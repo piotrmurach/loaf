@@ -1,6 +1,14 @@
 = loaf
 
-Description goes here.
+Helps in creating breadcrumbs. Uses controllers to specify names and routes for parts of breadcrum trails or collections of breadcrumbs. There is no markup present but only single helper method that exposes all the breadcrums data.  
+
+== Installation
+
+== Usage
+
+In controller:
+
+In view:
 
 == Contributing to loaf
  

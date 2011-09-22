@@ -6,8 +6,8 @@ module Loaf
 
       @crumbs.each do |crumb|
         
-        name = crumb.name
-        url  = crumb.url
+        name = crumb.name ? truncate(crumb.name.capitalize, :length => 30) : ''
+        url  = eval(crumb.url)
         styles = ( request.request_uri.split('?')[0] == url ? 'selected' : '' )
        
         puts "URL: #{url}"
