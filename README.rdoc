@@ -16,4 +16,3 @@ Description goes here.
 
 Copyright (c) 2011 Piotr Murach. See LICENSE.txt for
 further details.
-
