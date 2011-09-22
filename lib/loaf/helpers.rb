@@ -4,7 +4,7 @@ module Loaf
     def breadcrumbs(options={}, &block)
       #builder = Loaf::Builder.new(options)
 
-      @crumbs.each_pair do |key, crumb|
+      @crumbs.each do |crumb|
         
         name = crumb.name
         url  = crumb.url

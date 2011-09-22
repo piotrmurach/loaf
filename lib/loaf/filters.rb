@@ -15,11 +15,11 @@ module Loaf
     module InstanceMethods
       
       def add_breadcrumb(name, url)
-        crumbs[name.to_s] = Crumb.new(name, url)
+        crumbs << Crumb.new(name, url)
       end
 
       def crumbs
-        @crumbs ||= {}
+        @crumbs ||= []
       end
 
       def clear_crumbs
