@@ -1,13 +1,11 @@
-# rcov generated
 coverage
-# rdoc generated
 rdoc
-# yard generated
 doc
 .yardoc
-# bundler
 .bundle
-# jeweler generated
 pkg
-# vim
 *.swp
+Gemfile.lock
+log
+*.sqlite3
+.bundle
