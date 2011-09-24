@@ -10,9 +10,6 @@ module Loaf
         url  = eval(crumb.url)
         styles = ( request.request_uri.split('?')[0] == url ? 'selected' : '' )
        
-        puts "URL: #{url}"
-        puts "REQ: #{request.request_uri}"
-        
         block.call(name, url, styles)
       end
     end
