@@ -7,7 +7,8 @@ source "http://rubygems.org"
 # Include everything needed to run rake, tests, features, etc.
 group :development do
   gem "rails", "3.1.0"
-  gem "rspec", "~> 2.4.0"
+  gem "rspec", "~> 2.6.0"
+  gem "rspec-rails", "~> 2.6.1"
   gem "capybara", ">= 0.4.0"
   gem "bundler", "~> 1.0.0"
   gem "jeweler", "~> 1.6.4"
