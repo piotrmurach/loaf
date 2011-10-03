@@ -4,6 +4,7 @@ module Loaf
     Crumb = Struct.new(:name, :url, :styles)
 
     module ClassMethods
+
       def add_breadcrumb(name, url, options = {})
         before_filter options do |instance|
           instance.send(:add_breadcrumb, _normalize_name(name), url)

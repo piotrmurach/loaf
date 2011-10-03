@@ -1,4 +1,4 @@
-class Loaf
+module Loaf
   module Version
     MAJOR = 0
     MINOR = 1

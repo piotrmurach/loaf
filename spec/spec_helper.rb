@@ -4,7 +4,7 @@ ENV["RAILS_ENV"] = "test"
 #require 'rails'
 #require 'rails/test_help'
 #require 'rails'
-require 'rspec/rails'
+#require 'rspec/rails'
 require 'loaf'
 
 require File.expand_path("../rails_app/config/environment.rb", __FILE__)
