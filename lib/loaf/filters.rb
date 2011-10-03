@@ -4,7 +4,7 @@ module Loaf
     Crumb = Struct.new(:name, :url, :styles)
 
     module ClassMethods
-
+      
       def add_breadcrumb(name, url, options = {})
         before_filter(options) do |instance|
           instance.send(:add_breadcrumb, _normalize_name(name), url)
@@ -27,6 +27,13 @@ module Loaf
     end
 
     module InstanceMethods
+
+      # Add collection of nested breadcrumbs.
+      def add_breadcrumbs(collection=[], options={})
+        return nil unless collection.is_a? Array
+
+        #TODO see how best handle population
+      end
       
       def add_breadcrumb(name, url)
         _breadcrumbs << Crumb.new(name, url)

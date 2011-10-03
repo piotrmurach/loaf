@@ -3,7 +3,7 @@ module Loaf
 
     attr_accessor :crumbs
 
-    def initialize(options = {})
+    def initialize(view_context, collection, options = {})
 
       @params = default_options.merge(options)
 
