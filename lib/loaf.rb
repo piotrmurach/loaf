@@ -1,4 +1,5 @@
 require 'action_controller'
+require 'loaf/configuration'
 
 module Loaf
   if defined? Rails::Railtie
@@ -10,4 +11,6 @@ module Loaf
     ::ActionController::Base.send :include, Loaf::Filters
     ::ActionController::Base.helper Loaf::Helpers
   end
+
+  extend Configuration
 end

@@ -4,7 +4,7 @@ module Loaf
     def breadcrumbs(options={}, &block)
       #builder = Loaf::Builder.new(options)
 
-      @crumbs.each do |crumb|
+      _breadcrumbs.each do |crumb|
         
         name = crumb.name ? truncate(crumb.name.upcase, :length => 30) : ''
         url  = eval(crumb.url)

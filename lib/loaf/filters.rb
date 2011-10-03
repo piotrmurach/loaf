@@ -6,7 +6,7 @@ module Loaf
     module ClassMethods
 
       def add_breadcrumb(name, url, options = {})
-        before_filter options do |instance|
+        before_filter(options) do |instance|
           instance.send(:add_breadcrumb, _normalize_name(name), url)
         end
       end
@@ -29,21 +29,22 @@ module Loaf
     module InstanceMethods
       
       def add_breadcrumb(name, url)
-        crumbs << Crumb.new(name, url)
+        _breadcrumbs << Crumb.new(name, url)
       end
 
-      def crumbs
-        @crumbs ||= []
+      def _breadcrumbs
+        @_breadcrumbs ||= []
       end
 
       def clear_crumbs
-        crumbs.clear
+        _breadcrumbs.clear
       end
     end # InstanceMethods
 
     def self.included(base)
       base.extend ClassMethods
       base.send :include, InstanceMethods
+      base.send :helper_method, :_breadcrumbs
     end
 
   end # Filters
