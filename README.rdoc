@@ -4,6 +4,14 @@ Helps in creating breadcrumbs. Uses controllers to specify names and routes for 
 
 == Installation
 
+Install from source:
+  
+  gem install loaf
+
+Add to your Gemfile:
+  
+  gem 'loaf'
+
 == Usage
 
 In controller:
