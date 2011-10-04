@@ -13,6 +13,7 @@ module Loaf
   class Railtie
     def self.insert
       ActionController::Base.send :include, Loaf::Filters 
+      ActionController::Base.helper Loaf::Helpers
     end
   end # Railtie
 
