@@ -6,13 +6,14 @@ module Loaf
       :style_classes,
       :crumb_length,
       :last_crumb_linked,
-      :capitalize
+      :capitalize,
+      :root
     ]
 
     attr_accessor *VALID_ATTRIBUTES
 
     DEFAULT_LOCALES_PATH = "/"
-    
+
     DEFAULT_STYLE_CLASSES = 'selected'
 
     DEFAULT_CRUMB_LENGTH = 30
@@ -20,6 +21,8 @@ module Loaf
     DEFAULT_LAST_CRUMB_LINKED = false
 
     DEFAULT_CAPITALIZE = false
+
+    DEFAULT_ROOT = true
 
     def configure
       yield self
@@ -38,6 +41,6 @@ module Loaf
         send("#{attr}=", parent.const_get("DEFAULT_#{attr.to_s.upcase}"))
       end
     end
-    
+
   end # Configuration
 end # Loaf
