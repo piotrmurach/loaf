@@ -20,11 +20,28 @@ module Loaf
 
       _breadcrumbs.each do |crumb|
 
-        name = crumb.name ? truncate(crumb.name.upcase, :length => options[:crumb_length]) : ''
-        url  = send(crumb.url)
+        name = if crumb.name
+          formatted = options[:capitalize] ? crumb.name.capitalize : crumb.name
+          truncate(formatted, :length => options[:crumb_length])
+        else
+          '[name-error]'
+        end
+
+        url = url_for _process_url_for(crumb.url)
+
         styles = ( request.request_uri.split('?')[0] == url ? "#{options[:style_classes]}" : '' )
 
         block.call(name, url, styles)
+      end
+    end
+
+    private
+
+    def _process_url_for(url)
+      if url.is_a?(String) || url.is_a?(Symbol)
+        return send url
+      else
+        return url
       end
     end
 
