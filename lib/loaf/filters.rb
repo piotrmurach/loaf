@@ -1,10 +1,10 @@
 module Loaf
   module Filters
-    
+
     Crumb = Struct.new(:name, :url, :styles)
 
     module ClassMethods
-      
+
       def add_breadcrumb(name, url, options = {})
         before_filter(options) do |instance|
           instance.send(:add_breadcrumb, _normalize_name(name), url)
@@ -12,29 +12,43 @@ module Loaf
       end
 
       private
-      
+
       def _normalize_name(name=nil)
-        case name 
+        case name
         when NilClass
         when Proc
-          name.call 
+          name.call
         when Symbol
           name.to_s
         else
           name
         end
       end
+
+      def _process_url(url)
+      end
     end
 
     module InstanceMethods
 
       # Add collection of nested breadcrumbs.
-      def add_breadcrumbs(collection=[], options={})
-        return nil unless collection.is_a? Array
-
-        #TODO see how best handle population
+      # * <tt>collection</tt> - required collection of object for iteration
+      # * <tt>field</tt> - required object attribute name
+      #
+      def add_breadcrumbs(collection, field, options={})
+        namespace = nil
+        item_set = if _check_if_nested collection
+           items = collection.pop
+           namespace = collection
+           items
+        else
+          collection
+        end
+        item_set.each do |item|
+          add_breadcrumb item.send(field.to_sym), [ namespace, item ].flatten.compact
+        end
       end
-      
+
       def add_breadcrumb(name, url)
         _breadcrumbs << Crumb.new(name, url)
       end
@@ -46,6 +60,13 @@ module Loaf
       def clear_crumbs
         _breadcrumbs.clear
       end
+
+      private
+
+      def _check_if_nested(collection)
+        collection.last.is_a? Array
+      end
+
     end # InstanceMethods
 
     def self.included(base)
