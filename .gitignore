@@ -5,7 +5,6 @@ doc
 .bundle
 pkg
 *.swp
-Gemfile.lock
 log
 *.sqlite3
 .bundle

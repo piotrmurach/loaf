@@ -14,7 +14,7 @@ Gem::Specification.new do |gem|
   gem.require_paths = %w[ lib ]
 
   gem.add_development_dependency 'rails', '~> 3.1.0'
-  gem.add_development_dependency 'rspec', '~> 2.4.0'
+  gem.add_development_dependency 'rspec', '~> 2.7.0'
   gem.add_development_dependency 'rspec-rails', '>= 2.0.0'
   gem.add_development_dependency 'capybara', '>= 0.4.0'
   gem.add_development_dependency 'bundler', '~> 1.0.0'
