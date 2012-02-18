@@ -1,19 +1,18 @@
-require 'action_controller'
 require 'loaf/configuration'
 require 'loaf/railtie'
-require 'loaf/filters'
-require 'loaf/helpers'
+require 'loaf/controller_extensions'
+require 'loaf/view_extensions'
 
 module Loaf
+  extend Configuration
+
   if defined? Rails::Railtie
     require 'loaf/railtie'
   else
-    autoload :Filters, 'loaf/filters'
-    autoload :Helpers, 'loaf/helpers'
+    autoload :ControllerExtensions, 'loaf/controller_extensions'
+    autoload :Helpers, 'loaf/view_extensions'
 
-    ::ActionController::Base.send :include, Loaf::Filters
-    ::ActionController::Base.helper Loaf::Helpers
+    ::ActionController::Base.send :include, Loaf::ControllerExtensions
+    ::ActionController::Base.helper Loaf::ViewExtensions
   end
-
-  extend Configuration
-end
+end # Loaf
