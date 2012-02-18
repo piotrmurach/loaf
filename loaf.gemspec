@@ -1,22 +1,28 @@
-require File.expand_path('../lib/loaf/version', __FILE__)
+# -*- encoding: utf-8 -*-
+$:.push File.expand_path("../lib", __FILE__)
+require 'loaf/version'
 
-Gem::Specification.new do |gem|
-  gem.name        = "loaf"
-  gem.authors     = [ "Piotr Murach" ]
-  gem.email       = ""
-  gem.homepage    = 'https://github.com/peter-murach/loaf'
-  gem.summary     = "Loaf is a breadcrumb managing gem."
-  gem.description = "Loaf helps you manage breadcrumbs in your rails app. It aims to handle crumb data through easy dsl and expose it through view helpers without any assumptions about markup."
+Gem::Specification.new do |s|
+  s.name        = "loaf"
+  s.version     = Loaf::Version::STRING.dup
+  s.authors     = ["Piotr Murach"]
+  s.email       = [""]
+  s.homepage    = "https://github.com/peter-murach/loaf"
+  s.summary     = %q{Loaf is a breadcrumb managing gem.}
+  s.description = %q{Loaf helps you manage breadcrumbs in your rails app. It aims to handle crumb data through easy dsl and expose it through view helpers without any assumptions about markup.}
 
-  gem.version     = Loaf::Version::STRING.dup
+  s.rubyforge_project = "tytus"
 
-  gem.files = Dir["lib/**/*"] + ["Rakefile", "Gemfile", "README.rdoc"]
-  gem.require_paths = %w[ lib ]
+  s.files         = `git ls-files`.split("\n")
+  s.test_files    = `git ls-files -- {spec,features}/*`.split("\n")
+  s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
+  s.require_paths = ["lib"]
 
-  gem.add_development_dependency 'rails', '~> 3.1.0'
-  gem.add_development_dependency 'rspec', '~> 2.7.0'
-  gem.add_development_dependency 'rspec-rails', '>= 2.0.0'
-  gem.add_development_dependency 'capybara', '>= 0.4.0'
-  gem.add_development_dependency 'bundler', '~> 1.0.0'
-  gem.add_development_dependency 'jeweler', '~> 1.6.4'
+  s.add_dependency 'rails'
+
+  s.add_development_dependency 'rails'
+  s.add_development_dependency 'sqlite3'
+  s.add_development_dependency 'rspec-rails'
+  s.add_development_dependency 'capybara'
+  s.add_development_dependency 'bundler'
 end
