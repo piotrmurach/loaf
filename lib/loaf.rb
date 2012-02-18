@@ -1,5 +1,8 @@
 require 'loaf/configuration'
 require 'loaf/railtie'
+require 'loaf/crumb'
+require 'loaf/builder'
+require 'loaf/translation'
 require 'loaf/controller_extensions'
 require 'loaf/view_extensions'
 
