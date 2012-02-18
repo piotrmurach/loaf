@@ -5,6 +5,7 @@ require 'loaf/builder'
 require 'loaf/translation'
 require 'loaf/controller_extensions'
 require 'loaf/view_extensions'
+require 'loaf/crumb_formatter'
 
 module Loaf
   extend Configuration
