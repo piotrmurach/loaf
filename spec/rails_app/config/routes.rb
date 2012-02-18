@@ -1,11 +1,9 @@
 RailsApp::Application.routes.draw do
 
+  root :to => 'home#index'
+
   resources :posts do
     resources :comments
   end
-
-  match '/home' => 'home#index'
-
-  root :to => 'base#index'
 
 end
