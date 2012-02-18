@@ -13,18 +13,24 @@ Breadcrumbs creation library.
 
 Install from source:
 
-  gem install loaf
+```ruby
+gem install loaf
+```
 
 Add to your Gemfile:
 
-  gem 'loaf'
+```ruby
+gem 'loaf'
+```
 
 ## Configuration
 
-There is small set of custom opinionated defaults. However, to override them in your views just pass an option hash. The following options are valid:
+There is a small set of custom opinionated defaults. However, to override them in your views just pass an option hash. The following options are valid:
 
-  :crumb_length  # integer, default length is 30 characters
-  :root          # boolean, default is true, displays the home crumb
+```ruby
+:crumb_length  # integer, default length is 30 characters
+:root          # boolean, default is true, displays the home crumb
+```
 
 ## Usage
 
