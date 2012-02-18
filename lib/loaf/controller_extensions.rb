@@ -13,7 +13,8 @@ module Loaf
 
       def add_breadcrumb(name, url, options = {})
         before_filter(options) do |instance|
-          instance.send(:add_breadcrumb, _normalize_name(name), url)
+          # instance.send(:add_breadcrumb, _normalize_name(name), url)
+          instance.send(:add_breadcrumb, name, url, options)
         end
       end
 
@@ -55,8 +56,8 @@ module Loaf
         end
       end
 
-      def add_breadcrumb(name, url)
-        _breadcrumbs << Crumb.new(name, url)
+      def add_breadcrumb(name, url, options={})
+        _breadcrumbs << Loaf::Crumb.new(name, url)
       end
 
       def _breadcrumbs
