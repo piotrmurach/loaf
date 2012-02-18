@@ -1,0 +1,8 @@
+<ul id='breadcrumbs'>
+  <% breadcrumbs do |name, url, styles| %>
+    <li class="<%= styles %>">
+      <%= link_to name, url %>
+      <span><%= styles == 'selected' ? '' : '::' %></span>
+    </li>
+  <% end %>
+</ul>
