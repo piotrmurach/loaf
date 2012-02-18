@@ -8,6 +8,7 @@ Breadcrumbs creation library.
 * Helps in creating breadcrumbs.
 * Uses controllers to specify names and routes for parts of breadcrum trails or collections of breadcrumbs.
 * Stays out of your way when it comes to markup exposing only single helper method to access breadcrumb data.
+* Supports Rails 2 & 3.
 
 ## Installation
 
@@ -25,11 +26,30 @@ gem 'loaf'
 
 ## Configuration
 
-There is a small set of custom opinionated defaults. However, to override them in your views just pass an option hash. The following options are valid:
+There is a small set of custom opinionated defaults. The following options are valid parameters:
 
 ```ruby
-:crumb_length  # integer, default length is 30 characters
+:crumb_length  # breadcrumb length in integer, default length is 30 characters
 :root          # boolean, default is true, displays the home crumb
+:capitalize    # set breadcrumbs to have initial letter uppercase, default false
+:style_classes # CSS class to be used to style current breadcrumb,
+               # defaults to 'selected'
+```
+
+You can override them in your views by passing them to the view `breadcrumb` helper
+
+```ruby
+<% breadcrumbs :crumb_length => 20 do |name, url, styles| %>
+  ..
+<% end %>
+```
+
+or by adding initializer
+
+```ruby
+Loaf.configure do |config|
+  config.crumb_length => 20
+end
 ```
 
 ## Usage
@@ -49,7 +69,7 @@ end
 
 You can add breadcrumbs for nested resources, for instance, article categories:
 
-You can add semantic markup in your view to show breadcrumbs
+In your view add semantic markup to show breadcrumbs:
 
 ```html
 <ul id="breadcrumbs">
@@ -60,6 +80,36 @@ You can add semantic markup in your view to show breadcrumbs
     </li>
   <%- end -%>
 </ul>
+```
+
+Usually best practice is to put such snippet inside its own partial.
+
+## Locale
+
+When adding breadcrumbs one can use locales for their titles. The only assumption it makes is that all breadcrumb names are scoped inside `breadcrumbs` namespace. However, this can be easily changed by passing `:scope => 'new_scope_name'` configuration option
+
+```ruby
+en:
+  breadcrumbs:
+    controller:
+      action:
+```
+
+Therefore in your controller/view one would have
+
+```ruby
+class Blog::CategoriesController < ApplicationController
+
+  add_breadcrumb 'blog.categories', 'blog_categories_path'
+
+end
+
+And corresponding entry in locale:
+
+en:
+  breadcrumbs:
+    blog:
+      categories: 'Article Categories'
 ```
 
 ## TODO
