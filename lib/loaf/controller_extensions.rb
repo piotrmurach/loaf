@@ -32,9 +32,7 @@ module Loaf
         end
       end
 
-      def _process_url(url)
-      end
-    end
+    end # ClassMethods
 
     module InstanceMethods
 
@@ -64,7 +62,7 @@ module Loaf
         @_breadcrumbs ||= []
       end
 
-      def clear_crumbs
+      def clear_breadcrumbs
         _breadcrumbs.clear
       end
 
