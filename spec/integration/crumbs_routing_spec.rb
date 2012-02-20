@@ -22,11 +22,21 @@ describe "crumbs routing" do
       end
     end
 
-    it 'should' do
+    it 'should inherit and add new action specific breadcrumb' do
       visit new_post_path
       within '#breadcrumbs' do
         page.should have_content 'All Posts'
         page.should have_content 'New Post'
+      end
+    end
+  end
+
+  context 'adding breadcrumbs within view' do
+    it 'should append view specified breadcrumb' do
+      visit posts_path
+      within '#breadcrumbs' do
+        page.should have_content 'All Posts'
+        page.should have_content 'View Post'
       end
     end
   end

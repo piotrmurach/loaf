@@ -9,7 +9,7 @@ module Loaf
     # Adds breadcrumbs in a view.
     #
     def add_breadcrumb(name, url)
-      _breadcrumbs.push(name, url)
+      _breadcrumbs.push Loaf::Crumb.new(name, url)
     end
 
     # Renders breadcrumbs inside view.
