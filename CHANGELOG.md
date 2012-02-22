@@ -1,4 +1,9 @@
-0.2.0 (February  , 2012)
+0.2.1 (February 22, 2012)
+
+* Add more integration tests and fixed bug with adding breadcrumbs inside view
+* Add specs for controller extensions
+
+0.2.0 (February 18, 2012)
 
 * Change gemspec with new gem dependencies, use git
 * Setup testing environment with dummy rails app
