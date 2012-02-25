@@ -14,7 +14,9 @@ describe Loaf::ControllerExtensions do
   context 'classes extending controller_extensions' do
     subject { Controller }
     specify { should respond_to(:add_breadcrumb) }
+    specify { should respond_to(:breadcrumb) }
     specify { subject.new.should respond_to(:add_breadcrumb) }
+    specify { subject.new.should respond_to(:breadcrumb) }
     specify { subject.new.should respond_to(:add_breadcrumbs) }
     specify { subject.new.should respond_to(:clear_breadcrumbs) }
   end

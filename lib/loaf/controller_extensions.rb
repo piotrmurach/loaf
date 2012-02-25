@@ -11,12 +11,13 @@ module Loaf
 
     module ClassMethods
 
-      def add_breadcrumb(name, url, options = {})
+      def breadcrumb(name, url, options = {})
         before_filter(options) do |instance|
           # instance.send(:add_breadcrumb, _normalize_name(name), url)
           instance.send(:add_breadcrumb, name, url, options)
         end
       end
+      alias :add_breadcrumb :breadcrumb
 
       private
 
@@ -54,9 +55,10 @@ module Loaf
         end
       end
 
-      def add_breadcrumb(name, url, options={})
+      def breadcrumb(name, url, options={})
         _breadcrumbs << Loaf::Crumb.new(name, url)
       end
+      alias :add_breadcrumb :breadcrumb
 
       def _breadcrumbs
         @_breadcrumbs ||= []
