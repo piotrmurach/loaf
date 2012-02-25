@@ -7,6 +7,9 @@ require 'loaf/controller_extensions'
 require 'loaf/view_extensions'
 require 'loaf/crumb_formatter'
 
+# Add English load path by default
+I18n.load_path << File.join(File.dirname(__FILE__), 'config', 'locales', 'en.yml')
+
 module Loaf
   extend Configuration
 
