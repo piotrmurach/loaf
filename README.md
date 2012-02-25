@@ -59,10 +59,10 @@ In controller:
 ```ruby
 class Blog::CategoriesController < ApplicationController
 
-  add_breadcrumb 'Article Categories', 'blog_categories_path', :only => [:show]
+  breadcrumb 'Article Categories', 'blog_categories_path', :only => [:show]
 
   def show
-    add_breadcrumb "#{@category.title}", 'blog_category_path(@category)'
+    breadcrumb "#{@category.title}", 'blog_category_path(@category)'
   end
 end
 ```
@@ -100,7 +100,7 @@ Therefore in your controller/view one would have
 ```ruby
 class Blog::CategoriesController < ApplicationController
 
-  add_breadcrumb 'blog.categories', 'blog_categories_path'
+  breadcrumb 'blog.categories', 'blog_categories_path'
 
 end
 

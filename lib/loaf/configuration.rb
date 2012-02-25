@@ -26,6 +26,11 @@ module Loaf
 
     DEFAULT_ROOT = true
 
+    # Sets the Loaf configuration options. Best used by passing a block.
+    #
+    # Loaf.configure do |config|
+    #   config.capitalize = true
+    # end
     def configure
       yield self
     end
