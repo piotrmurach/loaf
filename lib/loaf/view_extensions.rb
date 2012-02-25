@@ -1,23 +1,26 @@
 # encoding: utf-8
 
 require 'loaf/crumb_formatter'
+require 'loaf/options_validator'
 
 module Loaf
   module ViewExtensions
     include Loaf::CrumbFormatter
+    include Loaf::OptionsValidator
 
-    # Adds breadcrumbs in a view.
+    # Adds breadcrumbs inside view.
     #
-    def add_breadcrumb(name, url)
+    def breadcrumb(name, url)
       _breadcrumbs.push Loaf::Crumb.new(name, url)
     end
+    alias :add_breadcrumb :breadcrumb
 
     # Renders breadcrumbs inside view.
     #
     def breadcrumbs(options={}, &block)
       #builder = Loaf::Builder.new(options)
+      valid? options
       options = Loaf.config.merge(options)
-
       _breadcrumbs.each do |crumb|
         name = format_name crumb, options
 
