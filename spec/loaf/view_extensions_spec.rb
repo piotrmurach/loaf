@@ -26,7 +26,7 @@ describe Loaf::ViewExtensions do
     end
 
     it 'creates crumb instance' do
-      Loaf::Crumb.should_receive(:new).with(name, url)
+      Loaf::Crumb.should_receive(:new).with(name, url, nil)
       instance.breadcrumb name, url
     end
 

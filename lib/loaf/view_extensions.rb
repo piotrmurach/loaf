@@ -10,8 +10,8 @@ module Loaf
 
     # Adds breadcrumbs inside view.
     #
-    def breadcrumb(name, url)
-      _breadcrumbs.push Loaf::Crumb.new(name, url)
+    def breadcrumb(name, url, options={})
+      _breadcrumbs.push Loaf::Crumb.new(name, url, options[:force])
     end
     alias :add_breadcrumb :breadcrumb
 
@@ -26,7 +26,7 @@ module Loaf
 
         url = url_for _process_url_for(crumb.url)
 
-        styles = current_page?(url) ? "#{options[:style_classes]}" : ''
+        styles = (current_page?(url) || crumb.force) ? "#{options[:style_classes]}" : ''
 
         block.call(name, url, styles)
       end
