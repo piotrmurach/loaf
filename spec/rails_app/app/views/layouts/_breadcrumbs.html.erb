@@ -1,3 +1,4 @@
+<% if has_breadcrumbs? %>
 <ul id='breadcrumbs'>
   <% breadcrumbs do |name, url, styles| %>
     <li class="<%= styles %>">
@@ -6,3 +7,4 @@
     </li>
   <% end %>
 </ul>
+<% end %>

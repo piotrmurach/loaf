@@ -4,7 +4,7 @@ describe 'setting configuration options' do
 
   context 'setting default css style for current crumb' do
     it "contains 'selected' inside the breadcrumb markup" do
-      visit root_path
+      visit posts_path
       within '#breadcrumbs' do
         page.should have_selector('.selected')
       end

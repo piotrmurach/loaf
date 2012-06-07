@@ -8,6 +8,12 @@ module Loaf
     include Loaf::CrumbFormatter
     include Loaf::OptionsValidator
 
+    # Checks to see if any breadcrumbs have been added
+    #
+    def has_breadcrumbs?
+      _breadcrumbs.present?
+    end
+
     # Adds breadcrumbs inside view.
     #
     def breadcrumb(name, url)
