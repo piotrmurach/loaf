@@ -36,7 +36,7 @@ module Loaf
 
     def _process_url_for(url)
       if url.is_a?(String) || url.is_a?(Symbol)
-        return send url
+        return respond_to?(url) ? send(url) : url
       else
         return url
       end
