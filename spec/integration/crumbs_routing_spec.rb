@@ -6,9 +6,7 @@ describe "crumbs routing" do
   context 'setting home breadcrumb' do
     it 'should inherit crumb for the root path' do
       visit root_path
-      within '#breadcrumbs' do
-        page.should have_content("Home")
-      end
+      page.should_not have_content("breadcrumbs")
     end
   end
 
