@@ -56,7 +56,7 @@ module Loaf
       end
 
       def breadcrumb(name, url, options={})
-        _breadcrumbs << Loaf::Crumb.new(name, url)
+        _breadcrumbs << Loaf::Crumb.new(name, url, options[:force])
       end
       alias :add_breadcrumb :breadcrumb
 

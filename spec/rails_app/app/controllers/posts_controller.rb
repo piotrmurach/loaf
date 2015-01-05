@@ -9,4 +9,8 @@ class PostsController < ApplicationController
     add_breadcrumb 'New Post', 'new_post_path'
   end
 
+  def create
+    add_breadcrumb 'New Post', 'new_post_path', :force => true
+    render :action => :new
+  end
 end
