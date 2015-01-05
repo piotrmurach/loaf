@@ -38,4 +38,17 @@ describe "crumbs routing" do
       end
     end
   end
+
+  context 'forcing breadcrumb' do
+    it 'should be current when forced' do
+      visit new_post_path
+      click_button "Create"
+
+      page.current_path.should == posts_path
+      within '#breadcrumbs' do
+        page.should have_content 'New Post'
+        page.should have_selector('.selected')
+      end
+    end
+  end
 end

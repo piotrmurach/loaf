@@ -2,5 +2,5 @@
 
 module Loaf
   # Basic crumb container
-  Crumb = Struct.new(:name, :url, :styles)
+  Crumb = Struct.new(:name, :url, :force)
 end # Loaf

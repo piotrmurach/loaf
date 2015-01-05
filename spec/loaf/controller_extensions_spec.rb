@@ -42,7 +42,7 @@ describe Loaf::ControllerExtensions do
     let(:instance) { Controller.new }
 
     it 'instantiates breadcrumbs container' do
-      Loaf::Crumb.should_receive(:new).with(name, url)
+      Loaf::Crumb.should_receive(:new).with(name, url, nil)
       instance.add_breadcrumb(name,url)
     end
 
