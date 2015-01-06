@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 module Loaf
   module Translation
     extend self
@@ -7,17 +9,22 @@ module Loaf
       :breadcrumbs
     end
 
-    # Accepts <tt>:scope</tt> parameter.
-    def breadcrumb_title(title, options={})
+    # Translate breadcrumb title
+    #
+    # @param [String] :title
+    # @param [Hash] options
+    # @option options [String] :scope
+    #   The translation scope
+    # @option options [String] :default
+    #   The default translation
+    #
+    # @api public
+    def breadcrumb_title(title, options = {})
       defaults  = []
-      parts     = title.to_s.split('.', 2)
-      actions   = parts.pop
-      namespace = parts.pop
-
-      defaults << :"#{self.i18n_scope}.#{title}"
+      defaults << :"#{i18n_scope}.#{title}"
       defaults << options.delete(:default) if options[:default]
 
-      options.reverse_merge! :count => 1, :default => defaults
+      options.reverse_merge! count: 1, default: defaults
       I18n.t(title, options)
     end
   end # Translation
