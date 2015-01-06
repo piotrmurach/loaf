@@ -7,7 +7,7 @@ RSpec.describe Loaf::Translation do
   before { I18n.backend = I18n::Backend::Simple.new }
 
   it 'translates breadcrumb title' do
-    I18n.backend.store_translations 'en', :breadcrumbs => { :home => 'Home'}
+    I18n.backend.store_translations 'en', breadcrumbs: { home: 'Home'}
     expect(described_class.breadcrumb_title('breadcrumbs.home')).to eql('Home')
   end
 
