@@ -1,9 +1,15 @@
+# encoding: utf-8
+
 require 'spec_helper'
 
-describe Loaf::ControllerExtensions do
+RSpec.describe Loaf::ControllerExtensions do
 
-  class Controller
+  class DummyController
     def self.helper_method(*args); end
+    def self.before_filter(options, &block)
+      puts 'IN BLOCK'
+      yield self.new
+    end
     include Loaf::ControllerExtensions
   end
 
@@ -11,45 +17,53 @@ describe Loaf::ControllerExtensions do
   let(:url) { stub }
   let(:options) { stub }
 
-  context 'classes extending controller_extensions' do
-    subject { Controller }
-    specify { should respond_to(:add_breadcrumb) }
-    specify { should respond_to(:breadcrumb) }
-    specify { subject.new.should respond_to(:add_breadcrumb) }
-    specify { subject.new.should respond_to(:breadcrumb) }
-    specify { subject.new.should respond_to(:add_breadcrumbs) }
-    specify { subject.new.should respond_to(:clear_breadcrumbs) }
+  context 'when classes extend controller_extensions' do
+    it { expect(DummyController).to respond_to(:add_breadcrumb) }
+    it { expect(DummyController).to respond_to(:breadcrumb) }
+    it { expect(DummyController.new).to respond_to(:add_breadcrumb) }
+    it { expect(DummyController.new).to respond_to(:breadcrumb) }
+    it { expect(DummyController.new).to respond_to(:add_breadcrumbs) }
+    it { expect(DummyController.new).to respond_to(:clear_breadcrumbs) }
   end
 
   context 'class methods' do
-    let(:controller) { Controller }
-    let(:instance) { Class.new(Controller) }
-
     it 'invokes before_filter' do
-      controller.should_receive(:before_filter)
-      controller.add_breadcrumb('name', 'url_path')
+      allow(DummyController).to receive(:before_filter)
+      DummyController.breadcrumb('name', 'url_path')
+      expect(DummyController).to have_received(:before_filter)
     end
 
     it 'delegates to instance' do
-      controller.stub(:before_filter).and_yield instance
-      instance.should_receive(:send).with(:add_breadcrumb, name, url, options)
-      controller.add_breadcrumb(name, url, options)
+      name    = 'List objects'
+      url     = :object_path
+      options = {force: true}
+      instance = double(:controller_instance).as_null_object
+
+      allow(DummyController).to receive(:new).and_return(instance)
+      DummyController.breadcrumb(name, url, options)
+      expect(instance).to have_received(:breadcrumb).with(name, url, options)
     end
   end
 
   context 'instance methods' do
-    let(:controller) { Controller }
-    let(:instance) { Controller.new }
-
     it 'instantiates breadcrumbs container' do
-      Loaf::Crumb.should_receive(:new).with(name, url, nil)
-      instance.add_breadcrumb(name,url)
+      name     = 'List objects'
+      url      = :object_path
+      instance = DummyController.new
+
+      allow(Loaf::Crumb).to receive(:new)
+      instance.breadcrumb(name, url)
+      expect(Loaf::Crumb).to have_received(:new).with(name, url, nil)
     end
 
     it 'adds breadcrumb to collection' do
-      expect do
-        instance.add_breadcrumb(name, url)
-      end.to change { instance._breadcrumbs.size }.by(1)
+      name     = 'List objects'
+      url      = :object_path
+      instance = DummyController.new
+
+      expect {
+        instance.breadcrumb(name, url)
+      }.to change { instance._breadcrumbs.size }.by(1)
     end
   end
-end # Loaf::ControllerExtensions
+end

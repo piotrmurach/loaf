@@ -17,7 +17,6 @@ module Loaf
       # @api public
       def breadcrumb(name, url, options = {})
         before_filter(options) do |instance|
-          puts 'YUP'
           # instance.send(:add_breadcrumb, _normalize_name(name), url)
           instance.send(:breadcrumb, name, url, options)
         end
