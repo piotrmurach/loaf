@@ -1,58 +1,48 @@
-# Loaf [![Build Status](https://secure.travis-ci.org/peter-murach/loaf.png?branch=master)][travis] [![Dependency Status](https://gemnasium.com/peter-murach/loaf.png?travis)][gemnasium]
+# Loaf
+[![Gem Version](https://badge.fury.io/rb/loaf.png)][gem]
+[![Build Status](https://secure.travis-ci.org/peter-murach/loaf.png?branch=master)][travis]
+[![Code Climate](https://codeclimate.com/github/peter-murach/loaf.png)][codeclimate]
+[![Dependency Status](https://gemnasium.com/peter-murach/loaf.png?travis)][gemnasium]
+[![Coverage Status](https://coveralls.io/repos/peter-murach/loaf/badge.png?branch=master)][coveralls]
+[![Inline docs](http://inch-ci.org/github/peter-murach/loaf.png?branch=master)][inchpages]
 
+[gem]: http://badge.fury.io/rb/loaf
 [travis]: http://travis-ci.org/peter-murach/loaf
+[codeclimate]: https://codeclimate.com/github/peter-murach/loaf
 [gemnasium]: https://gemnasium.com/peter-murach/loaf
+[coveralls]: https://coveralls.io/r/peter-murach/loaf
+[inchpages]: http://inch-ci.org/github/peter-murach/loaf
 
-Breadcrumbs creation library.
+> **Loaf** manages and displays breadcrumb trails in your Rails application.
 
-* Helps in creating breadcrumbs.
-* Uses controllers to specify names and routes for parts of breadcrum trails or collections of breadcrumbs.
-* Stays out of your way when it comes to markup exposing only single helper method to access breadcrumb data.
-* Supports Rails 2 & 3.
+## Features
+
+* Uses controllers or views to specify breadcrumb trails
+* No markup assumptions for breadcrumbs rendering
+* Use locales file for names - optional
+* Supports Rails 2.x, 3.x, 4.0, 4.1, 4.2
 
 ## Installation
 
-Install from source:
-
-```ruby
-gem install loaf
-```
-
-Add to your Gemfile:
+Add this line to your application's Gemfile:
 
 ```ruby
 gem 'loaf'
 ```
 
-## Configuration
-
-There is a small set of custom opinionated defaults. The following options are valid parameters:
+And then execute:
 
 ```ruby
-:crumb_length  # breadcrumb length in integer, default length is 30 characters
-:root          # boolean, default is true, displays the home crumb
-:capitalize    # set breadcrumbs to have initial letter uppercase, default false
-:style_classes # CSS class to be used to style current breadcrumb,
-               # defaults to 'selected'
+$ bundle
 ```
 
-You can override them in your views by passing them to the view `breadcrumb` helper
+Or install it yourself as:
 
 ```ruby
-<% breadcrumbs :crumb_length => 20 do |name, url, styles| %>
-  ..
-<% end %>
+gem install loaf
 ```
 
-or by adding initializer
-
-```ruby
-Loaf.configure do |config|
-  config.crumb_length => 20
-end
-```
-
-## Usage
+## 1. Usage
 
 In controller:
 
@@ -84,7 +74,35 @@ In your view add semantic markup to show breadcrumbs:
 
 Usually best practice is to put such snippet inside its own partial.
 
-## Locale
+## 2. Configuration
+
+There is a small set of custom opinionated defaults. The following options are valid parameters:
+
+```ruby
+:crumb_length  # breadcrumb length in integer, default length is 30 characters
+:root          # boolean, default is true, displays the home crumb
+:capitalize    # set breadcrumbs to have initial letter uppercase, default false
+:style_classes # CSS class to be used to style current breadcrumb,
+               # defaults to 'selected'
+```
+
+You can override them in your views by passing them to the view `breadcrumb` helper
+
+```ruby
+<% breadcrumbs :crumb_length => 20 do |name, url, styles| %>
+  ..
+<% end %>
+```
+
+or by adding initializer
+
+```ruby
+Loaf.configure do |config|
+  config.crumb_length => 20
+end
+```
+
+## 3. Locale
 
 When adding breadcrumbs one can use locales for their titles. The only assumption it makes is that all breadcrumb names are scoped inside `breadcrumbs` namespace. However, this can be easily changed by passing `:scope => 'new_scope_name'` configuration option
 
@@ -112,17 +130,10 @@ en:
       categories: 'Article Categories'
 ```
 
-## TODO
-
-* Add ability to add breadcrumbs for nested resources
-* Add support for name internationalisation
-* Finish specs
-
-## Contributing to loaf
+## Contributing
 
 Questions or problems? Please post them on the [issue tracker](https://github.com/peter-murach/loaf/issues). You can contribute changes by forking the project and submitting a pull request. You can ensure the tests are passing by running `bundle` and `rake`.
 
 ## Copyright
 
-Copyright (c) 2011 Piotr Murach. See LICENSE.txt for
-further details.
+Copyright (c) 2011-2015 Piotr Murach. See LICENSE.txt for further details.
