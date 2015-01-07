@@ -2,20 +2,15 @@
 
 require 'spec_helper'
 
-RSpec.describe Loaf::ControllerExtensions do
-
-  class DummyController
-    def self.helper_method(*args); end
-    def self.before_filter(options, &block)
-      puts 'IN BLOCK'
-      yield self.new
-    end
-    include Loaf::ControllerExtensions
+class DummyController
+  def self.helper_method(*args); end
+  def self.before_filter(options, &block)
+    yield self.new
   end
+  include Loaf::ControllerExtensions
+end
 
-  let(:name) { stub }
-  let(:url) { stub }
-  let(:options) { stub }
+RSpec.describe Loaf::ControllerExtensions do
 
   context 'when classes extend controller_extensions' do
     it { expect(DummyController).to respond_to(:add_breadcrumb) }
