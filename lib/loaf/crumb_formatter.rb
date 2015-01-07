@@ -1,20 +1,21 @@
+# encoding: utf-8
+
 module Loaf
+  # A mixin for formatting crumb name
   module CrumbFormatter
+    # @param [String] name
+    #   the name to format
+    #
+    # @api public
+    def format_name(name, options = {})
+      return if name.nil?
 
-    def format_name(crumb, options={})
-      if !crumb.name.blank?
-        formatted = crumb.name
-        formatted = crumb.name.capitalize if options[:capitalize]
-        formatted = if options[:crumb_length]
-          truncate(formatted, :length => options[:crumb_length])
-        else
-          formatted
-        end
-        formatted
-      else
-        '[name-error]'
+      formatted = name.to_s.dup
+      formatted = formatted.capitalize if options[:capitalize]
+      if options[:crumb_length]
+        formatted = truncate(formatted, length: options[:crumb_length])
       end
+      formatted
     end
-
   end # CrumbFormatter
 end # Loaf
