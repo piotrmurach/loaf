@@ -48,7 +48,7 @@ RSpec.describe Loaf::ControllerExtensions do
 
       allow(Loaf::Crumb).to receive(:new)
       instance.breadcrumb(name, url)
-      expect(Loaf::Crumb).to have_received(:new).with(name, url, nil)
+      expect(Loaf::Crumb).to have_received(:new).with(name, url, {})
     end
 
     it 'adds breadcrumb to collection' do
