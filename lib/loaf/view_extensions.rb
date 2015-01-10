@@ -47,7 +47,7 @@ module Loaf
       # builder = Loaf::Builder.new(options)
       return enum_for(:breadcrumbs) unless block_given?
       valid?(options)
-      options = Loaf.config.merge(options)
+      options = Loaf.configuration.to_hash.merge(options)
       _breadcrumbs.each do |crumb|
         name   = format_name(crumb.name, options)
         url    = url_for(_process_url_for(crumb.url))
