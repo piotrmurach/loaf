@@ -2,8 +2,7 @@
 
 require 'spec_helper'
 
-class DummyController
-  def self.helper_method(*args); end
+class DummyController < ActionController::Base
   def self.before_filter(options, &block)
     yield self.new
   end

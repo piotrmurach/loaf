@@ -93,7 +93,7 @@ RSpec.describe Loaf::ViewExtensions, '.breadcrumbs' do
   end
 
   it 'uses global configuration for crumb formatting' do
-    allow(Loaf).to receive(:crumb_length).and_return(10)
+    allow(Loaf.configuration).to receive(:crumb_length).and_return(10)
     instance = DummyView.new
     instance.breadcrumb('home-sweet-home', :home_path)
     instance.breadcrumb('posts-for-everybody', :posts_path)
@@ -110,7 +110,7 @@ RSpec.describe Loaf::ViewExtensions, '.breadcrumbs' do
   end
 
   it "allows to overwrite global configuration" do
-    allow(Loaf).to receive(:crumb_length).and_return(10)
+    allow(Loaf.configuration).to receive(:crumb_length).and_return(10)
     instance = DummyView.new
     instance.breadcrumb('home-sweet-home', :home_path)
     instance.breadcrumb('posts-for-everybody', :posts_path)
