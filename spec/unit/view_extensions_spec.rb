@@ -1,114 +1,162 @@
+# encoding: utf-8
+
 require 'spec_helper'
 
-describe Loaf::ViewExtensions do
-
-  class View < ActionView::Base
+RSpec.describe Loaf::ViewExtensions do
+  class DummyView < ActionView::Base
     include Loaf::ViewExtensions
-    attr_accessor_with_default :_breadcrumbs, []
+    attr_reader :_breadcrumbs
+
+    def url_for(*); end
+    def current_page?(*); end
   end
 
-  let(:name) { 'name' }
-  let(:url)  { 'url' }
-  let(:view) { View }
-  let(:instance) { view.new }
-
   context 'classes extending view_extensions' do
-     subject { View.new }
-     specify { should respond_to(:breadcrumb) }
-     specify { should respond_to(:add_breadcrumb) }
-     specify { should respond_to(:breadcrumbs) }
+    it { expect(DummyView.new).to respond_to(:breadcrumb) }
+    it { expect(DummyView.new).to respond_to(:add_breadcrumb) }
+    it { expect(DummyView.new).to respond_to(:breadcrumbs) }
   end
 
   context 'adding view breadcrumb' do
-    it 'calls breadcrumbs helper' do
-      instance.should_receive(:_breadcrumbs).and_return []
-      instance.breadcrumb name, url
-    end
-
     it 'creates crumb instance' do
-      Loaf::Crumb.should_receive(:new).with(name, url, nil)
+      instance = DummyView.new
+      name = 'Home'
+      url  = :home_path
+      allow(Loaf::Crumb).to receive(:new).with(name, url, {})
       instance.breadcrumb name, url
+      expect(Loaf::Crumb).to have_received(:new).with(name, url, {})
     end
 
-    it 'should add crumb to breadcrumbs storage' do
-      expect do
-        instance.breadcrumb name, url
-      end.to change { instance._breadcrumbs.size }.by(1)
+    it 'adds crumb to breadcrumbs storage' do
+      instance = DummyView.new
+      expect {
+        instance.breadcrumb 'Home', :home_path
+      }.to change { instance._breadcrumbs.size }.by(1)
     end
   end
 
   context 'breadcrumbs rendering' do
+    it "yields to block all breadcrumbs" do
+      instance = DummyView.new
+      instance.breadcrumb('home', :home_path)
+      instance.breadcrumb('posts', :posts_path)
 
-    let(:block) { lambda { |name, url, styles| } }
+      yielded = []
+      block = lambda { |name, url, styles| yielded << [name, url, styles]}
+      expect {
+        instance.breadcrumbs(&block)
+      }.to change { yielded.size }.from(0).to(2)
+    end
 
-    before do
-      @crumbs = []
-      @crumbs << Loaf::Crumb.new('home', :home_path)
-      @crumbs << Loaf::Crumb.new('posts', :posts_path)
-      instance.stub(:_breadcrumbs).and_return @crumbs
+    it "resolves breadcrumb paths" do
+      instance = DummyView.new
+      instance.breadcrumb('home', :home_path)
+      instance.breadcrumb('posts', :posts_path)
 
-      @options = {}
-      Loaf.stub_chain(:config, :merge).and_return @options
-      @crumbs.each do |crumb|
-        instance.stub(:format_name).with(crumb, @options).and_return crumb.name
-        instance.stub(:_process_url_for).with(crumb.url).and_return crumb.name
-      end
-      instance.stub(:current_page?).and_return true
+      allow(instance).to receive(:url_for).with(:home_path).and_return('/home')
+      allow(instance).to receive(:url_for).with(:posts_path).and_return('/posts')
+      yielded = []
+      block = lambda { |name, url, styles| yielded << [name, url, styles]}
+      instance.breadcrumbs(&block)
+      expect(yielded).to eq([
+        ['home', '/home', ''],
+        ['posts', '/posts', '']
+      ])
+    end
+
+    it "checks current path and provides styles" do
+      instance = DummyView.new
+      instance.breadcrumb('home', :home_path)
+      instance.breadcrumb('posts', :posts_path)
+
+      allow(instance).to receive(:url_for).with(:home_path).and_return('/home')
+      allow(instance).to receive(:url_for).with(:posts_path).and_return('/posts')
+      allow(instance).to receive(:current_page?).with('/home').and_return(false)
+      allow(instance).to receive(:current_page?).with('/posts').and_return(true)
+
+      yielded = []
+      block = lambda { |name, url, styles| yielded << [name, url, styles]}
+      instance.breadcrumbs(&block)
+      expect(yielded).to eq([
+        ['home', '/home', ''],
+        ['posts', '/posts', 'selected']
+      ])
+    end
+
+    it "allows to force current path" do
+      instance = DummyView.new
+      instance.breadcrumb('home', :home_path)
+      instance.breadcrumb('posts', :posts_path, force: true)
+
+      allow(instance).to receive(:url_for).with(:home_path).and_return('/home')
+      allow(instance).to receive(:url_for).with(:posts_path).and_return('/posts')
+      allow(instance).to receive(:current_page?).and_return(false)
+
+      yielded = []
+      block = lambda { |name, url, styles| yielded << [name, url, styles]}
+      instance.breadcrumbs(&block)
+      expect(yielded).to eq([
+        ['home', '/home', ''],
+        ['posts', '/posts', 'selected']
+      ])
+    end
+
+    it "returns enumerator without block" do
+      instance = DummyView.new
+      instance.breadcrumb('home', :home_path)
+      instance.breadcrumb('posts', :posts_path)
+
+      allow(instance).to receive(:url_for).with(:home_path).and_return('/home')
+      allow(instance).to receive(:url_for).with(:posts_path).and_return('/posts')
+
+      result = instance.breadcrumbs
+      expect(result).to be_a(Enumerable)
+      expect(result.take(2)).to eq([
+        ['home', '/home', ''],
+        ['posts', '/posts', '']
+      ])
     end
 
     it 'validates passed options' do
-      instance.should_receive(:valid?)
-      instance.breadcrumbs &block
+      instance = DummyView.new
+      block = lambda { |name, url, styles| }
+      expect {
+        instance.breadcrumbs(unknown: true, &block)
+      }.to raise_error(Loaf::InvalidOptions)
     end
 
-    it 'raises error for unkown option' do
-      expect do
-        instance.breadcrumbs :unsupported => true, &block
-      end.to raise_error(Loaf::InvalidOptions)
+    it 'uses global configuration for crumb formatting' do
+      allow(Loaf).to receive(:crumb_length).and_return(10)
+      instance = DummyView.new
+      instance.breadcrumb('home-sweet-home', :home_path)
+      instance.breadcrumb('posts-for-everybody', :posts_path)
+
+      allow(instance).to receive(:url_for).with(:home_path).and_return('/home')
+      allow(instance).to receive(:url_for).with(:posts_path).and_return('/posts')
+      yielded = []
+      block = lambda { |name, url, styles| yielded << [name, url, styles]}
+      instance.breadcrumbs(&block)
+      expect(yielded).to eq([
+        ['home-sw...', '/home', ''],
+        ['posts-f...', '/posts', '']
+      ])
     end
 
-    it 'calls loaf configuration' do
-      Loaf.should_receive(:config).and_return @options
-      @options.should_receive(:merge).with({:crumb_length => 10}).
-        and_return @options
-      instance.breadcrumbs :crumb_length => 10, &block
-    end
+    it "allows to overwrite global configuration" do
+      allow(Loaf).to receive(:crumb_length).and_return(10)
+      instance = DummyView.new
+      instance.breadcrumb('home-sweet-home', :home_path)
+      instance.breadcrumb('posts-for-everybody', :posts_path)
 
-    it 'uses breadcrumbs collection helper' do
-      instance.should_receive(:_breadcrumbs)
-      instance.breadcrumbs &block
-    end
-
-    it 'retrieves crumbs collection' do
-      instance._breadcrumbs.should eql @crumbs
-      instance.breadcrumbs &block
-    end
-
-    it 'formats crumb name' do
-      instance.should_receive(:format_name)
-      instance.breadcrumbs &block
-    end
-
-    it 'checks if crumb url is current' do
-      instance.should_receive(:current_page?)
-      instance.breadcrumbs &block
-    end
-
-    context 'rendering inside block' do
-      it 'returns crumb attributes' do
-        crumb = Loaf::Crumb.new name, url
-        instance.stub(:_breadcrumbs).and_return [crumb]
-        instance.should_receive(:format_name).with(crumb, @options).
-          and_return crumb.name
-        instance.should_receive(:_process_url_for).with(crumb.url).
-          and_return crumb.name
-
-        instance.breadcrumbs do |name, url, styles|
-          name.should eql crumb.name
-          url.should eql crumb.name
-          styles.should be_blank
-        end
-      end
+      allow(instance).to receive(:url_for).with(:home_path).and_return('/home')
+      allow(instance).to receive(:url_for).with(:posts_path).and_return('/posts')
+      yielded = []
+      block = lambda { |name, url, styles| yielded << [name, url, styles]}
+      instance.breadcrumbs(crumb_length: 15, &block)
+      expect(yielded).to eq([
+        ['home-sweet-home', '/home', ''],
+        ['posts-for-ev...', '/posts', '']
+      ])
     end
   end
-end # Loaf::ViewExtensions
+end
