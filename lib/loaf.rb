@@ -15,7 +15,28 @@ require 'loaf/options_validator'
 I18n.load_path << File.join(File.dirname(__FILE__), 'config', 'locales', 'en.yml')
 
 module Loaf
-  extend Configuration
+  # Set global configuration
+  #
+  # @api public
+  def self.configuration=(config)
+    @configuration = config
+  end
+
+  # Get global configuration
+  #
+  # @api public
+  def self.configuration
+    @configuration ||= Configuration.new
+  end
+
+  # Sets the Loaf configuration options. Best used by passing a block.
+  #
+  # Loaf.configure do |config|
+  #   config.capitalize = true
+  # end
+  def self.configure
+    yield configuration
+  end
 
   if defined? Rails::Railtie
     require 'loaf/railtie'
