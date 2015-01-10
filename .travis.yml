@@ -1,6 +1,7 @@
 language: ruby
 sudo: false
 bundler_args: --without yard benchmarks
+install: 'travis_retry bin/setup'
 script: 'bundle exec appraisal rake ci'
 rvm:
   - 1.9.3
