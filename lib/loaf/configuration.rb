@@ -1,8 +1,7 @@
 # encoding: utf-8
 
 module Loaf
-  module Configuration
-
+  class Configuration
     VALID_ATTRIBUTES = [
       :locales_path,
       :style_classes,
@@ -12,9 +11,9 @@ module Loaf
       :root
     ]
 
-    attr_accessor *VALID_ATTRIBUTES
+    attr_accessor(*VALID_ATTRIBUTES)
 
-    DEFAULT_LOCALES_PATH = "/"
+    DEFAULT_LOCALES_PATH = '/'
 
     DEFAULT_STYLE_CLASSES = 'selected'
 
@@ -26,28 +25,22 @@ module Loaf
 
     DEFAULT_ROOT = true
 
-    # Sets the Loaf configuration options. Best used by passing a block.
+    # Setup this configuration
     #
-    # Loaf.configure do |config|
-    #   config.capitalize = true
-    # end
-    def configure
-      yield self
-    end
-
-    def self.extended(base)
-      base.setup(self)
-    end
-
-    def config
-      VALID_ATTRIBUTES.inject({}) { |hash, k| hash[k] = send(k); hash }
-    end
-
-    def setup(parent)
+    # @api public
+    def initialize
       VALID_ATTRIBUTES.each do |attr|
-        send("#{attr}=", parent.const_get("DEFAULT_#{attr.to_s.upcase}"))
+        send("#{attr}=", self.class.const_get("DEFAULT_#{attr.to_s.upcase}"))
       end
     end
 
+    # Convert all properties into hash
+    #
+    # @return [Hash]
+    #
+    # @api public
+    def to_hash
+      VALID_ATTRIBUTES.reduce({}) { |acc, k| acc[k] = send(k); acc }
+    end
   end # Configuration
 end # Loaf
