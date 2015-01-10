@@ -1,5 +1,4 @@
 language: ruby
-cache: bundler
 sudo: false
 bundler_args: --without yard benchmarks
 script: 'bundle exec appraisal rake ci'
