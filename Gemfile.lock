@@ -130,7 +130,7 @@ PLATFORMS
 
 DEPENDENCIES
   appraisal (~> 1.0.2)
-  bundler (~> 1.6)
+  bundler (~> 1.5)
   capybara (~> 2.4.4)
   coveralls (~> 0.7.2)
   loaf!

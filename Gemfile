@@ -2,6 +2,8 @@ source 'https://rubygems.org'
 
 gemspec
 
+gem 'bundler', '~> 1.5'
+
 group :development do
   gem 'appraisal', '~> 1.0.2'
   gem 'rake',     '~> 10.3.2'
