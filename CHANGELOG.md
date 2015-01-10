@@ -1,3 +1,15 @@
+0.4.0 (January 10, 2015)
+
+* Change breadcrumbs view method to return enumerator without block
+* Change Crumb to ruby class and add force option
+* Change Configuration to ruby class and scope config options
+* Add ability to force current path through :force option
+* Change format_name to only take name argument
+* Change to expose config settings on configuration
+* Fix bug with url parameter to allow for regular rails path variables
+* Update test suite to work against different rubies 1.9.x, 2.x
+* Test Rails 3.2.x, 4.0, 4.1, 4.2
+
 0.3.0 (February 25, 2012)
 
 * Add loaf gem errors
