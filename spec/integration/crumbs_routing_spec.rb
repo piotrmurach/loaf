@@ -1,54 +1,46 @@
+# encoding: utf-8
+
 require 'spec_helper'
 
-describe "crumbs routing" do
+RSpec.describe "crumbs routing" do
   include ActionView::TestCase::Behavior
 
-  context 'setting home breadcrumb' do
-    it 'should inherit crumb for the root path' do
-      visit root_path
-      page.should_not have_content("breadcrumbs")
+  it "doens't show empty breadcrumbs" do
+    visit root_path
+    expect(page).to_not have_content("breadcrumbs")
+  end
+
+  it "inherits controller breadcrumb and adds index action breadcrumb" do
+    visit posts_path
+    within '#breadcrumbs' do
+      expect(page.html).to include('<a href="/">Home</a>')
+      expect(page.html).to include('<a href="/posts">All Posts</a>')
     end
   end
 
-  context 'inheriting breadcrumbs setup' do
-    it "should inherit root crumb for index action posts#index" do
-      visit posts_path
-      within '#breadcrumbs' do
-        page.should have_content 'Home'
-        page.should have_content 'All Posts'
-        page.should_not have_content 'New Post'
-      end
-    end
-
-    it 'should inherit and add new action specific breadcrumb' do
-      visit new_post_path
-      within '#breadcrumbs' do
-        page.should have_content 'All Posts'
-        page.should have_content 'New Post'
-      end
+  it 'filters out controller breadcrumb and adds new action breadcrumb' do
+    visit new_post_path
+    within '#breadcrumbs' do
+      expect(page).to_not have_content('Home')
+      expect(page).to have_content('New Post')
     end
   end
 
-  context 'adding breadcrumbs within view' do
-    it 'should append view specified breadcrumb' do
-      visit posts_path
-      within '#breadcrumbs' do
-        page.should have_content 'All Posts'
-        page.should have_content 'View Post'
-      end
+  it "adds breadcrumb in view with path variable" do
+    visit post_path(1)
+    within '#breadcrumbs' do
+      expect(page.html).to include('<a href="/posts/1">Show Post in view</a>')
     end
   end
 
-  context 'forcing breadcrumb' do
-    it 'should be current when forced' do
-      visit new_post_path
-      click_button "Create"
+  it 'should be current when forced' do
+    visit new_post_path
+    click_button "Create"
 
-      page.current_path.should == posts_path
-      within '#breadcrumbs' do
-        page.should have_content 'New Post'
-        page.should have_selector('.selected')
-      end
+    expect(page.current_path).to eq(posts_path)
+    within '#breadcrumbs' do
+      expect(page).to have_content('New Post')
+      expect(page).to have_selector('.selected')
     end
   end
 end
