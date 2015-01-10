@@ -20,7 +20,7 @@
 * Uses controllers or views to specify breadcrumb trails
 * No markup assumptions for breadcrumbs rendering
 * Use locales file for names - optional
-* Supports Rails 2.x, 3.x, 4.0, 4.1, 4.2
+* Tested with Rails 3.2, 4.0, 4.1, 4.2
 
 ## Installation
 
@@ -44,31 +44,37 @@ gem install loaf
 
 ## 1. Usage
 
-In controller:
+**Loaf** allows you to add breadcrumbs in controllers and views.
+
+In order to add breadcrumbs in controller use `breadcrumb` method. Outside of controller actions the `breadcrumb` helper behaviour is similar to filters and as such you can limit breadcrumb scope with familiar options `:only`, `:except`. Any breadcrumb specified inside actions creates another level in breadcrumbs trail.
 
 ```ruby
 class Blog::CategoriesController < ApplicationController
 
-  breadcrumb 'Article Categories', 'blog_categories_path', :only => [:show]
+  breadcrumb 'Article Categories', :blog_categories_path, only: [:show]
 
   def show
-    breadcrumb "#{@category.title}", 'blog_category_path(@category)'
+    breadcrumb "#{@category.title}", blog_category_path(@category)
   end
 end
 ```
 
-You can add breadcrumbs for nested resources, for instance, article categories:
+**Loaf** adds `breadcrumb` helper also to the views. Together with controller breadcrumbs, the view breadcrumbs are appended as the last. For instance, to specify view breadcrumb do:
 
-In your view add semantic markup to show breadcrumbs:
+```ruby
+<% breadcrumb "#{@category.title}", blog_category_path(@category) %>
+```
+
+Finally, in your view layout add semantic markup to show breadcrumbs:
 
 ```html
-<ul id="breadcrumbs">
-  <%- breadcrumbs :crumb_length => 20 do |name, url, styles| -%>
+<ul class='breadcrumbs'>
+  <% breadcrumbs do |name, url, styles| %>
     <li class="<%= styles %>">
       <%= link_to name, url %>
       <span><%= styles == 'selected' ? '' : '::' %></span>
     </li>
-  <%- end -%>
+  <% end %>
 </ul>
 ```
 
@@ -89,16 +95,16 @@ There is a small set of custom opinionated defaults. The following options are v
 You can override them in your views by passing them to the view `breadcrumb` helper
 
 ```ruby
-<% breadcrumbs :crumb_length => 20 do |name, url, styles| %>
+<% breadcrumbs crumb_length: 20 do |name, url, styles| %>
   ..
 <% end %>
 ```
 
-or by adding initializer
+or by adding initializer in `config/initializers/loaf.rb`:
 
 ```ruby
 Loaf.configure do |config|
-  config.crumb_length => 20
+  config.crumb_length = 20
 end
 ```
 
