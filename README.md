@@ -18,6 +18,7 @@
 ## Features
 
 * Uses controllers or views to specify breadcrumb trails
+* Specify urls using Rails conventions
 * No markup assumptions for breadcrumbs rendering
 * Use locales file for names - optional
 * Tested with Rails 3.2, 4.0, 4.1, 4.2
@@ -46,7 +47,7 @@ gem install loaf
 
 **Loaf** allows you to add breadcrumbs in controllers and views.
 
-In order to add breadcrumbs in controller use `breadcrumb` method. Outside of controller actions the `breadcrumb` helper behaviour is similar to filters and as such you can limit breadcrumb scope with familiar options `:only`, `:except`. Any breadcrumb specified inside actions creates another level in breadcrumbs trail.
+In order to add breadcrumbs in controller use `breadcrumb` method ([see 1.1](#11-breadcrumb)). Outside of controller actions the `breadcrumb` helper behaviour is similar to filters and as such you can limit breadcrumb scope with familiar options `:only`, `:except`. Any breadcrumb specified inside actions creates another level in breadcrumbs trail.
 
 ```ruby
 class Blog::CategoriesController < ApplicationController
@@ -79,6 +80,34 @@ Finally, in your view layout add semantic markup to show breadcrumbs:
 ```
 
 Usually best practice is to put such snippet inside its own partial.
+
+### 1.1 breadcrumb
+
+Creation of breadcrumb in Rails is achieved by the `breadcrumb` helper. The `breadcrumb` method takes at minimum two arguments: the first is a name for the crumb that will be displayed and the second is a url that the name points to. The url parameter uses the familiar Rails conventions.
+
+When using path variable `blog_categories_path`:
+
+```ruby
+breadcrumb 'Categories', blog_categories_path
+```
+
+When using an instance `@category`:
+
+```ruby
+braedcrumb "#{@category.title}", blog_category_path(@category)
+
+```
+You can also use set of objects:
+
+```ruby
+breadcrumb "#{@category.title}, [:blog, @category]"
+```
+
+You can specify segments of the url:
+
+```ruby
+breadcrumb "#{@category.title}", {controller: 'categories', action: 'show', id: @category.id}
+```
 
 ## 2. Configuration
 
