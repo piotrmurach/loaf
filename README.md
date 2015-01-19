@@ -55,7 +55,7 @@ class Blog::CategoriesController < ApplicationController
   breadcrumb 'Article Categories', :blog_categories_path, only: [:show]
 
   def show
-    breadcrumb "#{@category.title}", blog_category_path(@category)
+    breadcrumb @category.title, blog_category_path(@category)
   end
 end
 ```
@@ -63,14 +63,14 @@ end
 **Loaf** adds `breadcrumb` helper also to the views. Together with controller breadcrumbs, the view breadcrumbs are appended as the last. For instance, to specify view breadcrumb do:
 
 ```ruby
-<% breadcrumb "#{@category.title}", blog_category_path(@category) %>
+<%= breadcrumb @category.title, blog_category_path(@category) %>
 ```
 
 Finally, in your view layout add semantic markup to show breadcrumbs:
 
 ```html
 <ul class='breadcrumbs'>
-  <% breadcrumbs do |name, url, styles| %>
+  <%= breadcrumbs do |name, url, styles| %>
     <li class="<%= styles %>">
       <%= link_to name, url %>
       <span><%= styles == 'selected' ? '' : '::' %></span>
@@ -94,19 +94,19 @@ breadcrumb 'Categories', blog_categories_path
 When using an instance `@category`:
 
 ```ruby
-braedcrumb "#{@category.title}", blog_category_path(@category)
+braedcrumb @category.title, blog_category_path(@category)
 
 ```
 You can also use set of objects:
 
 ```ruby
-breadcrumb "#{@category.title}, [:blog, @category]"
+breadcrumb @category.title, [:blog, @category]
 ```
 
 You can specify segments of the url:
 
 ```ruby
-breadcrumb "#{@category.title}", {controller: 'categories', action: 'show', id: @category.id}
+breadcrumb @category.title, {controller: 'categories', action: 'show', id: @category.id}
 ```
 
 ## 2. Configuration
@@ -124,7 +124,7 @@ There is a small set of custom opinionated defaults. The following options are v
 You can override them in your views by passing them to the view `breadcrumb` helper
 
 ```ruby
-<% breadcrumbs crumb_length: 20 do |name, url, styles| %>
+<%= breadcrumbs crumb_length: 20 do |name, url, styles| %>
   ..
 <% end %>
 ```
