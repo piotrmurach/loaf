@@ -94,7 +94,7 @@ breadcrumb 'Categories', blog_categories_path
 When using an instance `@category`:
 
 ```ruby
-braedcrumb "#{@category.title}", blog_category_path(@category)
+breadcrumb "#{@category.title}", blog_category_path(@category)
 
 ```
 You can also use set of objects:
