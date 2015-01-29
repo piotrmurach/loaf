@@ -20,7 +20,7 @@
 * Uses controllers or views to specify breadcrumb trails
 * Specify urls using Rails conventions
 * No markup assumptions for breadcrumbs rendering
-* Use locales file for names - optional
+* Use locales file for breadcrumb names
 * Tested with Rails 3.2, 4.0, 4.1, 4.2
 
 ## Installation
@@ -41,6 +41,12 @@ Or install it yourself as:
 
 ```ruby
 gem install loaf
+```
+
+Then run the generator:
+
+```ruby
+rails generate loaf:install
 ```
 
 ## 1. Usage
@@ -137,32 +143,33 @@ Loaf.configure do |config|
 end
 ```
 
-## 3. Locale
+## 3. Translation
 
-When adding breadcrumbs one can use locales for their titles. The only assumption it makes is that all breadcrumb names are scoped inside `breadcrumbs` namespace. However, this can be easily changed by passing `:scope => 'new_scope_name'` configuration option
+You can use locales files for breadcrumbs' titles. **Loaf** assumes that all breadcrumb names are scoped inside `breadcrumbs` namespace inside `loaf` scope. However, this can be easily changed by passing `scope: 'new_scope_name'` configuration option.
 
 ```ruby
 en:
-  breadcrumbs:
-    controller:
-      action:
+  loaf:
+    breadcrumbs:
+      name: 'my-breadcrumb-name'
 ```
 
-Therefore in your controller/view one would have
+Therefore, in your controller/view you would do:
 
 ```ruby
 class Blog::CategoriesController < ApplicationController
 
-  breadcrumb 'blog.categories', 'blog_categories_path'
+  breadcrumb 'blog.categories', :blog_categories_path
 
 end
 
 And corresponding entry in locale:
 
 en:
-  breadcrumbs:
-    blog:
-      categories: 'Article Categories'
+  loaf:
+    breadcrumbs:
+      blog:
+        categories: 'Article Categories'
 ```
 
 ## Contributing
