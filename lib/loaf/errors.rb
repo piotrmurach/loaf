@@ -5,7 +5,7 @@ module Loaf #:nodoc:
   # Default Loaf error for all custom errors.
   #
   class LoafError < StandardError
-    BASE_KEY = "loaf.errors.messages"
+    BASE_KEY = "loaf.errors"
 
     def error_message(key, attributes)
       translate(key, attributes)
