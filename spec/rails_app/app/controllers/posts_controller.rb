@@ -5,7 +5,7 @@ class PostsController < ApplicationController
   breadcrumb 'Home', :root_path, only: :index
 
   def index
-    breadcrumb 'All Posts', posts_path
+    breadcrumb 'all_posts', posts_path
   end
 
   def show

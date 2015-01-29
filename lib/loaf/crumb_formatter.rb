@@ -8,9 +8,10 @@ module Loaf
     #
     # @api public
     def format_name(name, options = {})
-      return if name.nil?
+      return name if name.nil? || name.empty?
 
       formatted = name.to_s.dup
+      formatted = Loaf::Translation.find_title(formatted)
       formatted = formatted.capitalize if options[:capitalize]
       if options[:crumb_length]
         formatted = truncate(formatted, length: options[:crumb_length])
