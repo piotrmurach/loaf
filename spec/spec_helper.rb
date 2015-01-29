@@ -18,9 +18,8 @@ end
 # Configure Rails Environment
 ENV["RAILS_ENV"] = "test"
 
-require File.expand_path("../rails_app/config/environment.rb",  __FILE__)
+require 'rails_app/config/environment.rb'
 require 'rspec/rails'
-
 require 'loaf'
 
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each {|f| require f}
