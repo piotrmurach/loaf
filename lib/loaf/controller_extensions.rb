@@ -12,26 +12,29 @@ module Loaf
     end
 
     module ClassMethods
+      # Add breacrumb to the trail in controller as class method
+      #
       # @param [String]
       #
       # @api public
       def breadcrumb(name, url, options = {})
+        normalizer = method(:_normalize_name)
         before_filter(options) do |instance|
-          # instance.send(:add_breadcrumb, _normalize_name(name), url)
-          instance.send(:breadcrumb, name, url, options)
+          normalized_name = normalizer.call(name, instance)
+          normalized_url  = normalizer.call(url, instance)
+          instance.send(:breadcrumb, normalized_name, normalized_url, options)
         end
       end
       alias_method :add_breadcrumb, :breadcrumb
 
       private
 
-      def _normalize_name(name=nil)
+      # @api private
+      def _normalize_name(name, instance)
         case name
         when NilClass
         when Proc
-          name.call
-        when Symbol
-          name.to_s
+          name.call(instance)
         else
           name
         end
@@ -57,7 +60,7 @@ module Loaf
         end
       end
 
-      # Add breadcrumb
+      # Add breadcrumb in controller as instance method
       #
       # @param [String] name
       #

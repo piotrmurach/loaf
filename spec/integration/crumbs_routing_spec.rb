@@ -33,7 +33,7 @@ RSpec.describe "crumbs routing" do
     end
   end
 
-  it 'should be current when forced' do
+  it 'is current when forced' do
     visit new_post_path
     click_button "Create"
 
@@ -41,6 +41,13 @@ RSpec.describe "crumbs routing" do
     within '#breadcrumbs' do
       expect(page).to have_content('New Post')
       expect(page).to have_selector('.selected')
+    end
+  end
+
+  it "allows for procs in name and url" do
+    visit post_comments_path(1)
+    within '#breadcrumbs' do
+      expect(page.html).to include('<a href="/posts/1/comments">Post comments</a>')
     end
   end
 end
