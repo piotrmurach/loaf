@@ -66,7 +66,7 @@ class Blog::CategoriesController < ApplicationController
 end
 ```
 
-**Loaf** adds `breadcrumb` helper also to the views. Together with controller breadcrumbs, the view breadcrumbs are appended as the last. For instance, to specify view breadcrumb do:
+**Loaf** adds `breadcrumb` helper also to the views. Together with controller breadcrumbs, the view breadcrumbs are appended as the last in breadcrumb trail. For instance, to specify view breadcrumb do:
 
 ```ruby
 <% breadcrumb @category.title, blog_category_path(@category) %>
@@ -89,7 +89,9 @@ Usually best practice is to put such snippet inside its own partial.
 
 ### 1.1 breadcrumb
 
-Creation of breadcrumb in Rails is achieved by the `breadcrumb` helper. The `breadcrumb` method takes at minimum two arguments: the first is a name for the crumb that will be displayed and the second is a url that the name points to. The url parameter uses the familiar Rails conventions.
+Creation of breadcrumb in Rails is achieved by the `breadcrumb` helper.
+
+The `breadcrumb` method takes at minimum two arguments: the first is a name for the crumb that will be displayed and the second is a url that the name points to. The url parameter uses the familiar Rails conventions.
 
 When using path variable `blog_categories_path`:
 
@@ -113,6 +115,55 @@ You can specify segments of the url:
 
 ```ruby
 breadcrumb @category.title, {controller: 'categories', action: 'show', id: @category.id}
+```
+
+#### 1.1.1 breadcrumb in controller
+
+Breadcrumbs are inherited, so if you set a breadcrumb in `ApplicationController`, it will be inserted as a first element inside every breadcrumb trail. It is customary to set root breadcrumb like so:
+
+```ruby
+class ApplicationController < ActionController::Base
+  breadcrumb 'Home', :root_path
+end
+```
+
+In controller outside of any action the `breadcrumb` acts as filter.
+
+```ruby
+class ArticlesController < ApplicationController
+  breadcrumb 'All Articles', :articles_path, only: [:new, :create]
+end
+```
+
+**Loaf** allows you to call controller instance methods inside the `breadcrumb` helper outside of any action. This is useful if your breadcrumb has parameterized behaviour. For example, to dynamically evaluate parameters for breadcrumb title do:
+
+```ruby
+class CommentsController < ApplicationController
+  breadcrumb ->(c) { c.find_article(c.params[:post_id]).title }, :articles_path
+end
+```
+
+Also, to dynamically evalute parameters inside the url argument do:
+
+```ruby
+class CommentsController < ApplicationController
+  breadcrumb 'All Comments', ->(c) { c.post_comments_path(c.params[:post_id]) }
+end
+```
+
+### 1.2 force
+
+**Loaf** allows you to force a breadcrumb to be current.
+
+For example, on the create action as you are likely want the breadcrumb to be similar as for new action.
+
+```ruby
+class PostsController < ApplicationController
+  def create
+    breadcrumb 'New Post', new_post_path, force: true
+    render action: :new
+  end
+end
 ```
 
 ## 2. Configuration
@@ -158,13 +209,13 @@ Therefore, in your controller/view you would do:
 
 ```ruby
 class Blog::CategoriesController < ApplicationController
-
   breadcrumb 'blog.categories', :blog_categories_path
-
 end
+```
 
-And corresponding entry in locale:
+And corresponding entry in locale would be:
 
+```ruby
 en:
   loaf:
     breadcrumbs:
