@@ -1,3 +1,10 @@
+0.5.0 (January 31, 2015)
+
+* Add generator for locales file
+* Add breadcrumbs scope for translations
+* Change breadcrumb formatter to use translations for title formatting
+* Add ability to pass proc as title and/or url for breadcrumb helper inside controller
+
 0.4.0 (January 10, 2015)
 
 * Change breadcrumbs view method to return enumerator without block
