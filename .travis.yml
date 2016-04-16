@@ -1,5 +1,7 @@
+---
 language: ruby
 sudo: false
+cache: bundler
 bundler_args: --without yard benchmarks
 install: 'travis_retry bin/setup'
 script: 'bundle exec appraisal rake ci'
@@ -8,6 +10,7 @@ rvm:
   - 2.0.0
   - 2.1.0
   - 2.2.0
+  - 2.3.0
 matrix:
   include:
     - rvm: jruby-19mode
@@ -23,3 +26,5 @@ matrix:
   fast_finish: true
 branches:
   only: master
+notifications:
+  email: false
