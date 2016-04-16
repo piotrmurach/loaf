@@ -1,17 +1,17 @@
 # Loaf
-[![Gem Version](https://badge.fury.io/rb/loaf.png)][gem]
-[![Build Status](https://secure.travis-ci.org/peter-murach/loaf.png?branch=master)][travis]
-[![Code Climate](https://codeclimate.com/github/peter-murach/loaf.png)][codeclimate]
-[![Dependency Status](https://gemnasium.com/peter-murach/loaf.png?travis)][gemnasium]
-[![Coverage Status](https://coveralls.io/repos/peter-murach/loaf/badge.png?branch=master)][coveralls]
-[![Inline docs](http://inch-ci.org/github/peter-murach/loaf.png?branch=master)][inchpages]
+[![Gem Version](https://badge.fury.io/rb/loaf.svg)][gem]
+[![Build Status](https://secure.travis-ci.org/piotrmurach/loaf.svg?branch=master)][travis]
+[![Code Climate](https://codeclimate.com/github/piotrmurach/loaf/badges/gpa.svg)][codeclimate]
+[![Dependency Status](https://gemnasium.com/piotrmurach/loaf.svg?travis)][gemnasium]
+[![Coverage Status](https://coveralls.io/repos/github/piotrmurach/loaf/badge.svg?branch=master)][coveralls]
+[![Inline docs](http://inch-ci.org/github/piotrmurach/loaf.svg?branch=master)][inchpages]
 
 [gem]: http://badge.fury.io/rb/loaf
-[travis]: http://travis-ci.org/peter-murach/loaf
-[codeclimate]: https://codeclimate.com/github/peter-murach/loaf
-[gemnasium]: https://gemnasium.com/peter-murach/loaf
-[coveralls]: https://coveralls.io/r/peter-murach/loaf
-[inchpages]: http://inch-ci.org/github/peter-murach/loaf
+[travis]: http://travis-ci.org/piotrmurach/loaf
+[codeclimate]: https://codeclimate.com/github/piotrmurach/loaf
+[gemnasium]: https://gemnasium.com/piotrmurach/loaf
+[coveralls]: https://coveralls.io/github/piotrmurach/loaf
+[inchpages]: http://inch-ci.org/github/piotrmurach/loaf
 
 > **Loaf** manages and displays breadcrumb trails in your Rails application.
 
@@ -225,8 +225,8 @@ en:
 
 ## Contributing
 
-Questions or problems? Please post them on the [issue tracker](https://github.com/peter-murach/loaf/issues). You can contribute changes by forking the project and submitting a pull request. You can ensure the tests are passing by running `bundle` and `rake`.
+Questions or problems? Please post them on the [issue tracker](https://github.com/piotrmurach/loaf/issues). You can contribute changes by forking the project and submitting a pull request. You can ensure the tests are passing by running `bundle` and `rake`.
 
 ## Copyright
 
-Copyright (c) 2011-2015 Piotr Murach. See LICENSE.txt for further details.
+Copyright (c) 2011-2016 Piotr Murach. See LICENSE.txt for further details.

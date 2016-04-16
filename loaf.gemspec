@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.version     = Loaf::VERSION.dup
   s.authors     = ['Piotr Murach']
   s.email       = [""]
-  s.homepage    = 'https://github.com/peter-murach/loaf'
+  s.homepage    = 'https://github.com/piotrmurach/loaf'
   s.summary     = %q{Loaf manages and displays breadcrumb trails in your Rails application.}
   s.description = %q{Loaf manages and displays breadcrumb trails in your Rails app. It aims to handle breadcrumb data through easy dsl and expose it through view helpers without any assumptions about markup.}
 
