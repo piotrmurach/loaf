@@ -3,7 +3,8 @@ language: ruby
 sudo: false
 cache: bundler
 install:
-  - bundle exec appraisal install
+  - bundle install
+  - bundle exec bin/appraisal install
 script:
   - bundle exec appraisal rake ci
 rvm:
