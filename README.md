@@ -24,7 +24,7 @@
 * Specify urls using Rails conventions
 * No markup assumptions for breadcrumbs rendering
 * Use locales file for breadcrumb names
-* Tested with Rails 3.2, 4.0, 4.1, 4.2
+* Tested with Rails `>= 3.2` and Ruby `>= 2.0.0`
 
 ## Installation
 
