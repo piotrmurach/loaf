@@ -1,7 +1,9 @@
 <div align="center">
   <img width="237" src="https://cdn.rawgit.com/piotrmurach/loaf/master/assets/loaf_logo.png" alt="loaf logo" />
 </div>
+
 # Loaf
+
 [![Gem Version](https://badge.fury.io/rb/loaf.svg)][gem]
 [![Build Status](https://secure.travis-ci.org/piotrmurach/loaf.svg?branch=master)][travis]
 [![Code Climate](https://codeclimate.com/github/piotrmurach/loaf/badges/gpa.svg)][codeclimate]
@@ -232,4 +234,4 @@ Questions or problems? Please post them on the [issue tracker](https://github.co
 
 ## Copyright
 
-Copyright (c) 2011-2016 Piotr Murach. See LICENSE.txt for further details.
+Copyright (c) 2011-2017 Piotr Murach. See LICENSE.txt for further details.
