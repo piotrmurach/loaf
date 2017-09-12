@@ -4,10 +4,10 @@ if RUBY_VERSION > '1.9' and (ENV['COVERAGE'] || ENV['TRAVIS'])
   require 'simplecov'
   require 'coveralls'
 
-  SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
+  SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new([
     SimpleCov::Formatter::HTMLFormatter,
     Coveralls::SimpleCov::Formatter
-  ]
+  ])
 
   SimpleCov.start do
     command_name 'spec'
