@@ -1,14 +1,16 @@
-if RUBY_VERSION < '2.3.2'
+if RUBY_VERSION < '2.2.0'
   appraise 'rails3.2' do
     gem 'rails', '~> 3.2.22.5'
     gem 'test-unit', '~> 3.0'
   end
 end
 
-appraise 'rails4.0' do
-  gem 'rails', '~> 4.0.13'
-  gem 'test-unit'
-  gem 'mime-types', '~> 2.99'
+if RUBY_VERSION < '2.4.0'
+  appraise 'rails4.0' do
+    gem 'rails', '~> 4.0.13'
+    gem 'test-unit'
+    gem 'mime-types', '~> 2.99'
+  end
 end
 
 appraise 'rails4.1' do
