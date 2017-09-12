@@ -36,7 +36,7 @@ module Loaf
     def breadcrumb(name, url, options = {})
       _breadcrumbs << Loaf::Crumb.new(name, url, options)
     end
-    alias_method :add_breadcrumb, :breadcrumb
+    alias add_breadcrumb breadcrumb
 
     # Renders breadcrumbs inside view.
     #

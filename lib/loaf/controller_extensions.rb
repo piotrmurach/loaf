@@ -27,7 +27,7 @@ module Loaf
           instance.send(:breadcrumb, normalized_name, normalized_url, options)
         end
       end
-      alias_method :add_breadcrumb, :breadcrumb
+      alias add_breadcrumb breadcrumb
 
       private
 
@@ -72,7 +72,7 @@ module Loaf
       def breadcrumb(name, url, options = {})
         _breadcrumbs << Loaf::Crumb.new(name, url, options)
       end
-      alias_method :add_breadcrumb, :breadcrumb
+      alias add_breadcrumb breadcrumb
 
       # Collection of breadcrumbs
       #
