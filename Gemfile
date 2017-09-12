@@ -11,7 +11,7 @@ gem 'sqlite3' ,    '~> 1.3.13', platforms: :ruby
 gem 'activerecord-jdbcsqlite3-adapter', '~> 1.3.23', platforms: :jruby
 
 group :metrics do
-  gem 'coveralls', '~> 0.8.15'
-  gem 'simplecov', '~> 0.12.0'
+  gem 'coveralls', '~> 0.8.21'
+  gem 'simplecov', '~> 0.14.1'
   gem 'yardstick', '~> 0.9.9'
 end
