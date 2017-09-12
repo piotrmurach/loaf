@@ -43,30 +43,33 @@ module Loaf
     # @param [Hash] options
     #
     # @api public
-    def breadcrumbs(options = {}, &block)
-      # builder = Loaf::Builder.new(options)
+    def breadcrumbs(options = {})
       return enum_for(:breadcrumbs) unless block_given?
+
       valid?(options)
       options = Loaf.configuration.to_hash.merge(options)
       _breadcrumbs.each do |crumb|
-        name   = format_name(crumb.name, options)
-        url    = url_for(_process_url_for(crumb.url))
+        name = format_name(crumb.name, options)
+        path = url_for(_expand_url(crumb.url))
         styles = ''
-        if current_page?(url) || crumb.force
+        if current_page?(path) || crumb.force
           styles << "#{options[:style_classes]}"
         end
-        block.call(name, url, styles)
+        yield(name, path, styles)
       end
     end
 
     private
 
+    # Expand url in the current context of the view
+    #
     # @api private
-    def _process_url_for(url)
-      if url.is_a?(String) || url.is_a?(Symbol)
-        return respond_to?(url) ? send(url) : url
+    def _expand_url(url)
+      case url
+      when String, Symbol
+        respond_to?(url) ? send(url) : url
       else
-        return url
+        url
       end
     end
   end # ViewExtensions
