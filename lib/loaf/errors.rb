@@ -1,7 +1,6 @@
 # encoding: utf-8
 
 module Loaf #:nodoc:
-
   # Default Loaf error for all custom errors.
   #
   class LoafError < StandardError
@@ -28,5 +27,4 @@ module Loaf #:nodoc:
       )
     end
   end
-
 end # Loaf

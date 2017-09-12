@@ -1,5 +1,7 @@
 # encoding: utf-8
 
+require_relative 'translation'
+
 module Loaf
   # A mixin for formatting crumb name
   module CrumbFormatter

@@ -1,14 +1,7 @@
 # encoding: utf-8
 
-require 'loaf/configuration'
-require 'loaf/errors'
-require 'loaf/railtie'
-require 'loaf/crumb'
-require 'loaf/translation'
-require 'loaf/controller_extensions'
-require 'loaf/view_extensions'
-require 'loaf/crumb_formatter'
-require 'loaf/options_validator'
+require_relative 'loaf/configuration'
+require_relative 'loaf/railtie'
 
 module Loaf
   # Set global configuration
@@ -32,15 +25,5 @@ module Loaf
   # end
   def self.configure
     yield configuration
-  end
-
-  if defined? Rails::Railtie
-    require 'loaf/railtie'
-  else
-    autoload :ControllerExtensions, 'loaf/controller_extensions'
-    autoload :Helpers, 'loaf/view_extensions'
-
-    ::ActionController::Base.send :include, Loaf::ControllerExtensions
-    ::ActionController::Base.helper Loaf::ViewExtensions
   end
 end # Loaf

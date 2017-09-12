@@ -1,5 +1,7 @@
 # encoding: utf-8
 
+require_relative 'crumb'
+
 module Loaf
   module ControllerExtensions
     # Module injection

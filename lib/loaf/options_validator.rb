@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-require 'loaf/errors'
+require_relative 'errors'
 
 module Loaf
   # A mixin to validate configuration options

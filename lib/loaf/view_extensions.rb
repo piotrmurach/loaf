@@ -1,7 +1,7 @@
 # encoding: utf-8
 
-require 'loaf/crumb_formatter'
-require 'loaf/options_validator'
+require_relative 'crumb_formatter'
+require_relative 'options_validator'
 
 module Loaf
   # A mixin to define view extensions
