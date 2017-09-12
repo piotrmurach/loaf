@@ -9,6 +9,7 @@ gem 'capybara',    '~> 2.15.1'
 gem 'rspec-rails', '~> 3.6.1'
 gem 'sqlite3' ,    '~> 1.3.13', platforms: :ruby
 gem 'activerecord-jdbcsqlite3-adapter', '~> 1.3.23', platforms: :jruby
+gem 'nokogiri',    '~> 1.6.0'
 
 group :metrics do
   gem 'coveralls', '~> 0.8.21'
