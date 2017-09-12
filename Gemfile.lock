@@ -165,7 +165,7 @@ DEPENDENCIES
   activerecord-jdbcsqlite3-adapter (~> 1.3.10)
   ammeter (~> 1.1.3)
   appraisal (~> 2.1.0)
-  bundler (>= 1.5.0, < 2.0)
+  bundler (~> 1.5)
   capybara (~> 2.10.1)
   coveralls (~> 0.8.15)
   loaf!
@@ -177,4 +177,4 @@ DEPENDENCIES
   yardstick (~> 0.9.9)
 
 BUNDLED WITH
-   1.13.6
+   1.15.4
