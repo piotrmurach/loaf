@@ -9,7 +9,7 @@ module Loaf
       :last_crumb_linked,
       :capitalize,
       :root
-    ]
+    ].freeze
 
     attr_accessor(*VALID_ATTRIBUTES)
 
@@ -28,9 +28,11 @@ module Loaf
     # Setup this configuration
     #
     # @api public
-    def initialize
+    def initialize(attributes = {})
       VALID_ATTRIBUTES.each do |attr|
-        send("#{attr}=", self.class.const_get("DEFAULT_#{attr.to_s.upcase}"))
+        default = self.class.const_get("DEFAULT_#{attr.to_s.upcase}")
+        attr_value = attributes.fetch(attr) { default }
+        send("#{attr}=", attr_value)
       end
     end
 
