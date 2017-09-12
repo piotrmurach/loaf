@@ -1,6 +1,7 @@
-if RUBY_VERSION < '2.2.0'
+if RUBY_VERSION < '2.3.2'
   appraise 'rails3.2' do
     gem 'rails', '~> 3.2.22.5'
+    gem 'test-unit', '~> 3.0'
   end
 end
 
@@ -23,11 +24,6 @@ end
 if RUBY_VERSION >= '2.2.0'
   appraise 'rails5.0' do
     gem 'rails', '~> 5.0.6'
-    gem 'rspec-rails', '~> 3.6.1'
-  end
-
-  appraise 'rails5.1' do
-    gem 'rails', '~> 5.1.4'
     gem 'rspec-rails', '~> 3.6.1'
   end
 end
