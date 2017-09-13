@@ -68,6 +68,8 @@ module Loaf
       case url
       when String, Symbol
         respond_to?(url) ? send(url) : url
+      when Proc
+        url.call(self)
       else
         url
       end
