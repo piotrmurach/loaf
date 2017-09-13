@@ -21,7 +21,7 @@ module Loaf
       # @api public
       def breadcrumb(name, url, options = {})
         normalizer = method(:_normalize_name)
-        before_filter(options) do |instance|
+        send(_filter_name, options) do |instance|
           normalized_name = normalizer.call(name, instance)
           normalized_url  = normalizer.call(url, instance)
           instance.send(:breadcrumb, normalized_name, normalized_url, options)
@@ -30,6 +30,13 @@ module Loaf
       alias add_breadcrumb breadcrumb
 
       private
+
+      # Choose available filter name
+      #
+      # @api private
+      def _filter_name
+        respond_to?(:before_action) ? :before_action : :before_filter
+      end
 
       # @api private
       def _normalize_name(name, instance)

@@ -6,6 +6,9 @@ class DummyController < ActionController::Base
   def self.before_filter(options, &block)
     yield self.new
   end
+  class << self
+    alias before_action before_filter
+  end
   include Loaf::ControllerExtensions
 end
 
@@ -22,12 +25,13 @@ RSpec.describe Loaf::ControllerExtensions do
 
   context 'class methods' do
     it 'invokes before_filter' do
-      allow(DummyController).to receive(:before_filter)
+      allow(DummyController).to receive(:before_action)
+      allow(DummyController).to receive(:respond_to?).and_return(true)
       DummyController.breadcrumb('name', 'url_path')
-      expect(DummyController).to have_received(:before_filter)
+      expect(DummyController).to have_received(:before_action)
     end
 
-    it 'delegates to instance' do
+    it 'delegates breadcrumb registration to controller instance' do
       name    = 'List objects'
       url     = :object_path
       options = {force: true}
