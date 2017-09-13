@@ -1,13 +1,13 @@
 # encoding: utf-8
 
-require 'spec_helper'
-
-RSpec.describe "crumbs routing" do
+RSpec.describe "breadcrumbs trail" do
   include ActionView::TestCase::Behavior
 
-  it "doens't show empty breadcrumbs" do
+  it "shows root breadcrumb" do
     visit root_path
-    expect(page).to_not have_content("breadcrumbs")
+    within '#breadcrumbs' do
+      expect(page).to have_content('Home')
+    end
   end
 
   it "inherits controller breadcrumb and adds index action breadcrumb" do

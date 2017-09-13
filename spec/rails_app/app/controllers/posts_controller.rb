@@ -1,9 +1,6 @@
 class Post < Struct.new(:id); end
 
 class PostsController < ApplicationController
-
-  breadcrumb 'Home', :root_path, only: :index
-
   def index
     breadcrumb 'all_posts', posts_path
   end
