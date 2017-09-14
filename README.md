@@ -22,9 +22,9 @@
 
 ## Features
 
-* Uses controllers or views to specify breadcrumb trails
+* Use controllers and/or views to specify breadcrumb trails
 * Specify urls using Rails conventions
-* No markup assumptions for breadcrumbs rendering
+* No markup assumptions for breadcrumbs trails rendering
 * Use locales file for breadcrumb names
 * Tested with Rails `>= 3.2` and Ruby `>= 2.0.0`
 
@@ -54,11 +54,23 @@ Then run the generator:
 rails generate loaf:install
 ```
 
+## Contents
+
+* [1. Usage](#1-usage)
+* [2. API](#2-api)
+  * [2.1 breadcrumb](#21-breadcrumb)
+    * [2.1.1 controller](#211-controller)
+    * [2.1.2 view](#212-view)
+    * [2.1.3 :force](#213-force)
+  * [2.2 breadcrumbs_trail](#22-breadcrumbs-trail)
+* [3. Configuration](#3-configuration)
+* [4. Translation](#4-translation)
+
 ## 1. Usage
 
 **Loaf** allows you to add breadcrumbs in controllers and views.
 
-In order to add breadcrumbs in controller use `breadcrumb` method ([see 1.1](#11-breadcrumb)). Outside of controller actions the `breadcrumb` helper behaviour is similar to filters and as such you can limit breadcrumb scope with familiar options `:only`, `:except`. Any breadcrumb specified inside actions creates another level in breadcrumbs trail.
+In order to add breadcrumbs in controller use `breadcrumb` method ([see 2.1](#21-breadcrumb)).
 
 ```ruby
 class Blog::CategoriesController < ApplicationController
@@ -71,28 +83,11 @@ class Blog::CategoriesController < ApplicationController
 end
 ```
 
-**Loaf** adds `breadcrumb` helper also to the views. Together with controller breadcrumbs, the view breadcrumbs are appended as the last in breadcrumb trail. For instance, to specify view breadcrumb do:
+Then in your view render the breadcrumbs trail using [breadcrumbs_trail](#22-breadcrumbs-trail)
 
-```ruby
-<% breadcrumb @category.title, blog_category_path(@category) %>
-```
+## 2. API
 
-Finally, in your view layout add semantic markup to show breadcrumbs:
-
-```html
-<ul class='breadcrumbs'>
-  <% breadcrumbs do |name, url, styles| %>
-    <li class="<%= styles %>">
-      <%= link_to name, url %>
-      <span><%= styles == 'selected' ? '' : '::' %></span>
-    </li>
-  <% end %>
-</ul>
-```
-
-Usually best practice is to put such snippet inside its own partial.
-
-### 1.1 breadcrumb
+### 2.1 breadcrumb
 
 Creation of breadcrumb in Rails is achieved by the `breadcrumb` helper.
 
@@ -122,7 +117,7 @@ You can specify segments of the url:
 breadcrumb @category.title, {controller: 'categories', action: 'show', id: @category.id}
 ```
 
-#### 1.1.1 breadcrumb in controller
+#### 2.1.1 controller
 
 Breadcrumbs are inherited, so if you set a breadcrumb in `ApplicationController`, it will be inserted as a first element inside every breadcrumb trail. It is customary to set root breadcrumb like so:
 
@@ -132,7 +127,7 @@ class ApplicationController < ActionController::Base
 end
 ```
 
-In controller outside of any action the `breadcrumb` acts as filter.
+Outside of controller actions the `breadcrumb` helper behaviour is similar to filters/actions and as such you can limit breadcrumb scope with familiar options `:only`, `:except`. Any breadcrumb specified inside actions creates another level in breadcrumbs trail.
 
 ```ruby
 class ArticlesController < ApplicationController
@@ -156,7 +151,15 @@ class CommentsController < ApplicationController
 end
 ```
 
-### 1.2 force
+#### 2.1.2 view
+
+**Loaf** adds `breadcrumb` helper also to the views. Together with controller breadcrumbs, the view breadcrumbs are appended as the last in breadcrumb trail. For instance, to specify view breadcrumb do:
+
+```ruby
+<% breadcrumb @category.title, blog_category_path(@category) %>
+```
+
+#### 2.1.3 :force
 
 **Loaf** allows you to force a breadcrumb to be current.
 
@@ -171,7 +174,24 @@ class PostsController < ApplicationController
 end
 ```
 
-## 2. Configuration
+### 2.2 breadcrumbs_trail
+
+In your view layout add semantic markup to show breadcrumbs using the `breadcrumbs_trail` like so:
+
+```html
+<ul id='breadcrumbs'>
+  <% breadcrumbs_trail do |name, url, styles| %>
+    <li class="<%= styles %>">
+      <%= link_to name, url %>
+      <% unless styles.include?('selected') %><span>::</span><% end %>
+    </li>
+  <% end %>
+</ul>
+```
+
+Usually best practice is to put such snippet inside its own partial.
+
+## 3. Configuration
 
 There is a small set of custom opinionated defaults. The following options are valid parameters:
 
@@ -199,7 +219,7 @@ Loaf.configure do |config|
 end
 ```
 
-## 3. Translation
+## 4. Translation
 
 You can use locales files for breadcrumbs' titles. **Loaf** assumes that all breadcrumb names are scoped inside `breadcrumbs` namespace inside `loaf` scope. However, this can be easily changed by passing `scope: 'new_scope_name'` configuration option.
 
