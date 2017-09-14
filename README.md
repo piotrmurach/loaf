@@ -205,7 +205,7 @@ There is a small set of custom opinionated defaults. The following options are v
 
 You can override them in your views by passing them to the view `breadcrumb` helper
 
-```ruby
+```
 <% breadcrumbs crumb_length: 20 do |name, url, styles| %>
   ..
 <% end %>
