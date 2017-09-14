@@ -6,8 +6,8 @@ RSpec.describe "breadcrumbs trail" do
   it "shows root breadcrumb" do
     visit root_path
 
-    within '#breadcrumbs' do
-      expect(page.html).to include('<a class="selected" href="/">Home</a>')
+    within '#breadcrumbs .selected' do
+      expect(page.html).to include('<a href="/">Home</a>')
     end
   end
 
@@ -15,8 +15,10 @@ RSpec.describe "breadcrumbs trail" do
     visit posts_path
 
     within '#breadcrumbs' do
-      expect(page.html).to include('<a class="" href="/">Home</a>')
-      expect(page.html).to include('<a class="selected" href="/posts">All Posts</a>')
+      expect(page.html).to include('<a href="/">Home</a>')
+      within '.selected' do
+        expect(page.html).to include('<a href="/posts">All Posts</a>')
+      end
     end
   end
 
@@ -32,8 +34,8 @@ RSpec.describe "breadcrumbs trail" do
   it "adds breadcrumb in view with path variable" do
     visit post_path(1)
 
-    within '#breadcrumbs' do
-      expect(page.html).to include('<a class="selected" href="/posts/1">Show Post in view</a>')
+    within '#breadcrumbs .selected' do
+      expect(page.html).to include('<a href="/posts/1">Show Post in view</a>')
     end
   end
 
@@ -42,15 +44,16 @@ RSpec.describe "breadcrumbs trail" do
     click_button "Create"
 
     expect(page.current_path).to eq(posts_path)
-    within '#breadcrumbs' do
-      expect(page.html).to include('<a class="selected" href="/posts/new">New Post</a>')
+    within '#breadcrumbs .selected' do
+      expect(page.html).to include('<a href="/posts/new">New Post</a>')
     end
   end
 
   it "allows for procs in name and url" do
     visit post_comments_path(1)
-    within '#breadcrumbs' do
-      expect(page.html).to include('<a class="selected" href="/posts/1/comments">Post comments</a>')
+
+    within '#breadcrumbs .selected' do
+      expect(page.html).to include('<a href="/posts/1/comments">Post comments</a>')
     end
   end
 end

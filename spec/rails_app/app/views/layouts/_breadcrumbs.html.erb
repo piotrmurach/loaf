@@ -2,7 +2,7 @@
 <ul id='breadcrumbs'>
   <% breadcrumbs do |name, url, styles| %>
     <li class="<%= styles %>">
-      <%= link_to name, url, class: styles %>
+      <%= link_to name, url %>
       <% unless styles.include?('selected') %>
         <span>::</span>
       <% end %>
