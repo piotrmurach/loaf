@@ -62,7 +62,7 @@ rails generate loaf:install
     * [2.1.1 controller](#211-controller)
     * [2.1.2 view](#212-view)
     * [2.1.3 :force](#213-force)
-  * [2.2 breadcrumbs_trail](#22-breadcrumbs-trail)
+  * [2.2 breadcrumbs_trail](#22-breadcrumbs_trail)
 * [3. Configuration](#3-configuration)
 * [4. Translation](#4-translation)
 
@@ -83,7 +83,7 @@ class Blog::CategoriesController < ApplicationController
 end
 ```
 
-Then in your view render the breadcrumbs trail using [breadcrumbs_trail](#22-breadcrumbs-trail)
+Then in your view render the breadcrumbs trail using [breadcrumbs_trail](#22-breadcrumbs_trail)
 
 ## 2. API
 
