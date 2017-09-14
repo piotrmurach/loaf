@@ -13,8 +13,8 @@ gem "rails", "~> 4.1.16"
 gem "mime-types", "~> 2.99"
 
 group :metrics do
-  gem "coveralls", "~> 0.8.21"
-  gem "simplecov", "~> 0.14.1"
+  gem "coveralls", "0.8.17"
+  gem "simplecov", "~> 0.12.0"
   gem "yardstick", "~> 0.9.9"
 end
 
