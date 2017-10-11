@@ -1,7 +1,40 @@
+require 'action_view'
+
 class DummyView < ActionView::Base
+  module FakeRequest
+    class Request
+      attr_accessor :path
+      def get?
+        true
+      end
+    end
+    def request
+      @request ||= Request.new
+    end
+    def params
+      @params ||= {}
+    end
+  end
+
+  include FakeRequest
+  include ActionView::Helpers::UrlHelper
   include Loaf::ViewExtensions
+
   attr_reader :_breadcrumbs
 
-  def url_for(*); end
+  routes = ActionDispatch::Routing::RouteSet.new
+  routes.draw do
+    get "/" => "foo#bar", :as => :home
+    get "/posts" => "foo#posts"
+    get "/post/:id" => "foo#post", :as => :post
+    get "/post/:title" => "foo#title"
+  end
+
+  include routes.url_helpers
+
+  def set_path(path)
+    request.path = path
+  end
+
   def current_page?(*); end
 end
