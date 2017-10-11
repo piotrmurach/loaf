@@ -1,15 +1,14 @@
 # encoding: utf-8
 
-require 'spec_helper'
-
-RSpec.describe Loaf::ViewExtensions, '.breadcrumbs' do
+RSpec.describe Loaf::ViewExtensions, '#breadcrumbs' do
   it "yields to block all breadcrumbs" do
     instance = DummyView.new
+    instance.set_path('/')
     instance.breadcrumb('home', :home_path)
     instance.breadcrumb('posts', :posts_path)
 
     yielded = []
-    block = lambda { |name, url, styles| yielded << [name, url, styles]}
+    block = -> (name, url, styles) { yielded << [name, url, styles] }
     expect {
       instance.breadcrumbs(&block)
     }.to change { yielded.size }.from(0).to(2)
@@ -20,13 +19,13 @@ RSpec.describe Loaf::ViewExtensions, '.breadcrumbs' do
     instance.breadcrumb('home', :home_path)
     instance.breadcrumb('posts', :posts_path)
 
-    allow(instance).to receive(:url_for).with(:home_path).and_return('/home')
-    allow(instance).to receive(:url_for).with(:posts_path).and_return('/posts')
     yielded = []
-    block = lambda { |name, url, styles| yielded << [name, url, styles]}
+    block = -> (name, url, styles) { yielded << [name, url, styles] }
+
     instance.breadcrumbs(&block)
+
     expect(yielded).to eq([
-      ['home', '/home', ''],
+      ['home', '/', ''],
       ['posts', '/posts', '']
     ])
   end
@@ -36,16 +35,15 @@ RSpec.describe Loaf::ViewExtensions, '.breadcrumbs' do
     instance.breadcrumb('home', :home_path)
     instance.breadcrumb('posts', :posts_path)
 
-    allow(instance).to receive(:url_for).with(:home_path).and_return('/home')
-    allow(instance).to receive(:url_for).with(:posts_path).and_return('/posts')
-    allow(instance).to receive(:current_page?).with('/home').and_return(false)
+    allow(instance).to receive(:current_page?).with('/').and_return(false)
     allow(instance).to receive(:current_page?).with('/posts').and_return(true)
 
     yielded = []
-    block = lambda { |name, url, styles| yielded << [name, url, styles]}
+    block = -> (name, url, styles) { yielded << [name, url, styles] }
     instance.breadcrumbs(&block)
+
     expect(yielded).to eq([
-      ['home', '/home', ''],
+      ['home', '/', ''],
       ['posts', '/posts', 'selected']
     ])
   end
@@ -55,15 +53,14 @@ RSpec.describe Loaf::ViewExtensions, '.breadcrumbs' do
     instance.breadcrumb('home', :home_path)
     instance.breadcrumb('posts', :posts_path, force: true)
 
-    allow(instance).to receive(:url_for).with(:home_path).and_return('/home')
-    allow(instance).to receive(:url_for).with(:posts_path).and_return('/posts')
     allow(instance).to receive(:current_page?).and_return(false)
 
     yielded = []
-    block = lambda { |name, url, styles| yielded << [name, url, styles]}
+    block = -> (name, url, styles) { yielded << [name, url, styles] }
     instance.breadcrumbs(&block)
+
     expect(yielded).to eq([
-      ['home', '/home', ''],
+      ['home', '/', ''],
       ['posts', '/posts', 'selected']
     ])
   end
@@ -73,20 +70,18 @@ RSpec.describe Loaf::ViewExtensions, '.breadcrumbs' do
     instance.breadcrumb('home', :home_path)
     instance.breadcrumb('posts', :posts_path)
 
-    allow(instance).to receive(:url_for).with(:home_path).and_return('/home')
-    allow(instance).to receive(:url_for).with(:posts_path).and_return('/posts')
-
     result = instance.breadcrumbs
+
     expect(result).to be_a(Enumerable)
     expect(result.take(2)).to eq([
-      ['home', '/home', ''],
+      ['home', '/', ''],
       ['posts', '/posts', '']
     ])
   end
 
   it 'validates passed options' do
     instance = DummyView.new
-    block = lambda { |name, url, styles| }
+    block = -> (name, url, styles) {  }
     expect {
       instance.breadcrumbs(unknown: true, &block)
     }.to raise_error(Loaf::InvalidOptions)
@@ -98,13 +93,12 @@ RSpec.describe Loaf::ViewExtensions, '.breadcrumbs' do
     instance.breadcrumb('home-sweet-home', :home_path)
     instance.breadcrumb('posts-for-everybody', :posts_path)
 
-    allow(instance).to receive(:url_for).with(:home_path).and_return('/home')
-    allow(instance).to receive(:url_for).with(:posts_path).and_return('/posts')
     yielded = []
-    block = lambda { |name, url, styles| yielded << [name, url, styles]}
+    block = -> (name, url, styles) { yielded << [name, url, styles] }
     instance.breadcrumbs(&block)
+
     expect(yielded).to eq([
-      ['home-sw...', '/home', ''],
+      ['home-sw...', '/', ''],
       ['posts-f...', '/posts', '']
     ])
   end
@@ -115,13 +109,12 @@ RSpec.describe Loaf::ViewExtensions, '.breadcrumbs' do
     instance.breadcrumb('home-sweet-home', :home_path)
     instance.breadcrumb('posts-for-everybody', :posts_path)
 
-    allow(instance).to receive(:url_for).with(:home_path).and_return('/home')
-    allow(instance).to receive(:url_for).with(:posts_path).and_return('/posts')
     yielded = []
-    block = lambda { |name, url, styles| yielded << [name, url, styles]}
+    block = -> (name, url, styles) { yielded << [name, url, styles] }
     instance.breadcrumbs(crumb_length: 15, &block)
+
     expect(yielded).to eq([
-      ['home-sweet-home', '/home', ''],
+      ['home-sweet-home', '/', ''],
       ['posts-for-ev...', '/posts', '']
     ])
   end
