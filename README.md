@@ -18,13 +18,13 @@
 [coveralls]: https://coveralls.io/github/piotrmurach/loaf
 [inchpages]: http://inch-ci.org/github/piotrmurach/loaf
 
-> **Loaf** manages and displays breadcrumb trails in your Rails application.
+> **Loaf** manages and displays breadcrumbs in your Rails application.
 
 ## Features
 
-* Use controllers and/or views to specify breadcrumb trails
+* Use controllers and/or views to specify breadcrumbs
 * Specify urls using Rails conventions
-* No markup assumptions for breadcrumbs trails rendering
+* No markup assumptions for breadcrumbs rendering
 * Use locales file for breadcrumb names
 * Tested with Rails `>= 3.2` and Ruby `>= 2.0.0`
 
@@ -62,7 +62,7 @@ rails generate loaf:install
     * [2.1.1 controller](#211-controller)
     * [2.1.2 view](#212-view)
     * [2.1.3 :force](#213-force)
-  * [2.2 breadcrumbs_trail](#22-breadcrumbs_trail)
+  * [2.2 breadcrumbs](#22-breadcrumbs)
 * [3. Configuration](#3-configuration)
 * [4. Translation](#4-translation)
 
@@ -83,7 +83,7 @@ class Blog::CategoriesController < ApplicationController
 end
 ```
 
-Then in your view render the breadcrumbs trail using [breadcrumbs_trail](#22-breadcrumbs_trail)
+Then in your view render the breadcrumbs using [breadcrumbs](#22-breadcrumbs)
 
 ## 2. API
 
@@ -119,7 +119,7 @@ breadcrumb @category.title, {controller: 'categories', action: 'show', id: @cate
 
 #### 2.1.1 controller
 
-Breadcrumbs are inherited, so if you set a breadcrumb in `ApplicationController`, it will be inserted as a first element inside every breadcrumb trail. It is customary to set root breadcrumb like so:
+Breadcrumbs are inherited, so if you set a breadcrumb in `ApplicationController`, it will be inserted as a first element inside every breadcrumb. It is customary to set root breadcrumb like so:
 
 ```ruby
 class ApplicationController < ActionController::Base
@@ -127,7 +127,7 @@ class ApplicationController < ActionController::Base
 end
 ```
 
-Outside of controller actions the `breadcrumb` helper behaviour is similar to filters/actions and as such you can limit breadcrumb scope with familiar options `:only`, `:except`. Any breadcrumb specified inside actions creates another level in breadcrumbs trail.
+Outside of controller actions the `breadcrumb` helper behaviour is similar to filters/actions and as such you can limit breadcrumb scope with familiar options `:only`, `:except`. Any breadcrumb specified inside actions creates another level in breadcrumbs.
 
 ```ruby
 class ArticlesController < ApplicationController
@@ -153,7 +153,7 @@ end
 
 #### 2.1.2 view
 
-**Loaf** adds `breadcrumb` helper also to the views. Together with controller breadcrumbs, the view breadcrumbs are appended as the last in breadcrumb trail. For instance, to specify view breadcrumb do:
+**Loaf** adds `breadcrumb` helper also to the views. Together with controller breadcrumbs, the view breadcrumbs are appended as the last in breadcrumb. For instance, to specify view breadcrumb do:
 
 ```ruby
 <% breadcrumb @category.title, blog_category_path(@category) %>
@@ -174,13 +174,13 @@ class PostsController < ApplicationController
 end
 ```
 
-### 2.2 breadcrumbs_trail
+### 2.2 breadcrumbs
 
-In your view layout add semantic markup to show breadcrumbs using the `breadcrumbs_trail` like so:
+In your view layout add semantic markup to show breadcrumbs using the `breadcrumbs` like so:
 
 ```html
 <ul id='breadcrumbs'>
-  <% breadcrumbs_trail do |name, url, styles| %>
+  <% breadcrumbs do |name, url, styles| %>
     <li class="<%= styles %>">
       <%= link_to name, url %>
       <% unless styles.include?('selected') %><span>::</span><% end %>
