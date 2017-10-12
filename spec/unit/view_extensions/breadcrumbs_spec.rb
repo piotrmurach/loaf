@@ -1,81 +1,60 @@
 # encoding: utf-8
 
 RSpec.describe Loaf::ViewExtensions, '#breadcrumbs' do
-  it "yields to block all breadcrumbs" do
-    instance = DummyView.new
-    instance.set_path('/')
-    instance.breadcrumb('home', :home_path)
-    instance.breadcrumb('posts', :posts_path)
-
-    yielded = []
-    block = -> (name, url, styles) { yielded << [name, url, styles] }
-    expect {
-      instance.breadcrumbs(&block)
-    }.to change { yielded.size }.from(0).to(2)
-  end
-
   it "resolves breadcrumb paths" do
     instance = DummyView.new
     instance.breadcrumb('home', :home_path)
     instance.breadcrumb('posts', :posts_path)
+    instance.set_path('/posts')
 
-    yielded = []
-    block = -> (name, url, styles) { yielded << [name, url, styles] }
-
-    instance.breadcrumbs(&block)
-
-    expect(yielded).to eq([
+    expect { |b|
+      instance.breadcrumbs(&b)
+    }.to yield_successive_args(
       ['home', '/', ''],
-      ['posts', '/posts', '']
-    ])
+      ['posts', '/posts', 'selected']
+    )
   end
 
   it "checks current path and provides styles" do
     instance = DummyView.new
     instance.breadcrumb('home', :home_path)
     instance.breadcrumb('posts', :posts_path)
+    instance.set_path('/posts')
 
-    allow(instance).to receive(:current_page?).with('/').and_return(false)
-    allow(instance).to receive(:current_page?).with('/posts').and_return(true)
-
-    yielded = []
-    block = -> (name, url, styles) { yielded << [name, url, styles] }
-    instance.breadcrumbs(&block)
-
-    expect(yielded).to eq([
+    expect { |b|
+      instance.breadcrumbs(&b)
+    }.to yield_successive_args(
       ['home', '/', ''],
       ['posts', '/posts', 'selected']
-    ])
+    )
   end
 
-  it "allows to force current path" do
+  it "forces current path" do
     instance = DummyView.new
     instance.breadcrumb('home', :home_path)
     instance.breadcrumb('posts', :posts_path, force: true)
+    instance.set_path('/posts')
 
-    allow(instance).to receive(:current_page?).and_return(false)
-
-    yielded = []
-    block = -> (name, url, styles) { yielded << [name, url, styles] }
-    instance.breadcrumbs(&block)
-
-    expect(yielded).to eq([
+    expect { |b|
+      instance.breadcrumbs(&b)
+    }.to yield_successive_args(
       ['home', '/', ''],
       ['posts', '/posts', 'selected']
-    ])
+    )
   end
 
   it "returns enumerator without block" do
     instance = DummyView.new
     instance.breadcrumb('home', :home_path)
     instance.breadcrumb('posts', :posts_path)
+    instance.set_path('/posts')
 
     result = instance.breadcrumbs
 
     expect(result).to be_a(Enumerable)
     expect(result.take(2)).to eq([
       ['home', '/', ''],
-      ['posts', '/posts', '']
+      ['posts', '/posts', 'selected']
     ])
   end
 
@@ -92,15 +71,14 @@ RSpec.describe Loaf::ViewExtensions, '#breadcrumbs' do
     instance = DummyView.new
     instance.breadcrumb('home-sweet-home', :home_path)
     instance.breadcrumb('posts-for-everybody', :posts_path)
+    instance.set_path('/posts')
 
-    yielded = []
-    block = -> (name, url, styles) { yielded << [name, url, styles] }
-    instance.breadcrumbs(&block)
-
-    expect(yielded).to eq([
+    expect { |b|
+      instance.breadcrumbs(&b)
+    }.to yield_successive_args(
       ['home-sw...', '/', ''],
-      ['posts-f...', '/posts', '']
-    ])
+      ['posts-f...', '/posts', 'selected']
+    )
   end
 
   it "allows to overwrite global configuration" do
@@ -108,14 +86,13 @@ RSpec.describe Loaf::ViewExtensions, '#breadcrumbs' do
     instance = DummyView.new
     instance.breadcrumb('home-sweet-home', :home_path)
     instance.breadcrumb('posts-for-everybody', :posts_path)
+    instance.set_path('/posts')
 
-    yielded = []
-    block = -> (name, url, styles) { yielded << [name, url, styles] }
-    instance.breadcrumbs(crumb_length: 15, &block)
-
-    expect(yielded).to eq([
+    expect { |b|
+      instance.breadcrumbs(crumb_length: 15, &b)
+    }.to yield_successive_args(
       ['home-sweet-home', '/', ''],
-      ['posts-for-ev...', '/posts', '']
-    ])
+      ['posts-for-ev...', '/posts', 'selected']
+    )
   end
 end
