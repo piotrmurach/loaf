@@ -3,7 +3,7 @@ require 'action_view'
 class DummyView < ActionView::Base
   module FakeRequest
     class Request
-      attr_accessor :path
+      attr_accessor :path, :fullpath
       def get?
         true
       end
@@ -26,6 +26,7 @@ class DummyView < ActionView::Base
   routes.draw do
     get "/" => "foo#bar", :as => :home
     get "/posts" => "foo#posts"
+    get "/posts/:title" => "foo#posts"
     get "/post/:id" => "foo#post", :as => :post
     get "/post/:title" => "foo#title"
   end
@@ -34,7 +35,6 @@ class DummyView < ActionView::Base
 
   def set_path(path)
     request.path = path
+    request.fullpath = path
   end
-
-  def current_page?(*); end
 end
