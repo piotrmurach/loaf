@@ -62,7 +62,7 @@ rails generate loaf:install
     * [2.1.1 controller](#211-controller)
     * [2.1.2 view](#212-view)
     * [2.1.3 :match](#213-match)
-  * [2.2 breadcrumbs_trail](#22-breadcrumbs_trail)
+  * [2.2 breadcrumb_trail](#22-breadcrumb_trail)
 * [3. Configuration](#3-configuration)
 * [4. Translation](#4-translation)
 
@@ -83,7 +83,7 @@ class Blog::CategoriesController < ApplicationController
 end
 ```
 
-Then in your view render the breadcrumbs trail using [breadcrumbs_trail](#22-breadcrumbs_trail)
+Then in your view render the breadcrumbs trail using [breadcrumb_trail](#22-breadcrumb_trail)
 
 ## 2. API
 
@@ -183,13 +183,13 @@ To make a breadcrumb current based on the query params do:
 breadcrumb 'Posts', posts_path(order: :desc), match: {order: :desc}
 ```
 
-### 2.2 breadcrumbs_trail
+### 2.2 breadcrumb_trail
 
-In your view layout add semantic markup to show breadcrumbs using the `breadcrumbs_trail` like so:
+In your view layout add semantic markup to show breadcrumbs using the `breadcrumb_trail` like so:
 
 ```html
 <ul id='breadcrumbs'>
-  <% breadcrumbs_trail do |name, url, styles| %>
+  <% breadcrumb_trail do |name, url, styles| %>
     <li class="<%= styles %>">
       <%= link_to name, url %>
       <% unless styles.include?('selected') %><span>::</span><% end %>
