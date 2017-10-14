@@ -52,10 +52,38 @@ module Loaf
         name = format_name(crumb.name, options)
         path = url_for(_expand_url(crumb.url))
         styles = ''
-        if current_page?(path) || crumb.force
+        if current_crumb?(path, crumb.match)
           styles << "#{options[:style_classes]}"
         end
         yield(name, path, styles)
+      end
+    end
+
+    # Check if breadcrumb is current based on the pattern
+    #
+    # @param [String] path
+    # @param [Object] pattern
+    #   the pattern to match on
+    #
+    # @api public
+    def current_crumb?(path, pattern = :inclusive)
+      return false unless request.get? || request.head?
+
+      origin_path = URI.parser.unescape(path).force_encoding(Encoding::BINARY)
+
+      request_uri = request.fullpath
+      request_uri = URI.parser.unescape(request_uri)
+      request_uri.force_encoding(Encoding::BINARY)
+
+      case pattern
+      when :inclusive
+        origin_path.starts_with?(request_uri)
+      when :exact
+        request_uri == origin_path
+      when :force
+        true
+      else
+        raise ArgumentError, "Uknown pattern to match on `#{pattern}`"
       end
     end
 

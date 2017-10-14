@@ -18,14 +18,15 @@ RSpec.describe Loaf::ViewExtensions, '#breadcrumbs' do
   it "checks current path and provides styles" do
     instance = DummyView.new
     instance.breadcrumb('home', :home_path)
-    instance.breadcrumb('posts', :posts_path)
+    instance.breadcrumb('posts',
+      {controller: 'foo', action: 'posts', id: '73-title'})
     instance.set_path('/posts')
 
     expect { |b|
       instance.breadcrumbs(&b)
     }.to yield_successive_args(
       ['home', '/', ''],
-      ['posts', '/posts', 'selected']
+      ['posts', '/posts?id=73-title', 'selected']
     )
   end
 
