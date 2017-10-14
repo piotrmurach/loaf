@@ -76,10 +76,15 @@ module Loaf
       request_uri = URI.parser.unescape(request_uri)
       request_uri.force_encoding(Encoding::BINARY)
 
-      # prevent matching on root path
+      # strip away trailing slash
       if origin_path.start_with?("/") && origin_path != '/'
         origin_path.chomp!("/")
         request_uri.chomp!("/")
+      end
+
+      if %r{^\w+://} =~ origin_path
+        origin_path.chomp!("/")
+        request_uri.insert(0, "#{request.protocol}#{request.host_with_port}")
       end
 
       case pattern
@@ -90,7 +95,7 @@ module Loaf
       when :force
         true
       else
-        raise ArgumentError, "Uknown pattern to match on `#{pattern}`"
+        raise ArgumentError, "Unknown `:#{pattern}` match option!"
       end
     end
 

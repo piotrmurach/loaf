@@ -69,6 +69,24 @@ RSpec.describe Loaf::ViewExtensions, '#breadcrumbs' do
     expect(view.breadcrumbs.to_a).to eq([['posts', '/posts/', 'selected']])
   end
 
+  it "matches current path with :inclusive when absolute path" do
+    view = DummyView.new
+    view.breadcrumb('posts', 'http://www.example.com/posts/', match: :inclusive)
+    view.set_path('/posts')
+
+    expect(view.breadcrumbs.to_a).to eq([['posts', 'http://www.example.com/posts/', 'selected']])
+  end
+
+  it "failse to recognize the match option" do
+    view = DummyView.new
+    view.breadcrumb('posts', 'http://www.example.com/posts/', match: :boom)
+    view.set_path('/posts')
+    block = -> (*args) { }
+    expect {
+      view.breadcrumbs(&block)
+    }.to raise_error(ArgumentError, "Unknown `:boom` match option!")
+  end
+
   it "forces current path" do
     view = DummyView.new
     view.breadcrumb('home', :home_path)
