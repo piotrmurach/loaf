@@ -61,7 +61,7 @@ rails generate loaf:install
   * [2.1 breadcrumb](#21-breadcrumb)
     * [2.1.1 controller](#211-controller)
     * [2.1.2 view](#212-view)
-    * [2.1.3 :force](#213-force)
+    * [2.1.3 :match](#213-match)
   * [2.2 breadcrumbs_trail](#22-breadcrumbs_trail)
 * [3. Configuration](#3-configuration)
 * [4. Translation](#4-translation)
@@ -159,19 +159,28 @@ end
 <% breadcrumb @category.title, blog_category_path(@category) %>
 ```
 
-#### 2.1.3 :force
+#### 2.1.3 :match
 
-**Loaf** allows you to force a breadcrumb to be current.
+**Loaf** allows you to define matching conditions in order to make a breadcrumb current with the `:match` option.
 
-For example, on the create action as you are likely want the breadcrumb to be similar as for new action.
+The `:match` key accepts the following values:
+
+* `:inclusive` - the default value, which matches nested paths
+* `:exact` - matches only the exact same path
+* `:exclusive` - matches only direct path and its query params if present
+* `/regex/` - matches based on regular expression
+* `{foo: bar}` - match based on query params
+
+For example, to force a breadcrumb to be the current regardless do:
 
 ```ruby
-class PostsController < ApplicationController
-  def create
-    breadcrumb 'New Post', new_post_path, force: true
-    render action: :new
-  end
-end
+breadcrumb 'New Post', new_post_path, match: :exact
+```
+
+To make a breadcrumb current based on the query params do:
+
+```ruby
+breadcrumb 'Posts', posts_path(order: :desc), match: {order: :desc}
 ```
 
 ### 2.2 breadcrumbs_trail
