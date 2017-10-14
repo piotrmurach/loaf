@@ -90,6 +90,8 @@ module Loaf
       case pattern
       when :inclusive
         !request_uri.match(/^#{Regexp.escape(origin_path)}(\/.*|\?.*)?$/).nil?
+      when :exclusive
+        !request_uri.match(/^#{Regexp.escape(origin_path)}\/?(\?.*)?$/).nil?
       when :exact
         request_uri == origin_path
       when :force

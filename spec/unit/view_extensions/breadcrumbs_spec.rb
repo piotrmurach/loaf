@@ -93,6 +93,30 @@ RSpec.describe Loaf::ViewExtensions, '#breadcrumbs' do
     expect(view.breadcrumbs.to_a).to eq([['posts', '/posts', '']])
   end
 
+  it "fails to match current path with :exact when query params" do
+    view = DummyView.new
+    view.breadcrumb('posts', '/posts', match: :exact)
+    view.set_path('/posts?foo=bar')
+
+    expect(view.breadcrumbs.to_a).to eq([['posts', '/posts', '']])
+  end
+
+  it "matches current path with :exclusive option when query params" do
+    view = DummyView.new
+    view.breadcrumb('posts', '/posts', match: :exclusive)
+    view.set_path('/posts?foo=bar')
+
+    expect(view.breadcrumbs.to_a).to eq([['posts', '/posts', 'selected']])
+  end
+
+  it "fails to match current path with :exclusive option when nested" do
+    view = DummyView.new
+    view.breadcrumb('posts', '/posts', match: :exclusive)
+    view.set_path('/posts/1/comment')
+
+    expect(view.breadcrumbs.to_a).to eq([['posts', '/posts', '']])
+  end
+
   it "failse to recognize the match option" do
     view = DummyView.new
     view.breadcrumb('posts', 'http://www.example.com/posts/', match: :boom)
