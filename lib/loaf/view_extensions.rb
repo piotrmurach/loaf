@@ -1,4 +1,5 @@
 # encoding: utf-8
+# frozen_string_literal: true
 
 require_relative 'crumb_formatter'
 require_relative 'options_validator'
@@ -53,7 +54,7 @@ module Loaf
         path = url_for(_expand_url(crumb.url))
         styles = ''
         if current_crumb?(path, crumb.match)
-          styles << "#{options[:style_classes]}"
+          styles = "#{options[:style_classes]}"
         end
         yield(name, path, styles)
       end
