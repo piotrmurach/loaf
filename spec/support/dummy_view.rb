@@ -29,6 +29,7 @@ class DummyView < ActionView::Base
     get "/posts/:title" => "foo#posts"
     get "/post/:id" => "foo#post", :as => :post
     get "/post/:title" => "foo#title"
+    get "/post/:id/comments" => "foo#comments"
   end
 
   include routes.url_helpers
