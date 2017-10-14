@@ -3,8 +3,9 @@
 ## [v0.6.0] - 2017-x-x
 
 ### Added
-* Add new :exact option for precise url matching
-* Add testing for Rails 5.0, 5.1
+* Add new :match option to allow customisation of breadcrumb matching behaviour
+* Add #current_crumb? for checking if breadcrumb is current in view
+* Add tests setup for Rails 5.0, 5.1
 
 ### Changed
 * Remove Builder class
@@ -12,7 +13,7 @@
 * Change Loaf::Railtie to load for both old and new rails versions
 
 ### Fixed
-* Fix current page matching logic
+* Fix current page matching logic to allow for inclusive paths
 * Fix controller filter to work with new Rails action semantics
 
 ## [v0.5.0] - 2015-01-31
