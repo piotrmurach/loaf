@@ -1,9 +1,9 @@
 <% if breadcrumbs? %>
 <ul id='breadcrumbs'>
-  <% breadcrumbs do |name, url, styles| %>
-    <li class="<%= styles %>">
+  <% breadcrumbs do |name, url, current| %>
+    <li class="<%= current ? 'selected' : '' %>">
       <%= link_to name, url %>
-      <% unless styles.include?('selected') %>
+      <% unless current %>
         <span>::</span>
       <% end %>
     </li>

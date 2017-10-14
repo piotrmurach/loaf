@@ -10,8 +10,8 @@ RSpec.describe Loaf::ViewExtensions, '#breadcrumbs' do
     expect { |b|
       view.breadcrumbs(&b)
     }.to yield_successive_args(
-      ['home', '/', ''],
-      ['posts', '/posts', 'selected']
+      ['home', '/', false],
+      ['posts', '/posts', true]
     )
   end
 
@@ -24,8 +24,8 @@ RSpec.describe Loaf::ViewExtensions, '#breadcrumbs' do
     expect { |b|
       view.breadcrumbs(&b)
     }.to yield_successive_args(
-      ['home', '/', ''],
-      ['posts', '/posts', 'selected']
+      ['home', '/', false],
+      ['posts', '/posts', true]
     )
   end
 
@@ -34,7 +34,7 @@ RSpec.describe Loaf::ViewExtensions, '#breadcrumbs' do
     view.breadcrumb('posts', '/posts', match: :inclusive)
     view.set_path('/posts?foo=bar')
 
-    expect(view.breadcrumbs.to_a).to eq([['posts', '/posts', 'selected']])
+    expect(view.breadcrumbs.to_a).to eq([['posts', '/posts', true]])
   end
 
   it "matches current path with :inclusive when nested" do
@@ -42,7 +42,7 @@ RSpec.describe Loaf::ViewExtensions, '#breadcrumbs' do
     view.breadcrumb('posts', '/posts', match: :inclusive)
     view.set_path('/posts/1/comment')
 
-    expect(view.breadcrumbs.to_a).to eq([['posts', '/posts', 'selected']])
+    expect(view.breadcrumbs.to_a).to eq([['posts', '/posts', true]])
   end
 
   it "matches current path with :inclusive when nested" do
@@ -50,7 +50,7 @@ RSpec.describe Loaf::ViewExtensions, '#breadcrumbs' do
     view.breadcrumb('posts', '/posts', match: :inclusive)
     view.set_path('/posts/1/comment')
 
-    expect(view.breadcrumbs.to_a).to eq([['posts', '/posts', 'selected']])
+    expect(view.breadcrumbs.to_a).to eq([['posts', '/posts', true]])
   end
 
   it "doesn't match with :inclusive when unrelated path" do
@@ -58,7 +58,7 @@ RSpec.describe Loaf::ViewExtensions, '#breadcrumbs' do
     view.breadcrumb('posts', '/posts', match: :inclusive)
     view.set_path('/post/1')
 
-    expect(view.breadcrumbs.to_a).to eq([['posts', '/posts', '']])
+    expect(view.breadcrumbs.to_a).to eq([['posts', '/posts', false]])
   end
 
   it "matches current path with :inclusive when extra trailing slash" do
@@ -66,7 +66,7 @@ RSpec.describe Loaf::ViewExtensions, '#breadcrumbs' do
     view.breadcrumb('posts', '/posts/', match: :inclusive)
     view.set_path('/posts')
 
-    expect(view.breadcrumbs.to_a).to eq([['posts', '/posts/', 'selected']])
+    expect(view.breadcrumbs.to_a).to eq([['posts', '/posts/', true]])
   end
 
   it "matches current path with :inclusive when absolute path" do
@@ -74,7 +74,9 @@ RSpec.describe Loaf::ViewExtensions, '#breadcrumbs' do
     view.breadcrumb('posts', 'http://www.example.com/posts/', match: :inclusive)
     view.set_path('/posts')
 
-    expect(view.breadcrumbs.to_a).to eq([['posts', 'http://www.example.com/posts/', 'selected']])
+    expect(view.breadcrumbs.to_a).to eq([
+      ['posts', 'http://www.example.com/posts/', true]
+    ])
   end
 
   it "matches current path with :exact when trailing slash" do
@@ -82,7 +84,7 @@ RSpec.describe Loaf::ViewExtensions, '#breadcrumbs' do
     view.breadcrumb('posts', '/posts/', match: :exact)
     view.set_path('/posts')
 
-    expect(view.breadcrumbs.to_a).to eq([['posts', '/posts/', 'selected']])
+    expect(view.breadcrumbs.to_a).to eq([['posts', '/posts/', true]])
   end
 
   it "fails to match current path with :exact when nested" do
@@ -90,7 +92,7 @@ RSpec.describe Loaf::ViewExtensions, '#breadcrumbs' do
     view.breadcrumb('posts', '/posts', match: :exact)
     view.set_path('/posts/1/comment')
 
-    expect(view.breadcrumbs.to_a).to eq([['posts', '/posts', '']])
+    expect(view.breadcrumbs.to_a).to eq([['posts', '/posts', false]])
   end
 
   it "fails to match current path with :exact when query params" do
@@ -98,7 +100,7 @@ RSpec.describe Loaf::ViewExtensions, '#breadcrumbs' do
     view.breadcrumb('posts', '/posts', match: :exact)
     view.set_path('/posts?foo=bar')
 
-    expect(view.breadcrumbs.to_a).to eq([['posts', '/posts', '']])
+    expect(view.breadcrumbs.to_a).to eq([['posts', '/posts', false]])
   end
 
   it "matches current path with :exclusive option when query params" do
@@ -106,7 +108,7 @@ RSpec.describe Loaf::ViewExtensions, '#breadcrumbs' do
     view.breadcrumb('posts', '/posts', match: :exclusive)
     view.set_path('/posts?foo=bar')
 
-    expect(view.breadcrumbs.to_a).to eq([['posts', '/posts', 'selected']])
+    expect(view.breadcrumbs.to_a).to eq([['posts', '/posts', true]])
   end
 
   it "fails to match current path with :exclusive option when nested" do
@@ -114,7 +116,7 @@ RSpec.describe Loaf::ViewExtensions, '#breadcrumbs' do
     view.breadcrumb('posts', '/posts', match: :exclusive)
     view.set_path('/posts/1/comment')
 
-    expect(view.breadcrumbs.to_a).to eq([['posts', '/posts', '']])
+    expect(view.breadcrumbs.to_a).to eq([['posts', '/posts', false]])
   end
 
   it "matches current path with regex option when query params" do
@@ -122,7 +124,7 @@ RSpec.describe Loaf::ViewExtensions, '#breadcrumbs' do
     view.breadcrumb('posts', '/posts', match: %r{/po})
     view.set_path('/posts?foo=bar')
 
-    expect(view.breadcrumbs.to_a).to eq([['posts', '/posts', 'selected']])
+    expect(view.breadcrumbs.to_a).to eq([['posts', '/posts', true]])
   end
 
   it "matches current path with query params option" do
@@ -130,7 +132,7 @@ RSpec.describe Loaf::ViewExtensions, '#breadcrumbs' do
     view.breadcrumb('posts', '/posts', match: {foo: :bar})
     view.set_path('/posts?foo=bar&baz=boo')
 
-    expect(view.breadcrumbs.to_a).to eq([['posts', '/posts', 'selected']])
+    expect(view.breadcrumbs.to_a).to eq([['posts', '/posts', true]])
   end
 
   it "fails to match current path with query params option" do
@@ -138,7 +140,7 @@ RSpec.describe Loaf::ViewExtensions, '#breadcrumbs' do
     view.breadcrumb('posts', '/posts', match: {foo: :bar})
     view.set_path('/posts?foo=2&baz=boo')
 
-    expect(view.breadcrumbs.to_a).to eq([['posts', '/posts', '']])
+    expect(view.breadcrumbs.to_a).to eq([['posts', '/posts', false]])
   end
 
   it "failse to recognize the match option" do
@@ -160,8 +162,8 @@ RSpec.describe Loaf::ViewExtensions, '#breadcrumbs' do
     expect { |b|
       view.breadcrumbs(&b)
     }.to yield_successive_args(
-      ['home', '/', 'selected'],
-      ['posts', '/posts', 'selected']
+      ['home', '/', true],
+      ['posts', '/posts', true]
     )
   end
 
@@ -175,8 +177,8 @@ RSpec.describe Loaf::ViewExtensions, '#breadcrumbs' do
 
     expect(result).to be_a(Enumerable)
     expect(result.take(2)).to eq([
-      ['home', '/', ''],
-      ['posts', '/posts', 'selected']
+      ['home', '/', false],
+      ['posts', '/posts', true]
     ])
   end
 
@@ -198,8 +200,8 @@ RSpec.describe Loaf::ViewExtensions, '#breadcrumbs' do
     expect { |b|
       view.breadcrumbs(&b)
     }.to yield_successive_args(
-      ['home-sw...', '/', ''],
-      ['posts-f...', '/posts', 'selected']
+      ['home-sw...', '/', false],
+      ['posts-f...', '/posts', true]
     )
   end
 
@@ -213,8 +215,8 @@ RSpec.describe Loaf::ViewExtensions, '#breadcrumbs' do
     expect { |b|
       view.breadcrumbs(crumb_length: 15, &b)
     }.to yield_successive_args(
-      ['home-sweet-home', '/', ''],
-      ['posts-for-ev...', '/posts', 'selected']
+      ['home-sweet-home', '/', false],
+      ['posts-for-ev...', '/posts', true]
     )
   end
 end

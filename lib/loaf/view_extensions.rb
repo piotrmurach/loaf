@@ -52,11 +52,8 @@ module Loaf
       _breadcrumbs.each do |crumb|
         name = format_name(crumb.name, options)
         path = url_for(_expand_url(crumb.url))
-        styles = ''
-        if current_crumb?(path, crumb.match)
-          styles = "#{options[:style_classes]}"
-        end
-        yield(name, path, styles)
+        current = current_crumb?(path, crumb.match)
+        yield(name, path, current)
       end
     end
 
