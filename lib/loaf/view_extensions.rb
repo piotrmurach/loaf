@@ -98,6 +98,9 @@ module Loaf
         true
       when Regexp
         !request_uri.match(pattern).nil?
+      when Hash
+        query_params = URI.encode_www_form(pattern)
+        !request_uri.match(/^#{Regexp.escape(origin_path)}\/?(\?.*)?.*?#{query_params}.*$/).nil?
       else
         raise ArgumentError, "Unknown `:#{pattern}` match option!"
       end
