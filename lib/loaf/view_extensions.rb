@@ -77,13 +77,13 @@ module Loaf
       request_uri.force_encoding(Encoding::BINARY)
 
       # strip away trailing slash
-      if origin_path.start_with?("/") && origin_path != '/'
-        origin_path.chomp!("/")
-        request_uri.chomp!("/")
+      if origin_path.start_with?('/') && origin_path != '/'
+        origin_path.chomp!('/')
+        request_uri.chomp!('/')
       end
 
       if %r{^\w+://} =~ origin_path
-        origin_path.chomp!("/")
+        origin_path.chomp!('/')
         request_uri.insert(0, "#{request.protocol}#{request.host_with_port}")
       end
 
