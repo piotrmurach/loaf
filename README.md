@@ -187,15 +187,17 @@ breadcrumb 'Posts', posts_path(order: :desc), match: {order: :desc}
 
 In your view layout add semantic markup to show breadcrumbs using the `breadcrumb_trail` like so:
 
-```html
-<ul id='breadcrumbs'>
-  <% breadcrumb_trail do |name, url, styles| %>
-    <li class="<%= styles %>">
-      <%= link_to name, url %>
-      <% unless styles.include?('selected') %><span>::</span><% end %>
-    </li>
-  <% end %>
-</ul>
+```erb
+<nav aria-label="Breadcrumb">
+  <ol class='breadcrumbs'>
+    <% breadcrumb_trail do |crumb| %>
+      <li class="<%= crumb.current? ? 'current' : '' %>">
+        <%= link_to crumb.name, crumb.url, (crumb.current? ? {'aria-current' => 'page'} : {}) %>
+        <% unless crumb.current? %><span>::</span><% end %>
+      </li>
+    <% end %>
+  </ol>
+</nav>
 ```
 
 Usually best practice is to put such snippet inside its own partial.
@@ -205,22 +207,19 @@ Usually best practice is to put such snippet inside its own partial.
 There is a small set of custom opinionated defaults. The following options are valid parameters:
 
 ```ruby
-:crumb_length  # breadcrumb length in integer, default length is 30 characters
-:root          # boolean, default is true, displays the home crumb
 :capitalize    # set breadcrumbs to have initial letter uppercase, default false
-:style_classes # CSS class to be used to style current breadcrumb,
-               # defaults to 'selected'
+:crumb_length  # breadcrumb length in integer, default length is 30 characters
 ```
 
 You can override them in your views by passing them to the view `breadcrumb` helper
 
-```
-<% breadcrumbs crumb_length: 20 do |name, url, styles| %>
+```erb
+<% breadcrumb_trail crumb_length: 20 do |name, url, styles| %>
   ..
 <% end %>
 ```
 
-or by adding initializer in `config/initializers/loaf.rb`:
+or by configuring an option in `config/initializers/loaf.rb`:
 
 ```ruby
 Loaf.configure do |config|
