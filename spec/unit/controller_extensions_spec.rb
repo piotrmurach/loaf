@@ -1,17 +1,5 @@
 # encoding: utf-8
 
-require 'spec_helper'
-
-class DummyController < ActionController::Base
-  def self.before_filter(options, &block)
-    yield self.new
-  end
-  class << self
-    alias before_action before_filter
-  end
-  include Loaf::ControllerExtensions
-end
-
 RSpec.describe Loaf::ControllerExtensions do
 
   context 'when classes extend controller_extensions' do
@@ -24,7 +12,7 @@ RSpec.describe Loaf::ControllerExtensions do
   end
 
   context 'class methods' do
-    it 'invokes before_filter' do
+    it 'invokes before_action' do
       allow(DummyController).to receive(:before_action)
       allow(DummyController).to receive(:respond_to?).and_return(true)
       DummyController.breadcrumb('name', 'url_path')
