@@ -15,31 +15,70 @@ RSpec.describe Loaf::ViewExtensions, '#breadcrumbs' do
     )
   end
 
-  it "checks current path and provides styles" do
+  it "matches current path with :inclusive option as default" do
     instance = DummyView.new
     instance.breadcrumb('home', :home_path)
-    instance.breadcrumb('posts',
-      {controller: 'foo', action: 'posts', id: '73-title'})
-    instance.set_path('/posts')
+    instance.breadcrumb('posts', :posts_path)
+    instance.set_path('/posts?id=73-title')
 
     expect { |b|
       instance.breadcrumbs(&b)
     }.to yield_successive_args(
       ['home', '/', ''],
-      ['posts', '/posts?id=73-title', 'selected']
+      ['posts', '/posts', 'selected']
     )
+  end
+
+  it "matches current path with :inclusive when query params" do
+    view = DummyView.new
+    view.breadcrumb('posts', '/posts', match: :inclusive)
+    view.set_path('/posts?foo=bar')
+
+    expect(view.breadcrumbs.to_a).to eq([['posts', '/posts', 'selected']])
+  end
+
+  it "matches current path with :inclusive when nested" do
+    view = DummyView.new
+    view.breadcrumb('posts', '/posts', match: :inclusive)
+    view.set_path('/posts/1/comment')
+
+    expect(view.breadcrumbs.to_a).to eq([['posts', '/posts', 'selected']])
+  end
+
+  it "matches current path with :inclusive when nested" do
+    view = DummyView.new
+    view.breadcrumb('posts', '/posts', match: :inclusive)
+    view.set_path('/posts/1/comment')
+
+    expect(view.breadcrumbs.to_a).to eq([['posts', '/posts', 'selected']])
+  end
+
+  it "doesn't match with :inclusive when unrelated path" do
+    view = DummyView.new
+    view.breadcrumb('posts', '/posts', match: :inclusive)
+    view.set_path('/post/1')
+
+    expect(view.breadcrumbs.to_a).to eq([['posts', '/posts', '']])
+  end
+
+  it "matches current path with :inclusive when extra trailing slash" do
+    view = DummyView.new
+    view.breadcrumb('posts', '/posts/', match: :inclusive)
+    view.set_path('/posts')
+
+    expect(view.breadcrumbs.to_a).to eq([['posts', '/posts/', 'selected']])
   end
 
   it "forces current path" do
     instance = DummyView.new
     instance.breadcrumb('home', :home_path)
-    instance.breadcrumb('posts', :posts_path, force: true)
-    instance.set_path('/posts')
+    instance.breadcrumb('posts', :posts_path, match: :force)
+    instance.set_path('/')
 
     expect { |b|
       instance.breadcrumbs(&b)
     }.to yield_successive_args(
-      ['home', '/', ''],
+      ['home', '/', 'selected'],
       ['posts', '/posts', 'selected']
     )
   end

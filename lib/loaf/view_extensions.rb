@@ -76,9 +76,15 @@ module Loaf
       request_uri = URI.parser.unescape(request_uri)
       request_uri.force_encoding(Encoding::BINARY)
 
+      # prevent matching on root path
+      if origin_path.start_with?("/") && origin_path != '/'
+        origin_path.chomp!("/")
+        request_uri.chomp!("/")
+      end
+
       case pattern
       when :inclusive
-        origin_path.starts_with?(request_uri)
+        !request_uri.match(/^#{Regexp.escape(origin_path)}(\/.*|\?.*)?$/).nil?
       when :exact
         request_uri == origin_path
       when :force
