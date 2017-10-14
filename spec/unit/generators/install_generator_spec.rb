@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-require 'spec_helper'
+require 'fileutils'
 require 'generators/loaf/install_generator'
 
 RSpec.describe Loaf::Generators::InstallGenerator, type: :generator do
@@ -12,5 +12,6 @@ RSpec.describe Loaf::Generators::InstallGenerator, type: :generator do
     run_generator
     locale = file("config/locales/loaf.en.yml")
     expect(locale).to exist
+    FileUtils.rm_rf(File.expand_path("../../../tmp", __FILE__))
   end
 end
