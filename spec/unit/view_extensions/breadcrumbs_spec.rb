@@ -77,6 +77,22 @@ RSpec.describe Loaf::ViewExtensions, '#breadcrumbs' do
     expect(view.breadcrumbs.to_a).to eq([['posts', 'http://www.example.com/posts/', 'selected']])
   end
 
+  it "matches current path with :exact when trailing slash" do
+    view = DummyView.new
+    view.breadcrumb('posts', '/posts/', match: :exact)
+    view.set_path('/posts')
+
+    expect(view.breadcrumbs.to_a).to eq([['posts', '/posts/', 'selected']])
+  end
+
+  it "fails to match current path with :exact when nested" do
+    view = DummyView.new
+    view.breadcrumb('posts', '/posts', match: :exact)
+    view.set_path('/posts/1/comment')
+
+    expect(view.breadcrumbs.to_a).to eq([['posts', '/posts', '']])
+  end
+
   it "failse to recognize the match option" do
     view = DummyView.new
     view.breadcrumb('posts', 'http://www.example.com/posts/', match: :boom)
