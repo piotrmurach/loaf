@@ -10,11 +10,11 @@ class PostsController < ApplicationController
   end
 
   def new
+    breadcrumb 'All', :posts_path, match: :force
     breadcrumb 'New Post', new_post_path
   end
 
   def create
-    breadcrumb 'New Post', new_post_path, force: true
     render action: :new
   end
 end
