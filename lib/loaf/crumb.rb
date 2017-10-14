@@ -7,12 +7,12 @@ module Loaf
 
     attr_reader :url
 
-    attr_reader :force
+    attr_reader :match
 
     def initialize(name, url, options = {})
       @name  = name
       @url   = url
-      @force = options.fetch(:force) { false }
+      @match = options.fetch(:match) { :inclusive }
     end
   end
 end # Loaf
