@@ -2,13 +2,13 @@
 
 RSpec.describe Loaf::ViewExtensions, '#breadcrumbs' do
   it "resolves breadcrumb paths" do
-    instance = DummyView.new
-    instance.breadcrumb('home', :home_path)
-    instance.breadcrumb('posts', :posts_path)
-    instance.set_path('/posts')
+    view = DummyView.new
+    view.breadcrumb('home', :home_path)
+    view.breadcrumb('posts', :posts_path)
+    view.set_path('/posts')
 
     expect { |b|
-      instance.breadcrumbs(&b)
+      view.breadcrumbs(&b)
     }.to yield_successive_args(
       ['home', '/', ''],
       ['posts', '/posts', 'selected']
@@ -16,13 +16,13 @@ RSpec.describe Loaf::ViewExtensions, '#breadcrumbs' do
   end
 
   it "matches current path with :inclusive option as default" do
-    instance = DummyView.new
-    instance.breadcrumb('home', :home_path)
-    instance.breadcrumb('posts', :posts_path)
-    instance.set_path('/posts?id=73-title')
+    view = DummyView.new
+    view.breadcrumb('home', :home_path)
+    view.breadcrumb('posts', :posts_path)
+    view.set_path('/posts?id=73-title')
 
     expect { |b|
-      instance.breadcrumbs(&b)
+      view.breadcrumbs(&b)
     }.to yield_successive_args(
       ['home', '/', ''],
       ['posts', '/posts', 'selected']
@@ -70,13 +70,13 @@ RSpec.describe Loaf::ViewExtensions, '#breadcrumbs' do
   end
 
   it "forces current path" do
-    instance = DummyView.new
-    instance.breadcrumb('home', :home_path)
-    instance.breadcrumb('posts', :posts_path, match: :force)
-    instance.set_path('/')
+    view = DummyView.new
+    view.breadcrumb('home', :home_path)
+    view.breadcrumb('posts', :posts_path, match: :force)
+    view.set_path('/')
 
     expect { |b|
-      instance.breadcrumbs(&b)
+      view.breadcrumbs(&b)
     }.to yield_successive_args(
       ['home', '/', 'selected'],
       ['posts', '/posts', 'selected']
@@ -84,12 +84,12 @@ RSpec.describe Loaf::ViewExtensions, '#breadcrumbs' do
   end
 
   it "returns enumerator without block" do
-    instance = DummyView.new
-    instance.breadcrumb('home', :home_path)
-    instance.breadcrumb('posts', :posts_path)
-    instance.set_path('/posts')
+    view = DummyView.new
+    view.breadcrumb('home', :home_path)
+    view.breadcrumb('posts', :posts_path)
+    view.set_path('/posts')
 
-    result = instance.breadcrumbs
+    result = view.breadcrumbs
 
     expect(result).to be_a(Enumerable)
     expect(result.take(2)).to eq([
@@ -99,22 +99,22 @@ RSpec.describe Loaf::ViewExtensions, '#breadcrumbs' do
   end
 
   it 'validates passed options' do
-    instance = DummyView.new
+    view = DummyView.new
     block = -> (name, url, styles) {  }
     expect {
-      instance.breadcrumbs(unknown: true, &block)
+      view.breadcrumbs(unknown: true, &block)
     }.to raise_error(Loaf::InvalidOptions)
   end
 
   it 'uses global configuration for crumb formatting' do
     allow(Loaf.configuration).to receive(:crumb_length).and_return(10)
-    instance = DummyView.new
-    instance.breadcrumb('home-sweet-home', :home_path)
-    instance.breadcrumb('posts-for-everybody', :posts_path)
-    instance.set_path('/posts')
+    view = DummyView.new
+    view.breadcrumb('home-sweet-home', :home_path)
+    view.breadcrumb('posts-for-everybody', :posts_path)
+    view.set_path('/posts')
 
     expect { |b|
-      instance.breadcrumbs(&b)
+      view.breadcrumbs(&b)
     }.to yield_successive_args(
       ['home-sw...', '/', ''],
       ['posts-f...', '/posts', 'selected']
@@ -123,13 +123,13 @@ RSpec.describe Loaf::ViewExtensions, '#breadcrumbs' do
 
   it "allows to overwrite global configuration" do
     allow(Loaf.configuration).to receive(:crumb_length).and_return(10)
-    instance = DummyView.new
-    instance.breadcrumb('home-sweet-home', :home_path)
-    instance.breadcrumb('posts-for-everybody', :posts_path)
-    instance.set_path('/posts')
+    view = DummyView.new
+    view.breadcrumb('home-sweet-home', :home_path)
+    view.breadcrumb('posts-for-everybody', :posts_path)
+    view.set_path('/posts')
 
     expect { |b|
-      instance.breadcrumbs(crumb_length: 15, &b)
+      view.breadcrumbs(crumb_length: 15, &b)
     }.to yield_successive_args(
       ['home-sweet-home', '/', ''],
       ['posts-for-ev...', '/posts', 'selected']
