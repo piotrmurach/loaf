@@ -96,6 +96,8 @@ module Loaf
         request_uri == origin_path
       when :force
         true
+      when Regexp
+        !request_uri.match(pattern).nil?
       else
         raise ArgumentError, "Unknown `:#{pattern}` match option!"
       end

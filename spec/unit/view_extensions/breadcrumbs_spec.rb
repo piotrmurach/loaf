@@ -117,6 +117,14 @@ RSpec.describe Loaf::ViewExtensions, '#breadcrumbs' do
     expect(view.breadcrumbs.to_a).to eq([['posts', '/posts', '']])
   end
 
+  it "matches current path with regex option when query params" do
+    view = DummyView.new
+    view.breadcrumb('posts', '/posts', match: %r{/po})
+    view.set_path('/posts?foo=bar')
+
+    expect(view.breadcrumbs.to_a).to eq([['posts', '/posts', 'selected']])
+  end
+
   it "failse to recognize the match option" do
     view = DummyView.new
     view.breadcrumb('posts', 'http://www.example.com/posts/', match: :boom)
