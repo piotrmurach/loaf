@@ -4,11 +4,8 @@ module Loaf
   class Configuration
     VALID_ATTRIBUTES = [
       :locales_path,
-      :style_classes,
       :crumb_length,
-      :last_crumb_linked,
-      :capitalize,
-      :root
+      :capitalize
     ].freeze
 
     attr_accessor(*VALID_ATTRIBUTES)

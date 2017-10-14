@@ -10,10 +10,10 @@ RSpec.describe Loaf::Configuration do
   end
 
   it "accepts attributes at initialization" do
-    options = { crumb_length: 12, style_classes: 'active'}
+    options = { crumb_length: 12 }
     config = Loaf::Configuration.new(options)
 
-    expect(config.style_classes).to eq('active')
+    expect(config.crumb_length).to eq(12)
   end
 
   it "exports configuration as hash" do
@@ -21,10 +21,7 @@ RSpec.describe Loaf::Configuration do
     expect(config.to_hash).to eq({
       capitalize: false,
       crumb_length: 30,
-      last_crumb_linked: false,
-      locales_path: '/',
-      root: true,
-      style_classes: 'selected'
+      locales_path: '/'
     })
   end
 end
