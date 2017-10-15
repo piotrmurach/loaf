@@ -17,18 +17,18 @@ module Loaf
       end
     end
   else
+    class Railtie
+      class << self
+        def insert_view
+          ActionController::Base.helper Loaf::ViewExtensions
+        end
+        def insert_controller
+          ActionController::Base.send :include, Loaf::ControllerExtensions
+        end
+      end
+    end # Railtie
+
     Loaf::Railtie.insert_controller
     Loaf::Railtie.insert_view
   end
-
-  class Railtie
-    class << self
-      def insert_view
-        ActionController::Base.helper Loaf::ViewExtensions
-      end
-      def insert_controller
-        ActionController::Base.send :include, Loaf::ControllerExtensions
-      end
-    end
-  end # Railtie
 end # Loaf
