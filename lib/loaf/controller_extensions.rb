@@ -52,24 +52,6 @@ module Loaf
     end # ClassMethods
 
     module InstanceMethods
-      # Add collection of nested breadcrumbs.
-      # * <tt>collection</tt> - required collection of object for iteration
-      # * <tt>field</tt> - required object attribute name
-      #
-      def add_breadcrumbs(collection, field, options = {})
-        namespace = nil
-        item_set = if _check_if_nested collection
-           items = collection.pop
-           namespace = collection
-           items
-        else
-          collection
-        end
-        item_set.each do |item|
-          add_breadcrumb item.send(field.to_sym), [ namespace, item ].flatten.compact
-        end
-      end
-
       # Add breadcrumb in controller as instance method
       #
       # @param [String] name
@@ -94,12 +76,6 @@ module Loaf
       # @api public
       def clear_breadcrumbs
         _breadcrumbs.clear
-      end
-
-      private
-
-      def _check_if_nested(collection)
-        collection.last.is_a? Array
       end
     end # InstanceMethods
   end # ControllerExtensions

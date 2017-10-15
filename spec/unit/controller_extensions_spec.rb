@@ -7,7 +7,6 @@ RSpec.describe Loaf::ControllerExtensions do
     it { expect(DummyController).to respond_to(:breadcrumb) }
     it { expect(DummyController.new).to respond_to(:add_breadcrumb) }
     it { expect(DummyController.new).to respond_to(:breadcrumb) }
-    it { expect(DummyController.new).to respond_to(:add_breadcrumbs) }
     it { expect(DummyController.new).to respond_to(:clear_breadcrumbs) }
   end
 
