@@ -185,7 +185,23 @@ breadcrumb 'Posts', posts_path(order: :desc), match: {order: :desc}
 
 ### 2.2 breadcrumb_trail
 
-In your view layout add semantic markup to show breadcrumbs using the `breadcrumb_trail` like so:
+In order to display breadcrumbs use the `breadcrumb_trail` view helper which as an argument accepts options and yeilds all breadcrumbs to a block:
+
+```ruby
+breadcrumb_trail do |crumb|
+  ...
+end
+```
+
+The yielded pararmeter is a `Loaf::Crumb` object that provides the following methods:
+
+```ruby
+crumb.name     # => the name as string
+crumb.path     # => the path as string
+crumb.current? # => true or false
+```
+
+For example, you can add the following semantic markup to show breadcrumbs using the `breadcrumb_trail` helper like so:
 
 ```erb
 <nav aria-label="Breadcrumb">
