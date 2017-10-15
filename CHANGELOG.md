@@ -12,6 +12,7 @@
 * Change Loaf::Railtie to load for both old and new rails versions
 * Remove Builder class
 * Remove configuration options :root, :last_crumb_linked, :style_classes
+* Remove #add_breadcrumbs from controller api
 
 ### Fixed
 * Fix current page matching logic to allow for inclusive paths
