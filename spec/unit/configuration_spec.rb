@@ -24,4 +24,12 @@ RSpec.describe Loaf::Configuration do
       locales_path: '/'
     })
   end
+
+  it "yields configuration" do
+    conf = double(:conf)
+    allow(Loaf).to receive(:configuration).and_return(conf)
+    expect { |b|
+      Loaf.configure(&b)
+    }.to yield_with_args(conf)
+  end
 end
