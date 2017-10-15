@@ -14,6 +14,7 @@ module Loaf
       @name  = name
       @url   = url
       @match = options.fetch(:match) { :inclusive }
+      freeze
     end
   end
 end # Loaf
