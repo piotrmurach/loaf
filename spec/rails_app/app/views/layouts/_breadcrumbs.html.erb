@@ -1,9 +1,9 @@
 <% if breadcrumb_trail.any? %>
 <ul id='breadcrumbs'>
-  <% breadcrumb_trail do |name, url, current| %>
-    <li class="<%= current ? 'selected' : '' %>">
-      <%= link_to name, url %>
-      <% unless current %>
+  <% breadcrumb_trail do |crumb| %>
+    <li class="<%= crumb.current? ? 'selected' : '' %>">
+      <%= link_to crumb.name, crumb.url %>
+      <% unless crumb.current? %>
         <span>::</span>
       <% end %>
     </li>

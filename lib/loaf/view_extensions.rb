@@ -1,6 +1,8 @@
 # encoding: utf-8
 # frozen_string_literal: true
 
+require_relative 'breadcrumb'
+require_relative 'crumb'
 require_relative 'crumb_formatter'
 require_relative 'options_validator'
 
@@ -53,7 +55,8 @@ module Loaf
         name = format_name(crumb.name, options)
         path = url_for(_expand_url(crumb.url))
         current = current_crumb?(path, crumb.match)
-        yield(name, path, current)
+
+        yield(Loaf::Breadcrumb[name, path, current])
       end
     end
 
