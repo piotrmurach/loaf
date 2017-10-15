@@ -44,8 +44,8 @@ module Loaf
     # @param [Hash] options
     #
     # @api public
-    def breadcrumbs(options = {})
-      return enum_for(:breadcrumbs) unless block_given?
+    def breadcrumb_trail(options = {})
+      return enum_for(:breadcrumb_trail) unless block_given?
 
       valid?(options)
       options = Loaf.configuration.to_hash.merge(options)

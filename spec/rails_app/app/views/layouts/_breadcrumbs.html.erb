@@ -1,6 +1,6 @@
-<% if breadcrumbs? %>
+<% if breadcrumb_trail.any? %>
 <ul id='breadcrumbs'>
-  <% breadcrumbs do |name, url, current| %>
+  <% breadcrumb_trail do |name, url, current| %>
     <li class="<%= current ? 'selected' : '' %>">
       <%= link_to name, url %>
       <% unless current %>
