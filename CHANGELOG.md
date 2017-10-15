@@ -8,9 +8,10 @@
 * Add tests setup for Rails 5.0, 5.1
 
 ### Changed
-* Remove Builder class
 * Change Configuration to accept attributes at initilization
 * Change Loaf::Railtie to load for both old and new rails versions
+* Remove Builder class
+* Remove configuration options :root, :last_crumb_linked, :style_classes
 
 ### Fixed
 * Fix current page matching logic to allow for inclusive paths
