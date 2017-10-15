@@ -198,6 +198,7 @@ The yielded pararmeter is a `Loaf::Crumb` object that provides the following met
 ```ruby
 crumb.name     # => the name as string
 crumb.path     # => the path as string
+crumb.url      # => alias for path
 crumb.current? # => true or false
 ```
 
