@@ -1,6 +1,6 @@
 # Change log
 
-## [v0.6.0] - 2017-x-x
+## [v0.6.0] - 2017-10-x
 
 ### Added
 * Add new :match option to allow customisation of breadcrumb matching behaviour
@@ -46,26 +46,33 @@
 ### Fixed
 * Fix bug with url parameter to allow for regular rails path variables
 
-0.3.0 (February 25, 2012)
+## [0.3.0] - 2012-02-25
 
+### Added
 * Add loaf gem errors
 * Add custom options validator for filtering invalid breadcrumbs params
-* Renamed main gem helpers for adding breadcrumbs from `add_breadcrumb` to
-  `breadcrumb`, both inside controllers and views.
 * Add specs for isolated view testing.
 
-0.2.1 (February 22, 2012)
+### Changed
+* Renamed main gem helpers for adding breadcrumbs from `add_breadcrumb` to
+  `breadcrumb`, both inside controllers and views.
 
+## [0.2.1] - 2012-02-22
+
+### Added
 * Add more integration tests and fixed bug with adding breadcrumbs inside view
 * Add specs for controller extensions
 
-0.2.0 (February 18, 2012)
+## [0.2.0] - 2012-02-18
 
-* Change gemspec with new gem dependencies, use git
-* Setup testing environment with dummy rails app
+### Added
 * Add integration tests for breadcrumbs view rendering
 * Add translation module for breadcrumbs title lookup
 * Add breadcrumb formatting module with tests
+
+### Changed
+* Change gemspec with new gem dependencies, use git
+* Setup testing environment with dummy rails app
 * Refactor names for controller and view extensions
 
 ## [v0.1.0] - 2011-10-22
@@ -78,4 +85,4 @@
 [v0.3.0]: https://github.com/piotrmurach/tty-spinner/compare/v0.2.1...v0.3.0
 [v0.2.1]: https://github.com/piotrmurach/tty-spinner/compare/v0.2.0...v0.2.1
 [v0.2.0]: https://github.com/piotrmurach/tty-spinner/compare/v0.1.0...v0.2.0
-[v0.1.0]: https://github.com/piotrmurach/tty-spinner/compare/v0.1.0
+[v0.1.0]: https://github.com/piotrmurach/tty-spinner/compare/v0.1.0...HEAD
