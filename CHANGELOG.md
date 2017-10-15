@@ -8,6 +8,7 @@
 * Add tests setup for Rails 5.0, 5.1
 
 ### Changed
+* Change view helper name from #breadcrumbs to #breadcrumb_trail
 * Change Configuration to accept attributes at initilization
 * Change Loaf::Railtie to load for both old and new rails versions
 * Remove Builder class
