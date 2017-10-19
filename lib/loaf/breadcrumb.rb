@@ -1,4 +1,3 @@
-# 
 module Loaf
   # A container for breadcrumb values
   #  @api public
