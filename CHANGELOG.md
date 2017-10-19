@@ -1,6 +1,6 @@
 # Change log
 
-## [v0.6.0] - 2017-10-x
+## [v0.6.0] - 2017-10-19
 
 ### Added
 * Add new :match option to allow customisation of breadcrumb matching behaviour
