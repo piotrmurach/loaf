@@ -135,6 +135,20 @@ class ArticlesController < ApplicationController
 end
 ```
 
+Each time you call the `breadcrumb` helper, a new element is added to a breadcrumb trial stack:
+
+```ruby
+class ArticlesController < ApplicationController
+  breadcrumb 'Home', :root_path
+  breadcrumb 'All Articles', :articles_path
+
+  def show
+    breadcrumb 'Article One', article_path(:one)
+    breadcrumb 'Article Two', article_path(:two)
+  end
+end
+```
+
 **Loaf** allows you to call controller instance methods inside the `breadcrumb` helper outside of any action. This is useful if your breadcrumb has parameterized behaviour. For example, to dynamically evaluate parameters for breadcrumb title do:
 
 ```ruby
