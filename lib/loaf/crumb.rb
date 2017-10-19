@@ -1,4 +1,3 @@
-# encoding: utf-8
 # frozen_string_literal: true
 
 module Loaf
@@ -13,8 +12,8 @@ module Loaf
     def initialize(name, url, options = {})
       @name  = name
       @url   = url
-      @match = options.fetch(:match) { :inclusive }
+      @match = options.delete(:match) { :inclusive }
       freeze
     end
-  end
+  end # Crumb
 end # Loaf
