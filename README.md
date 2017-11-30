@@ -6,14 +6,14 @@
 
 [![Gem Version](https://badge.fury.io/rb/loaf.svg)][gem]
 [![Build Status](https://secure.travis-ci.org/piotrmurach/loaf.svg?branch=master)][travis]
-[![Code Climate](https://codeclimate.com/github/piotrmurach/loaf/badges/gpa.svg)][codeclimate]
+[![Maintainability](https://api.codeclimate.com/v1/badges/966193dafa3895766977/maintainability)][codeclimate]
 [![Dependency Status](https://gemnasium.com/piotrmurach/loaf.svg?travis)][gemnasium]
 [![Coverage Status](https://coveralls.io/repos/github/piotrmurach/loaf/badge.svg?branch=master)][coveralls]
 [![Inline docs](http://inch-ci.org/github/piotrmurach/loaf.svg?branch=master)][inchpages]
 
 [gem]: http://badge.fury.io/rb/loaf
 [travis]: http://travis-ci.org/piotrmurach/loaf
-[codeclimate]: https://codeclimate.com/github/piotrmurach/loaf
+[codeclimate]: https://codeclimate.com/github/piotrmurach/loaf/maintainability
 [gemnasium]: https://gemnasium.com/piotrmurach/loaf
 [coveralls]: https://coveralls.io/github/piotrmurach/loaf
 [inchpages]: http://inch-ci.org/github/piotrmurach/loaf
