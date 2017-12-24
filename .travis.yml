@@ -10,9 +10,9 @@ script:
 rvm:
   - 2.0.0
   - 2.1.10
-  - 2.2.5
-  - 2.3.1
-  - 2.4.1
+  - 2.2.8
+  - 2.3.5
+  - 2.4.2
 matrix:
   include:
     - rvm: jruby-9.1.1.0
@@ -23,11 +23,11 @@ matrix:
       gemfile: gemfiles/rails5.0.gemfile
     - rvm: 2.1.10
       gemfile: gemfiles/rails5.0.gemfile
-    - rvm: 2.2.5
+    - rvm: 2.2.8
       gemfile: gemfiles/rails3.2.gemfile
-    - rvm: 2.3.1
+    - rvm: 2.3.5
       gemfile: gemfiles/rails3.2.gemfile
-    - rvm: 2.4.1
+    - rvm: 2.4.2
       gemfile:
         - gemfiles/rails3.2.gemfile
         - gemfiles/rails4.0.gemfile
