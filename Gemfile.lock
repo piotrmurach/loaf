@@ -85,10 +85,10 @@ GEM
       mime-types-data (~> 3.2015)
     mime-types-data (3.2016.0521)
     mini_mime (1.0.0)
-    mini_portile2 (2.1.0)
+    mini_portile2 (2.3.0)
     minitest (5.10.3)
-    nokogiri (1.6.8.1)
-      mini_portile2 (~> 2.1.0)
+    nokogiri (1.8.1)
+      mini_portile2 (~> 2.3.0)
     public_suffix (2.0.5)
     rack (1.6.8)
     rack-test (0.6.3)
@@ -172,7 +172,7 @@ DEPENDENCIES
   capybara (~> 2.16.1)
   coveralls (= 0.8.17)
   loaf!
-  nokogiri (~> 1.6.8)
+  nokogiri (~> 1.8.1)
   public_suffix (~> 2.0.5)
   rake
   rspec-rails (~> 3.7.2)
