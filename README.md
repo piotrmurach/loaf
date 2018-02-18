@@ -199,7 +199,7 @@ breadcrumb 'Posts', posts_path(order: :desc), match: {order: :desc}
 
 ### 2.2 breadcrumb_trail
 
-In order to display breadcrumbs use the `breadcrumb_trail` view helper which as an argument accepts options and yeilds all breadcrumbs to a block:
+In order to display breadcrumbs use the `breadcrumb_trail` view helper which as an argument accepts options and yields all breadcrumbs to a block:
 
 ```ruby
 breadcrumb_trail do |crumb|
