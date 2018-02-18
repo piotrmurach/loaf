@@ -52,7 +52,7 @@ module Loaf
       options = Loaf.configuration.to_hash.merge(options)
       _breadcrumbs.each do |crumb|
         name = format_name(crumb.name, options)
-        path = url_for(_expand_url(crumb.url))
+        path = crumb.url.nil? ? "#" : url_for(_expand_url(crumb.url))
         current = current_crumb?(path, crumb.match)
 
         yield(Loaf::Breadcrumb[name, path, current])
