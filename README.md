@@ -293,4 +293,4 @@ Questions or problems? Please post them on the [issue tracker](https://github.co
 
 ## Copyright
 
-Copyright (c) 2011-2017 Piotr Murach. See LICENSE.txt for further details.
+Copyright (c) 2011-2018 Piotr Murach. See LICENSE.txt for further details.
