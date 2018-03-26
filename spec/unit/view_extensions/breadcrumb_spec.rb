@@ -1,7 +1,5 @@
 # encoding: utf-8
 
-require 'spec_helper'
-
 RSpec.describe Loaf::ViewExtensions, '.breadcrumb' do
 
   it { expect(DummyView.new).to respond_to(:add_breadcrumb) }

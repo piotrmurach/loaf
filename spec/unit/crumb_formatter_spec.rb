@@ -1,7 +1,5 @@
 # encoding: utf-8
 
-require 'spec_helper'
-
 RSpec.describe Loaf::CrumbFormatter, '.format_name' do
   let(:formatter) {
     Class.new do

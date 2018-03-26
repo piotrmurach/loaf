@@ -1,7 +1,5 @@
 # encoding: utf-8
 
-require 'spec_helper'
-
 RSpec.describe Loaf::OptionsValidator, '.valid?' do
   let(:klass) { Class.extend Loaf::OptionsValidator }
 

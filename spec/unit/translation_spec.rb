@@ -1,7 +1,5 @@
 # encoding: utf-8
 
-require 'spec_helper'
-
 RSpec.describe Loaf::Translation do
 
   before { I18n.backend = I18n::Backend::Simple.new }
