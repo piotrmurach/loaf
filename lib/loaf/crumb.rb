@@ -10,6 +10,9 @@ module Loaf
     attr_reader :match
 
     def initialize(name, url, options = {})
+      raise ArgumentError, "first argument, `name`, cannot be nil" if name.nil?
+      raise ArgumentError, "second argument, `url`, cannot be nil" if url.nil?
+
       @name  = name
       @url   = url
       @match = options.delete(:match) { :inclusive }
