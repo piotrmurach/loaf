@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    loaf (0.6.0)
+    loaf (0.6.1)
       rails (>= 3.2)
 
 GEM
@@ -182,4 +182,4 @@ DEPENDENCIES
   yardstick (~> 0.9.9)
 
 BUNDLED WITH
-   1.16.0
+   1.16.1
