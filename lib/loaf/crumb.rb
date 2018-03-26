@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 module Loaf
-  # Basic crumb container
+  # Basic crumb container for internal use
+  # @api private
   class Crumb
     attr_reader :name
 
@@ -10,13 +11,18 @@ module Loaf
     attr_reader :match
 
     def initialize(name, url, options = {})
-      raise ArgumentError, "first argument, `name`, cannot be nil" if name.nil?
-      raise ArgumentError, "second argument, `url`, cannot be nil" if url.nil?
-
-      @name  = name
-      @url   = url
+      @name  = name || raise_name_error
+      @url   = url || raise_url_error
       @match = options.fetch(:match, :inclusive)
       freeze
+    end
+
+    def raise_name_error
+      raise ArgumentError, 'breadcrumb first argument, `name`, cannot be nil'
+    end
+
+    def raise_url_error
+      raise ArgumentError, 'breadcrumb second argument, `url`, cannot be nil'
     end
   end # Crumb
 end # Loaf
