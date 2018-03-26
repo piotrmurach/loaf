@@ -12,7 +12,7 @@ module Loaf
     def initialize(name, url, options = {})
       @name  = name
       @url   = url
-      @match = options.delete(:match) { :inclusive }
+      @match = options.fetch(:match, :inclusive)
       freeze
     end
   end # Crumb
