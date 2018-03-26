@@ -1,5 +1,13 @@
 # Change log
 
+## [v0.6.1] - 2018-03-26
+
+### Added
+* Add nil guard and clear error messages to Loaf::Crumb initialization by Dan Matthews(@dmvt)
+
+### Fixed
+* Fix Loaf::Crumb to stop modifying options hash by Marcel Müller(@TheNeikos)
+
 ## [v0.6.0] - 2017-10-19
 
 ### Added
