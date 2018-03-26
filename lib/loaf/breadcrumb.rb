@@ -1,6 +1,6 @@
 module Loaf
   # A container for breadcrumb values
-  #  @api public
+  # @api public
   class Breadcrumb
     attr_reader :name
 
