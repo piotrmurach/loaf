@@ -219,7 +219,7 @@ crumb.current? # => true or false
 For example, you can add the following semantic markup to show breadcrumbs using the `breadcrumb_trail` helper like so:
 
 ```erb
-<nav aria-label="Breadcrumb">
+<nav aria-label="breadcrumb">
   <ol class='breadcrumbs'>
     <% breadcrumb_trail do |crumb| %>
       <li class="<%= crumb.current? ? 'current' : '' %>">
@@ -230,6 +230,20 @@ For example, you can add the following semantic markup to show breadcrumbs using
   </ol>
 </nav>
 ```
+
+For bootstrap,
+```erb
+<nav aria-label="breadcrumb">
+  <ol class='breadcrumbs'>
+    <% breadcrumb_trail do |crumb| %>
+      <li class="breadcrumb-item <%= crumb.current? ? 'active' : '' %>">
+        <%= link_to_unless crumb.current?, crumb.name, crumb.url, (crumb.current? ? {'aria-current' => 'page'} : {}) %>
+      </li>
+    <% end %>
+  </ol>
+</nav>
+```
+
 
 Usually best practice is to put such snippet inside its own partial.
 
