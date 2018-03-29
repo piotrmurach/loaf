@@ -254,6 +254,7 @@ There is a small set of custom opinionated defaults. The following options are v
 ```ruby
 :capitalize    # set breadcrumbs to have initial letter uppercase, default false
 :crumb_length  # breadcrumb length in integer, default length is 30 characters
+:match         # set match type, default :inclusive
 ```
 
 You can override them in your views by passing them to the view `breadcrumb` helper

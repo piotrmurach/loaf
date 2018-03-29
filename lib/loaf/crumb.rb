@@ -13,7 +13,7 @@ module Loaf
     def initialize(name, url, options = {})
       @name  = name || raise_name_error
       @url   = url || raise_url_error
-      @match = options.fetch(:match, :inclusive)
+      @match = options.fetch(:match, Loaf.configuration.match)
       freeze
     end
 

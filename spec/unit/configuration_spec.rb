@@ -5,15 +5,18 @@ RSpec.describe Loaf::Configuration do
     config = Loaf::Configuration.new
 
     config.crumb_length = 4
-
     expect(config.crumb_length).to eq(4)
+
+    config.match = :exact
+    expect(config.match).to eq(:exact)
   end
 
   it "accepts attributes at initialization" do
-    options = { crumb_length: 12 }
+    options = { crumb_length: 12, match: :exact }
     config = Loaf::Configuration.new(options)
 
     expect(config.crumb_length).to eq(12)
+    expect(config.match).to eq(:exact)
   end
 
   it "exports configuration as hash" do
@@ -21,7 +24,8 @@ RSpec.describe Loaf::Configuration do
     expect(config.to_hash).to eq({
       capitalize: false,
       crumb_length: 30,
-      locales_path: '/'
+      locales_path: '/',
+      match: :inclusive
     })
   end
 
