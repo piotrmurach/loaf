@@ -1,5 +1,10 @@
 # Change log
 
+## [v0.6.2] - 2018-03-30
+
+### Added
+* Add :match to Configuration by Johan Kim(@hiphapis)
+
 ## [v0.6.1] - 2018-03-26
 
 ### Added
@@ -87,6 +92,7 @@
 
 * Initial implementation and release
 
+[v0.6.2]: https://github.com/piotrmurach/tty-spinner/compare/v0.6.1...v0.6.2
 [v0.6.1]: https://github.com/piotrmurach/tty-spinner/compare/v0.6.0...v0.6.1
 [v0.6.0]: https://github.com/piotrmurach/tty-spinner/compare/v0.5.0...v0.6.0
 [v0.5.0]: https://github.com/piotrmurach/tty-spinner/compare/v0.4.0...v0.5.0
