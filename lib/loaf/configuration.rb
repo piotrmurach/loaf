@@ -5,7 +5,8 @@ module Loaf
     VALID_ATTRIBUTES = [
       :locales_path,
       :crumb_length,
-      :capitalize
+      :capitalize,
+      :match
     ].freeze
 
     attr_accessor(*VALID_ATTRIBUTES)
@@ -19,6 +20,8 @@ module Loaf
     DEFAULT_LAST_CRUMB_LINKED = false
 
     DEFAULT_CAPITALIZE = false
+
+    DEFAULT_MATCH = :inclusive
 
     DEFAULT_ROOT = true
 
