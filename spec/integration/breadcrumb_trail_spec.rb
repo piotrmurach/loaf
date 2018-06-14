@@ -39,6 +39,14 @@ RSpec.describe "breadcrumbs trail" do
     end
   end
 
+  it "shows breadcrumbs using instance variables" do
+    visit post_path(1)
+
+    within "#breadcrumbs" do
+      expect(page.html).to include('<a href="/posts/3735928559">3735928559</a>')
+    end
+  end
+
   it 'is current when forced' do
     visit new_post_path
 

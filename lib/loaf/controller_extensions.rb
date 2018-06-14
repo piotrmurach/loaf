@@ -43,7 +43,7 @@ module Loaf
         case name
         when NilClass
         when Proc
-          name.call(instance)
+          instance.instance_exec instance, &name
         else
           name
         end
