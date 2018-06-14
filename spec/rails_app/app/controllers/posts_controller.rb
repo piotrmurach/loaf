@@ -1,6 +1,11 @@
 class Post < Struct.new(:id); end
 
 class PostsController < ApplicationController
+  before_filter :load_post
+
+  breadcrumb ->(_) { @special_post.id.to_s },
+             ->(_) { post_path(@special_post.id) }, only: [:show]
+
   def index
     breadcrumb 'all_posts', posts_path
   end
@@ -16,5 +21,11 @@ class PostsController < ApplicationController
 
   def create
     render action: :new
+  end
+
+  private
+
+  def load_post
+    @special_post = ::Post.new(0xDEADBEEF)
   end
 end
