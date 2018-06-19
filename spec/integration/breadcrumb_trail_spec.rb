@@ -64,7 +64,7 @@ RSpec.describe "breadcrumbs trail" do
     within "#breadcrumbs .selected" do
       expect(page.html).to include(
         '<a href="/posts/1/comments?no_controller=true">'\
-        'Post comments No Controller</a>'
+        "Post comments No Controller</a>"
       )
     end
   end
