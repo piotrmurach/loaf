@@ -1,32 +1,33 @@
----
 language: ruby
-sudo: false
 cache: bundler
-install:
-  - bundle install
-  - bundle exec bin/appraisal install
-script:
-  - bundle exec appraisal rake ci
+sudo: false
+before_install:
+  - gem install bundler -v 1.16.2
 rvm:
   - 2.1.10
   - 2.2.9
   - 2.3.6
   - 2.4.3
   - 2.5.0
+gemfile:
+  - gemfiles/rails3.2.gemfile
+  - gemfiles/rails4.0.gemfile
+  - gemfiles/rails4.1.gemfile
+  - gemfiles/rails4.2.gemfile
+  - gemfiles/rails5.0.gemfile
+  - gemfiles/rails5.1.gemfile
+  - gemfiles/rails5.2.gemfile
 matrix:
   include:
-    - rvm: jruby-9.1.1.0
-    - rvm: jruby-head
-    - rvm: ruby-head
+    - jruby-9.1.1.0
+    - jruby-head
+    - ruby-head
   exclude:
     - rvm: 2.1.10
       gemfile:
         - gemfiles/rails5.0.gemfile
         - gemfiles/rails5.1.gemfile
-    - rvm: 2.2.9
-      gemfile: gemfiles/rails3.2.gemfile
-    - rvm: 2.3.6
-      gemfile: gemfiles/rails3.2.gemfile
+        - gemfiles/rails5.2.gemfile
     - rvm: 2.4.3
       gemfile:
         - gemfiles/rails3.2.gemfile
