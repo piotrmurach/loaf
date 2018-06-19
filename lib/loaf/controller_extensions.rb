@@ -43,7 +43,7 @@ module Loaf
         case name
         when NilClass
         when Proc
-          if name.arity.positive?
+          if name.arity == 1
             instance.instance_exec(instance, &name)
           else
             instance.instance_exec(&name)
