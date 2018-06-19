@@ -19,9 +19,9 @@ gemfile:
   - gemfiles/rails5.2.gemfile
 matrix:
   include:
-    - jruby-9.1.1.0
-    - jruby-head
-    - ruby-head
+    - rvm: jruby-9.1.1.0
+    - rvm: jruby-head
+    - rvm: ruby-head
   exclude:
     - rvm: 2.1.10
       gemfile:
