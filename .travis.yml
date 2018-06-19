@@ -9,6 +9,7 @@ rvm:
   - 2.3.6
   - 2.4.3
   - 2.5.0
+  - jruby-9.1.17.0
 gemfile:
   - gemfiles/rails3.2.gemfile
   - gemfiles/rails4.0.gemfile
@@ -18,30 +19,37 @@ gemfile:
   - gemfiles/rails5.1.gemfile
   - gemfiles/rails5.2.gemfile
 matrix:
-  include:
-    - rvm: jruby-9.1.1.0
-    - rvm: jruby-head
-    - rvm: ruby-head
   exclude:
     - rvm: 2.1.10
       gemfile:
         - gemfiles/rails5.0.gemfile
+    - rvm: 2.1.10
+      gemfile:
         - gemfiles/rails5.1.gemfile
+    - rvm: 2.1.10
+      gemfile:
         - gemfiles/rails5.2.gemfile
     - rvm: 2.4.3
       gemfile:
         - gemfiles/rails3.2.gemfile
+    - rvm: 2.4.3
+      gemfile:
         - gemfiles/rails4.0.gemfile
+    - rvm: 2.4.3
+      gemfile:
         - gemfiles/rails4.1.gemfile
     - rvm: 2.5.0
       gemfile:
         - gemfiles/rails3.2.gemfile
+    - rvm: 2.5.0
+      gemfile:
         - gemfiles/rails4.0.gemfile
+    - rvm: 2.5.0
+      gemfile:
         - gemfiles/rails4.1.gemfile
+
   allow_failures:
-    - rvm: ruby-head
     - rvm: jruby-9.1.1.0
-    - rvm: jruby-head
   fast_finish: true
 branches:
   only: master
