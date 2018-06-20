@@ -10,7 +10,7 @@ gem 'rspec-rails', '~> 3.7.2'
 gem 'nokogiri',    '~> 1.8.1'
 gem 'public_suffix', '~> 2.0.5'
 gem 'sqlite3' ,    '~> 1.3.13', platforms: :ruby
-gem 'activerecord-jdbcsqlite3-adapter', '~> 1.3.23', platforms: :jruby
+gem 'activerecord-jdbcsqlite3-adapter', '~> 1.3.24', platforms: :jruby
 
 group :metrics do
   gem 'coveralls', '0.8.17'

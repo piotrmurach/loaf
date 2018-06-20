@@ -57,4 +57,15 @@ RSpec.describe "breadcrumbs trail" do
       expect(page.html).to include('<a href="/posts/1/comments">Post comments</a>')
     end
   end
+
+  it "allows for procs in name and url without supplying the controller" do
+    visit post_comments_path(1)
+
+    within "#breadcrumbs .selected" do
+      expect(page.html).to include(
+        '<a href="/posts/1/comments?no_controller=true">'\
+        "Post comments No Controller</a>"
+      )
+    end
+  end
 end

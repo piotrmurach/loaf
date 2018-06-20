@@ -153,7 +153,7 @@ end
 
 ```ruby
 class CommentsController < ApplicationController
-  breadcrumb ->(c) { c.find_article(c.params[:post_id]).title }, :articles_path
+  breadcrumb -> { find_article(params[:post_id]).title }, :articles_path
 end
 ```
 
@@ -161,7 +161,7 @@ Also, to dynamically evalute parameters inside the url argument do:
 
 ```ruby
 class CommentsController < ApplicationController
-  breadcrumb 'All Comments', ->(c) { c.post_comments_path(c.params[:post_id]) }
+  breadcrumb 'All Comments', -> { post_comments_path(params[:post_id]) }
 end
 ```
 
