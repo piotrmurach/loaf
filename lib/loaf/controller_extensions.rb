@@ -38,6 +38,10 @@ module Loaf
         respond_to?(:before_action) ? :before_action : :before_filter
       end
 
+      # Convert breadcrumb name to string
+      #
+      # @return [String]
+      #
       # @api private
       def _normalize_name(name, instance)
         case name
