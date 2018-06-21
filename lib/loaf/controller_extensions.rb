@@ -16,7 +16,9 @@ module Loaf
     module ClassMethods
       # Add breacrumb to the trail in controller as class method
       #
-      # @param [String]
+      # @param [String] name
+      #
+      # @param [Object] url
       #
       # @api public
       def breadcrumb(name, url, options = {})
