@@ -29,6 +29,15 @@ module Loaf
       end
       alias add_breadcrumb breadcrumb
 
+      # Provide a scope to add multiple breadcrumbs to the trail in controller as class method
+      #
+      # @api public
+      def breadcrumbs(options = {}, &block)
+        send(_filter_name, options) do |instance|
+          instance.instance_exec(&block)
+        end
+      end
+
       private
 
       # Choose available filter name
