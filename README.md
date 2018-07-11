@@ -163,7 +163,7 @@ class CommentsController < ApplicationController
 end
 ```
 
-You may wish to define breadcrumbs in a recursive manner. This is easy within views, and controller actions (just loop your collection), but if you want to do this in the controller class you can use the `before_action` approach:
+You may wish to define breadcrumbs over a collection. This is easy within views, and controller actions (just loop your collection), but if you want to do this in the controller class you can use the `before_action` approach:
 
 ```ruby
 before_action do
@@ -173,7 +173,7 @@ before_action do
 end
 ```
 
-Assume `ancestors` is provided by an instance method (e.g. via [Decent Exposure](https://github.com/hashrocket/decent_exposure)).
+Assume `ancestors` method is defined inside the controller.
 
 #### 2.1.2 view
 
