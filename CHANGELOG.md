@@ -67,7 +67,7 @@
 ### Fixed
 * Fix bug with url parameter to allow for regular rails path variables
 
-## [0.3.0] - 2012-02-25
+## [v0.3.0] - 2012-02-25
 
 ### Added
 * Add loaf gem errors
@@ -78,13 +78,13 @@
 * Renamed main gem helpers for adding breadcrumbs from `add_breadcrumb` to
   `breadcrumb`, both inside controllers and views.
 
-## [0.2.1] - 2012-02-22
+## [v0.2.1] - 2012-02-22
 
 ### Added
 * Add more integration tests and fixed bug with adding breadcrumbs inside view
 * Add specs for controller extensions
 
-## [0.2.0] - 2012-02-18
+## [v0.2.0] - 2012-02-18
 
 ### Added
 * Add integration tests for breadcrumbs view rendering
