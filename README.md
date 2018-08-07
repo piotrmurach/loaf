@@ -255,6 +255,8 @@ For Bootstrap 4:
 </nav>
 ```
 
+and if you are using HAML do:
+
 ```haml
   - # haml
   %ol.breadcrumbs
@@ -263,25 +265,20 @@ For Bootstrap 4:
         = link_to_unless crumb.current?, crumb.name, crumb.url, (crumb.current? ? {'aria-current' => 'page'} : {})
 ```
 
-
-
-
-Usually best practice is to put such snippet inside its own partial.
+Usually best practice is to put such snippet inside its own `_breadcrumbs.html.erb` partial.
 
 ## 3. Configuration
 
 There is a small set of custom opinionated defaults. The following options are valid parameters:
 
 ```ruby
-:capitalize    # set breadcrumbs to have initial letter uppercase, default false
-:crumb_length  # breadcrumb length in integer, default length is 30 characters
-:match         # set match type, default :inclusive
+:match # set match type, default :inclusive (see [:match](#213-match) for more details)
 ```
 
 You can override them in your views by passing them to the view `breadcrumb` helper
 
 ```erb
-<% breadcrumb_trail crumb_length: 20 do |name, url, styles| %>
+<% breadcrumb_trail(match: :exclusive) do |name, url, styles| %>
   ..
 <% end %>
 ```
@@ -290,7 +287,7 @@ or by configuring an option in `config/initializers/loaf.rb`:
 
 ```ruby
 Loaf.configure do |config|
-  config.crumb_length = 20
+  config.match = :exclusive
 end
 ```
 
