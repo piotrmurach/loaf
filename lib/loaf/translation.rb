@@ -2,12 +2,15 @@
 
 module Loaf
   module Translation
-    extend self
-
     # Returns translation lookup
+    #
+    # @return [String]
+    #
+    # @api private
     def translation_scope
-      "loaf.breadcrumbs"
+      'loaf.breadcrumbs'
     end
+    module_function :translation_scope
 
     # Translate breadcrumb title
     #
@@ -18,12 +21,17 @@ module Loaf
     # @option options [String] :default
     #   The default translation
     #
+    # @return [String]
+    #
     # @api public
     def find_title(title, options = {})
+      return title if title.nil? || title.empty?
+
       options[:scope] ||= translation_scope
       options[:default] = Array(options[:default])
       options[:default] << title if options[:default].empty?
-      I18n.t("#{title}", options)
+      I18n.t(title.to_s, options)
     end
+    module_function :find_title
   end # Translation
 end # Loaf

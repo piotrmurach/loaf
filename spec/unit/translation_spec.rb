@@ -6,6 +6,14 @@ RSpec.describe Loaf::Translation do
 
   after { I18n.backend.reload! }
 
+  it "doesn't translate empty title" do
+    expect(described_class.find_title('')).to eql('')
+  end
+
+  it "skips translation if doesn't find a matching scope" do
+    expect(described_class.find_title('unknown')).to eql('unknown')
+  end
+
   it 'translates breadcrumb title' do
     I18n.backend.store_translations 'en', loaf: { breadcrumbs: { home: 'Home'}}
     expect(described_class.find_title('home')).to eql('Home')
