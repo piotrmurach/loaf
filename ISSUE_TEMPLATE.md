@@ -1,6 +1,6 @@
 ### Are you in the right place?
 * For issues or feature requests file a GitHub issue in this repository
-* For general questions or discussion post in [Gitter](https://gitter.im/piotrmurach/tty)
+* For general questions or discussion post on StackOverflow
 
 ### Describe the problem
 A brief description of the issue/feature.
@@ -20,4 +20,4 @@ What did you expect to happen?
 
 * OS version:
 * Ruby version:
-* TTY version:
+* Loaf version:
