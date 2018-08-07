@@ -196,8 +196,21 @@ RSpec.describe Loaf::ViewExtensions, '#breadcrumb_trail' do
     }.to raise_error(Loaf::InvalidOptions)
   end
 
+  it "permits arbitrary length crumb names" do
+    view = DummyView.new
+    view.breadcrumb('<span class="fa fa-home"></span>', :home_path)
+    view.set_path('/posts')
+
+    yielded = []
+    block = -> (crumb) { yielded << crumb.to_a }
+    view.breadcrumb_trail(&block)
+
+    expect(yielded).to eq([
+      ['<span class="fa fa-home"></span>', '/', false]
+    ])
+  end
+
   it 'uses global configuration for crumb formatting' do
-    allow(Loaf.configuration).to receive(:crumb_length).and_return(10)
     view = DummyView.new
     view.breadcrumb('home-sweet-home', :home_path)
     view.breadcrumb('posts-for-everybody', :posts_path)
@@ -208,13 +221,12 @@ RSpec.describe Loaf::ViewExtensions, '#breadcrumb_trail' do
     view.breadcrumb_trail(&block)
 
     expect(yielded).to eq([
-      ['home-sw...', '/', false],
-      ['posts-f...', '/posts', true]
+      ['home-sweet-home', '/', false],
+      ['posts-for-everybody', '/posts', true]
     ])
   end
 
   it "allows to overwrite global configuration" do
-    allow(Loaf.configuration).to receive(:crumb_length).and_return(10)
     view = DummyView.new
     view.breadcrumb('home-sweet-home', :home_path)
     view.breadcrumb('posts-for-everybody', :posts_path)
@@ -222,11 +234,11 @@ RSpec.describe Loaf::ViewExtensions, '#breadcrumb_trail' do
 
     yielded = []
     block = -> (crumb) { yielded << crumb.to_a }
-    view.breadcrumb_trail(crumb_length: 15, &block)
+    view.breadcrumb_trail(match: :exact, &block)
 
     expect(yielded).to eq([
       ['home-sweet-home', '/', false],
-      ['posts-for-ev...', '/posts', true]
+      ['posts-for-everybody', '/posts', true]
     ])
   end
 end

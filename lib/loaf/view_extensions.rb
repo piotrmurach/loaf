@@ -2,13 +2,12 @@
 
 require_relative 'breadcrumb'
 require_relative 'crumb'
-require_relative 'crumb_formatter'
 require_relative 'options_validator'
+require_relative 'translation'
 
 module Loaf
   # A mixin to define view extensions
   module ViewExtensions
-    include Loaf::CrumbFormatter
     include Loaf::OptionsValidator
 
     def initialize(*)
@@ -51,7 +50,7 @@ module Loaf
       valid?(options)
       options = Loaf.configuration.to_hash.merge(options)
       _breadcrumbs.each do |crumb|
-        name = format_name(crumb.name, options)
+        name = title_for(crumb.name)
         path = url_for(_expand_url(crumb.url))
         current = current_crumb?(path, crumb.match)
 
@@ -106,6 +105,15 @@ module Loaf
     end
 
     private
+
+    # Find title translation for a crumb name
+    #
+    # @return [String]
+    #
+    # @api private
+    def title_for(name)
+      Translation.find_title(name)
+    end
 
     # Expand url in the current context of the view
     #
