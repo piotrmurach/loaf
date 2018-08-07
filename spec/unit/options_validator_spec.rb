@@ -4,7 +4,7 @@ RSpec.describe Loaf::OptionsValidator, '.valid?' do
   let(:klass) { Class.extend Loaf::OptionsValidator }
 
   it 'validates succesfully known option' do
-    expect(klass.valid?(crumb_length: 10)).to eq(true)
+    expect(klass.valid?(match: :exact)).to eq(true)
   end
 
   it 'validates unknown option with an error' do
