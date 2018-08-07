@@ -1,29 +1,23 @@
-# encoding: utf-8
+# frozen_string_literal: true
 
 RSpec.describe Loaf::Configuration do
   it "allows to set and read attributes" do
     config = Loaf::Configuration.new
-
-    config.crumb_length = 4
-    expect(config.crumb_length).to eq(4)
-
     config.match = :exact
     expect(config.match).to eq(:exact)
   end
 
   it "accepts attributes at initialization" do
-    options = { crumb_length: 12, match: :exact }
+    options = { locales_path: '/lib', match: :exact }
     config = Loaf::Configuration.new(options)
 
-    expect(config.crumb_length).to eq(12)
+    expect(config.locales_path).to eq('/lib')
     expect(config.match).to eq(:exact)
   end
 
   it "exports configuration as hash" do
     config = Loaf::Configuration.new
     expect(config.to_hash).to eq({
-      capitalize: false,
-      crumb_length: 30,
       locales_path: '/',
       match: :inclusive
     })

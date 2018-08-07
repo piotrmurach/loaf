@@ -4,8 +4,6 @@ module Loaf
   class Configuration
     VALID_ATTRIBUTES = [
       :locales_path,
-      :crumb_length,
-      :capitalize,
       :match
     ].freeze
 
@@ -13,17 +11,7 @@ module Loaf
 
     DEFAULT_LOCALES_PATH = '/'
 
-    DEFAULT_STYLE_CLASSES = 'selected'
-
-    DEFAULT_CRUMB_LENGTH = 30
-
-    DEFAULT_LAST_CRUMB_LINKED = false
-
-    DEFAULT_CAPITALIZE = false
-
     DEFAULT_MATCH = :inclusive
-
-    DEFAULT_ROOT = true
 
     # Setup this configuration
     #
