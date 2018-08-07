@@ -1,5 +1,16 @@
 # Change log
 
+## [v0.8.0] - 2018-08-07
+
+### Changed
+* Change Translation to skip translating nil and empty string
+* Change view extension to only lookup breadcrumb name translation
+* Remove Configuration #crumb_length and #capitalize options
+* Remove CrumbFormatter to skip truncating and formatting crumb names
+
+## Fix
+* Fix issue with breadcrumb names being modified
+
 ## [v0.7.0] - 2018-06-20
 
 ### Added
@@ -100,6 +111,7 @@
 
 * Initial implementation and release
 
+[v0.8.0]: https://github.com/piotrmurach/tty-spinner/compare/v0.7.0...v0.8.0
 [v0.7.0]: https://github.com/piotrmurach/tty-spinner/compare/v0.6.2...v0.7.0
 [v0.6.2]: https://github.com/piotrmurach/tty-spinner/compare/v0.6.1...v0.6.2
 [v0.6.1]: https://github.com/piotrmurach/tty-spinner/compare/v0.6.0...v0.6.1
