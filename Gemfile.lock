@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    loaf (0.7.0)
+    loaf (0.8.0)
       rails (>= 3.2)
 
 GEM
