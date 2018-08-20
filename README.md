@@ -245,7 +245,7 @@ For Bootstrap 4:
 ```erb
 <% #erb %>
 <nav aria-label="breadcrumb">
-  <ol class='breadcrumbs'>
+  <ol class='breadcrumb'>
     <% breadcrumb_trail do |crumb| %>
       <li class="breadcrumb-item <%= crumb.current? ? 'active' : '' %>">
         <%= link_to_unless crumb.current?, crumb.name, crumb.url, (crumb.current? ? {'aria-current' => 'page'} : {}) %>
@@ -259,7 +259,7 @@ and if you are using HAML do:
 
 ```haml
   - # haml
-  %ol.breadcrumbs
+  %ol.breadcrumb
     - breadcrumb_trail do |crumb|
       %li.breadcrumb-item{class: crumb.current? ? 'active' : '' }
         = link_to_unless crumb.current?, crumb.name, crumb.url, (crumb.current? ? {'aria-current' => 'page'} : {})
