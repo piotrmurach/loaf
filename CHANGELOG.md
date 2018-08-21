@@ -14,7 +14,7 @@
 ## [v0.7.0] - 2018-06-20
 
 ### Added
-* Add test setup for Rails 5.2 by Bendon Muir(@brendon)
+* Add test setup for Rails 5.2 by Brendon Muir(@brendon)
 
 ### Changed
 * Change controller level #breadcrumb helper to accept Proc as name without controller parameter by Brendon Muir(@brendon)
