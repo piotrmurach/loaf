@@ -14,7 +14,7 @@
 ## [v0.7.0] - 2018-06-20
 
 ### Added
-* Add test setup for Rails 5.2 by Bendon Muir(@brendon)
+* Add test setup for Rails 5.2 by Brendon Muir(@brendon)
 
 ### Changed
 * Change controller level #breadcrumb helper to accept Proc as name without controller parameter by Brendon Muir(@brendon)
@@ -111,14 +111,14 @@
 
 * Initial implementation and release
 
-[v0.8.0]: https://github.com/piotrmurach/tty-spinner/compare/v0.7.0...v0.8.0
-[v0.7.0]: https://github.com/piotrmurach/tty-spinner/compare/v0.6.2...v0.7.0
-[v0.6.2]: https://github.com/piotrmurach/tty-spinner/compare/v0.6.1...v0.6.2
-[v0.6.1]: https://github.com/piotrmurach/tty-spinner/compare/v0.6.0...v0.6.1
-[v0.6.0]: https://github.com/piotrmurach/tty-spinner/compare/v0.5.0...v0.6.0
-[v0.5.0]: https://github.com/piotrmurach/tty-spinner/compare/v0.4.0...v0.5.0
-[v0.4.0]: https://github.com/piotrmurach/tty-spinner/compare/v0.3.0...v0.4.0
-[v0.3.0]: https://github.com/piotrmurach/tty-spinner/compare/v0.2.1...v0.3.0
-[v0.2.1]: https://github.com/piotrmurach/tty-spinner/compare/v0.2.0...v0.2.1
-[v0.2.0]: https://github.com/piotrmurach/tty-spinner/compare/v0.1.0...v0.2.0
-[v0.1.0]: https://github.com/piotrmurach/tty-spinner/compare/v0.1.0...HEAD
+[v0.8.0]: https://github.com/piotrmurach/loaf/compare/v0.7.0...v0.8.0
+[v0.7.0]: https://github.com/piotrmurach/loaf/compare/v0.6.2...v0.7.0
+[v0.6.2]: https://github.com/piotrmurach/loaf/compare/v0.6.1...v0.6.2
+[v0.6.1]: https://github.com/piotrmurach/loaf/compare/v0.6.0...v0.6.1
+[v0.6.0]: https://github.com/piotrmurach/loaf/compare/v0.5.0...v0.6.0
+[v0.5.0]: https://github.com/piotrmurach/loaf/compare/v0.4.0...v0.5.0
+[v0.4.0]: https://github.com/piotrmurach/loaf/compare/v0.3.0...v0.4.0
+[v0.3.0]: https://github.com/piotrmurach/loaf/compare/v0.2.1...v0.3.0
+[v0.2.1]: https://github.com/piotrmurach/loaf/compare/v0.2.0...v0.2.1
+[v0.2.0]: https://github.com/piotrmurach/loaf/compare/v0.1.0...v0.2.0
+[v0.1.0]: https://github.com/piotrmurach/loaf/compare/v0.1.0...HEAD
