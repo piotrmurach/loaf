@@ -9,6 +9,7 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/966193dafa3895766977/maintainability)][codeclimate]
 [![Coverage Status](https://coveralls.io/repos/github/piotrmurach/loaf/badge.svg?branch=master)][coveralls]
 [![Inline docs](http://inch-ci.org/github/piotrmurach/loaf.svg?branch=master)][inchpages]
+[![Reviewed by Hound](https://img.shields.io/badge/Reviewed_by-Hound-8E64B0.svg)](https://houndci.com)
 
 [gem]: http://badge.fury.io/rb/loaf
 [travis]: http://travis-ci.org/piotrmurach/loaf
