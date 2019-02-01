@@ -13,8 +13,6 @@ Gem::Specification.new do |spec|
   spec.description = %q{Loaf manages and displays breadcrumb trails in your Rails app. It aims to handle breadcrumb data through easy dsl and expose it through view helpers without any assumptions about markup.}
 
   spec.files         = `git ls-files`.split("\n")
-  spec.test_files    = `git ls-files -- {spec,features}/*`.split("\n")
-  spec.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
   spec.metadata['allowed_push_host'] = 'https://rubygems.org'
