@@ -1,6 +1,8 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
-set -e
+set -euo pipefail
+IFS=$'\n\t'
+set -vx
 
 # Install gems required by Appraisal
 bundle install
