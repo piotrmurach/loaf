@@ -1,5 +1,15 @@
 # Change log
 
+## [v0.8.1] - 2019-02-04
+
+### Added
+* Add console binary
+
+### Changed
+* Remove rake & appraisal binaries
+* Change setup binary to load correct env
+* Change gemspec to load files directly in without using git
+
 ## [v0.8.0] - 2018-08-07
 
 ### Changed
