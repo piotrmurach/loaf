@@ -19,12 +19,14 @@ Gem::Specification.new do |spec|
   spec.files        += Dir['README.md', 'CHANGELOG.md', 'LICENSE.txt', 'Rakefile', 'Appraisals']
   spec.require_paths = ["lib"]
 
-  spec.metadata = {
-    'allowed_push_host' => 'https://rubygems.org',
-    'bug_tracker_uri'   => 'https://github.com/piotrmurach/loaf/issues',
-    'source_code_uri'   => 'https://github.com/piotrmurach/loaf',
-    'changelog_uri'     => 'https://github.com/piotrmurach/loaf/blob/master/CHANGELOG.md'
-  }
+  if spec.respond_to?(:metadata=)
+    spec.metadata = {
+      'allowed_push_host' => 'https://rubygems.org',
+      'bug_tracker_uri'   => 'https://github.com/piotrmurach/loaf/issues',
+      'source_code_uri'   => 'https://github.com/piotrmurach/loaf',
+      'changelog_uri'     => 'https://github.com/piotrmurach/loaf/blob/master/CHANGELOG.md'
+    }
+  end
 
   spec.add_dependency 'rails', '>= 3.2'
 
