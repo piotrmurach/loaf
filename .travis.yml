@@ -35,12 +35,20 @@ matrix:
       gemfile: gemfiles/rails5.2.gemfile
     - rvm: 2.1.10
       gemfile: gemfiles/rails6.0.gemfile
+    - rvm: 2.2.10
+      gemfile: gemfiles/rails5.2.gemfile
+    - rvm: 2.2.10
+      gemfile: gemfiles/rails6.0.gemfile
+    - rvm: 2.3.8
+      gemfile: gemfiles/rails6.0.gemfile
     - rvm: 2.4.5
       gemfile: gemfiles/rails3.2.gemfile
     - rvm: 2.4.5
       gemfile: gemfiles/rails4.0.gemfile
     - rvm: 2.4.5
       gemfile: gemfiles/rails4.1.gemfile
+    - rvm: 2.4.5
+      gemfile: gemfiles/rails6.0.gemfile
     - rvm: 2.5.3
       gemfile: gemfiles/rails3.2.gemfile
     - rvm: 2.5.3
