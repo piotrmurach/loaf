@@ -324,6 +324,14 @@ en:
 
 Questions or problems? Please post them on the [issue tracker](https://github.com/piotrmurach/loaf/issues). You can contribute changes by forking the project and submitting a pull request. You can ensure the tests are passing by running `bundle` and `rake`.
 
+## License
+
+The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+
+## Code of Conduct
+
+Everyone interacting in the Loaf project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/piotrmurach/loaf/blob/master/CODE_OF_CONDUCT.md).
+
 ## Copyright
 
-Copyright (c) 2011-2018 Piotr Murach. See LICENSE.txt for further details.
+Copyright (c) 2011 Piotr Murach. See LICENSE.txt for further details.
