@@ -10,6 +10,7 @@ Gem::Specification.new do |spec|
   spec.summary     = %q{Loaf manages and displays breadcrumb trails in your Rails application.}
   spec.description = %q{Loaf manages and displays breadcrumb trails in your Rails app. It aims to handle breadcrumb data through easy dsl and expose it through view helpers without any assumptions about markup.}
   spec.homepage    = "https://github.com/piotrmurach/loaf"
+  spec.license     = "MIT"
   if spec.respond_to?(:metadata=)
     spec.metadata = {
       "allowed_push_host" => "https://rubygems.org",
