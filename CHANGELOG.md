@@ -3,7 +3,7 @@
 ## [v0.8.2] - 2020-01-19
 
 ### Changed
-* Change gemspec to include metadata and license info
+* Change gemspec to include metadata, license info and remove test artifacts
 * Change to update testing to include Ruby 2.7
 
 ## [v0.8.1] - 2019-02-04
