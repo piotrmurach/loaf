@@ -20,6 +20,11 @@ class DummyView < ActionView::Base
   include ActionView::Helpers::UrlHelper
   include Loaf::ViewExtensions
 
+  def initialize(*args)
+    context = ActionView::LookupContext.new([])
+    super(context, *args)
+  end
+
   attr_reader :_breadcrumbs
 
   routes = ActionDispatch::Routing::RouteSet.new
