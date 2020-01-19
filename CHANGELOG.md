@@ -7,6 +7,9 @@
 * Change to update testing to include Ruby 2.7
 * Change to limit Ruby to 1.9.3 or greater
 
+### Fixed
+* Fix Ruby 2.7 warnings
+
 ## [v0.8.1] - 2019-02-04
 
 ### Added
