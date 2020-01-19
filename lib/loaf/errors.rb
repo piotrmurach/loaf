@@ -11,7 +11,7 @@ module Loaf #:nodoc:
     end
 
     def translate(key, options)
-      ::I18n.translate("#{BASE_KEY}.#{key}", { :locale => :en }.merge(options))
+      ::I18n.translate("#{BASE_KEY}.#{key}", **{ :locale => :en }.merge(options))
     end
   end
 

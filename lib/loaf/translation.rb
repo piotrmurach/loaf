@@ -30,7 +30,7 @@ module Loaf
       options[:scope] ||= translation_scope
       options[:default] = Array(options[:default])
       options[:default] << title if options[:default].empty?
-      I18n.t(title.to_s, options)
+      I18n.t(title.to_s, **options)
     end
     module_function :find_title
   end # Translation
