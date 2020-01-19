@@ -26,6 +26,7 @@ Gem::Specification.new do |spec|
                        }
   spec.files        += Dir["tasks/*", "README.md", "CHANGELOG.md", "LICENSE.txt", "Rakefile", "Appraisals"]
   spec.require_paths = ["lib"]
+  spec.extra_rdoc_files = ["README.md"]
 
   spec.add_dependency "rails", ">= 3.2"
 
