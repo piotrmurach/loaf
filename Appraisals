@@ -14,11 +14,15 @@ rails_versions.each do |(version, rails)|
 
   appraise "rails#{version}" do
     gem "rails", "~> #{rails}"
+    gem "capybara", "~> 2.18.0"
 
     if gem_version <= Gem::Version.new("4.0")
       gem "test-unit", "~> 3.0"
+      gem "sqlite3" , "~> 1.3.13", platforms: :ruby
     elsif gem_version >= Gem::Version.new("6.0")
       gem "sqlite3" , "~> 1.4.2", platforms: :ruby
+    else
+      gem "sqlite3" , "~> 1.3.13", platforms: :ruby
     end
   end
 end
