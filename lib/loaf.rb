@@ -1,5 +1,6 @@
 require_relative 'loaf/configuration'
 require_relative 'loaf/railtie'
+require_relative 'loaf/version'
 
 module Loaf
   # Set global configuration
