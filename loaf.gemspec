@@ -26,6 +26,7 @@ Gem::Specification.new do |spec|
                        }
   spec.files        += Dir["tasks/*", "README.md", "CHANGELOG.md", "LICENSE.txt", "Rakefile", "Appraisals"]
   spec.require_paths = ["lib"]
+  spec.required_ruby_version = ">= 1.9.3"
   spec.bindir        = "exe"
   spec.extra_rdoc_files = ["README.md"]
 
