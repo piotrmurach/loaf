@@ -1,5 +1,11 @@
 # Change log
 
+## [v0.8.2] - 2020-01-19
+
+### Changed
+* Change gemspec to include metadata and license info
+* Change to update testing to include Ruby 2.7
+
 ## [v0.8.1] - 2019-02-04
 
 ### Added
@@ -121,6 +127,8 @@
 
 * Initial implementation and release
 
+[v0.8.2]: https://github.com/piotrmurach/loaf/compare/v0.8.1...v0.8.2
+[v0.8.1]: https://github.com/piotrmurach/loaf/compare/v0.8.0...v0.8.1
 [v0.8.0]: https://github.com/piotrmurach/loaf/compare/v0.7.0...v0.8.0
 [v0.7.0]: https://github.com/piotrmurach/loaf/compare/v0.6.2...v0.7.0
 [v0.6.2]: https://github.com/piotrmurach/loaf/compare/v0.6.1...v0.6.2
