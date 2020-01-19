@@ -1,6 +1,4 @@
-lib = File.expand_path("../lib", __FILE__)
-$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "loaf/version"
+require_relative "lib/loaf/version"
 
 Gem::Specification.new do |spec|
   spec.name        = "loaf"
@@ -21,14 +19,11 @@ Gem::Specification.new do |spec|
       "source_code_uri"   => "https://github.com/piotrmurach/loaf",
     }
   end
-  spec.files         = Dir["{lib,spec,config}/**/*"].reject { |f|
-                         File.directory?(f) || f.include?(".sqlite3") || f.include?(".log")
-                       }
-  spec.files        += Dir["tasks/*", "README.md", "CHANGELOG.md", "LICENSE.txt", "Rakefile", "Appraisals"]
+  spec.files         = Dir["{lib,config}/**/*", "README.md", "CHANGELOG.md", "LICENSE.txt"]
+  spec.extra_rdoc_files = ["README.md"]
+  spec.bindir        = "exe"
   spec.require_paths = ["lib"]
   spec.required_ruby_version = ">= 1.9.3"
-  spec.bindir        = "exe"
-  spec.extra_rdoc_files = ["README.md"]
 
   spec.add_dependency "rails", ">= 3.2"
 
