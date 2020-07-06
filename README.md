@@ -175,6 +175,8 @@ end
 
 Assume `ancestors` method is defined inside the controller.
 
+You can access an array of the names pushed into the breadcrumb trail, in order of addition, with controller method `breadcrumb_names`. This can be handy for generating meaningful page titles from breadcrumb data.
+
 #### 2.1.2 view
 
 **Loaf** adds `breadcrumb` helper also to the views. Together with controller breadcrumbs, the view breadcrumbs are appended as the last in breadcrumb trail. For instance, to specify view breadcrumb do:
@@ -266,6 +268,8 @@ and if you are using HAML do:
 ```
 
 Usually best practice is to put such snippet inside its own `_breadcrumbs.html.erb` partial.
+
+As with controllers, can access an array of the names pushed into the breadcrumb trail, in order of addition, with helper method `breadcrumb_names`. This can be handy for generating meaningful page titles from breadcrumb data. Use whichever of the two is more convenient given your application structure and coding style.
 
 ## 3. Configuration
 
