@@ -39,6 +39,14 @@ module Loaf
     end
     alias add_breadcrumb breadcrumb
 
+    # Returns an array of breadcrumb names, in case you need them elsewhere -
+    # e.g. to build a helpful <title>...</title> attribute.
+    #
+    # @api public
+    def breadcrumb_names
+      _breadcrumbs.map(&:name)
+    end
+
     # Renders breadcrumbs inside view.
     #
     # @param [Hash] options

@@ -11,6 +11,7 @@ module Loaf
       base.extend ClassMethods
       base.send :include, InstanceMethods
       base.send :helper_method, :_breadcrumbs
+      base.send :helper_method, :breadcrumb_names
     end
 
     module ClassMethods
@@ -70,6 +71,14 @@ module Loaf
         _breadcrumbs << Loaf::Crumb.new(name, url, options)
       end
       alias add_breadcrumb breadcrumb
+
+      # Array of breadcrumb names, in case you need them elsewhere - e.g. to
+      # build a helpful <title>...</title> attribute.
+      #
+      # @api public
+      def breadcrumb_names
+        _breadcrumbs.map(&:name)
+      end
 
       # Collection of breadcrumbs
       #
