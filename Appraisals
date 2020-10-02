@@ -1,4 +1,4 @@
-rails_versions = [
+railties_versions = [
   %w[3.2 3.2.22.5],
   %w[4.0 4.0.13],
   %w[4.1 4.1.16],
@@ -9,11 +9,11 @@ rails_versions = [
   %w[6.0 6.0.2],
 ]
 
-rails_versions.each do |(version, rails)|
+railties_versions.each do |(version, railties)|
   gem_version = Gem::Version.new(version)
 
-  appraise "rails#{version}" do
-    gem "rails", "~> #{rails}"
+  appraise "railties#{version}" do
+    gem "railties", "~> #{railties}"
     gem "capybara", "~> 2.18.0"
 
     if gem_version <= Gem::Version.new("4.0")
