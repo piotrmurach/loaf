@@ -19,8 +19,8 @@ Gem::Specification.new do |spec|
       "source_code_uri"   => "https://github.com/piotrmurach/loaf",
     }
   end
-  spec.files         = Dir["{lib,config}/**/*", "README.md", "CHANGELOG.md", "LICENSE.txt"]
-  spec.extra_rdoc_files = ["README.md"]
+  spec.files         = Dir["{lib,config}/**/*"]
+  spec.extra_rdoc_files = Dir["README.md", "CHANGELOG.md", "LICENSE.txt"]
   spec.bindir        = "exe"
   spec.require_paths = ["lib"]
   spec.required_ruby_version = ">= 1.9.3"
