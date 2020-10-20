@@ -48,11 +48,11 @@ module Loaf
       return enum_for(:breadcrumb_trail) unless block_given?
 
       valid?(options)
-      options = Loaf.configuration.to_hash.merge(options)
+
       _breadcrumbs.each do |crumb|
         name = title_for(crumb.name)
         path = url_for(_expand_url(crumb.url))
-        current = current_crumb?(path, crumb.match)
+        current = current_crumb?(path, options.fetch(:match) { crumb.match })
 
         yield(Loaf::Breadcrumb[name, path, current])
       end

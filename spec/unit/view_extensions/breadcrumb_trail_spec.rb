@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-RSpec.describe Loaf::ViewExtensions, '#breadcrumb_trail' do
+RSpec.describe Loaf::ViewExtensions, "#breadcrumb_trail" do
   it "resolves breadcrumb paths" do
     view = DummyView.new
     view.breadcrumb('home', :home_path)
@@ -37,14 +37,6 @@ RSpec.describe Loaf::ViewExtensions, '#breadcrumb_trail' do
     view = DummyView.new
     view.breadcrumb('posts', '/posts', match: :inclusive)
     view.set_path('/posts?foo=bar')
-
-    expect(view.breadcrumb_trail.map(&:to_a)).to eq([['posts', '/posts', true]])
-  end
-
-  it "matches current path with :inclusive when nested" do
-    view = DummyView.new
-    view.breadcrumb('posts', '/posts', match: :inclusive)
-    view.set_path('/posts/1/comment')
 
     expect(view.breadcrumb_trail.map(&:to_a)).to eq([['posts', '/posts', true]])
   end
@@ -147,7 +139,31 @@ RSpec.describe Loaf::ViewExtensions, '#breadcrumb_trail' do
     expect(view.breadcrumb_trail.map(&:to_a)).to eq([['posts', '/posts', false]])
   end
 
-  it "failse to recognize the match option" do
+  it "overrides breadcrumb :inclusive match option with :exclusive" do
+    view = DummyView.new
+    view.breadcrumb('posts', '/posts', match: :inclusive)
+    view.set_path('/posts/1/comment')
+
+    yielded = []
+    block = ->(crumb) { yielded << crumb.to_a }
+    view.breadcrumb_trail(match: :exclusive, &block)
+
+    expect(yielded).to eq([['posts', '/posts', false]])
+  end
+
+  it "overrides default :inclusive match option with :exact" do
+    view = DummyView.new
+    view.breadcrumb('posts', :posts_path)
+    view.set_path('/posts/1/comment')
+
+    yielded = []
+    block = ->(crumb) { yielded << crumb.to_a }
+    view.breadcrumb_trail(match: :exact, &block)
+
+    expect(yielded).to eq([['posts', '/posts', false]])
+  end
+
+  it "fails to recognize the match option" do
     view = DummyView.new
     view.breadcrumb('posts', 'http://www.example.com/posts/', match: :boom)
     view.set_path('/posts')
@@ -226,11 +242,11 @@ RSpec.describe Loaf::ViewExtensions, '#breadcrumb_trail' do
     ])
   end
 
-  it "allows to overwrite global configuration" do
+  it "overwrites global configuration" do
     view = DummyView.new
     view.breadcrumb('home-sweet-home', :home_path)
     view.breadcrumb('posts-for-everybody', :posts_path)
-    view.set_path('/posts')
+    view.set_path('/posts/1')
 
     yielded = []
     block = -> (crumb) { yielded << crumb.to_a }
@@ -238,7 +254,7 @@ RSpec.describe Loaf::ViewExtensions, '#breadcrumb_trail' do
 
     expect(yielded).to eq([
       ['home-sweet-home', '/', false],
-      ['posts-for-everybody', '/posts', true]
+      ['posts-for-everybody', '/posts', false]
     ])
   end
 end
