@@ -4,6 +4,7 @@
 
 ### Changed
 * Reduce gem dependencies to `railties` by Christian Sutter (@csutter)
+* Use `URI::DEFAULT_PARSER` instead of deprecated `URI.parser` by (@dsazup)
 
 ### Fixed
 * Fix #breadcrumb_trail to allow overriding the match option

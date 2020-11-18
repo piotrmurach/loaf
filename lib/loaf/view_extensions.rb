@@ -68,10 +68,10 @@ module Loaf
     def current_crumb?(path, pattern = :inclusive)
       return false unless request.get? || request.head?
 
-      origin_path = URI.parser.unescape(path).force_encoding(Encoding::BINARY)
+      origin_path = URI::DEFAULT_PARSER.unescape(path).force_encoding(Encoding::BINARY)
 
       request_uri = request.fullpath
-      request_uri = URI.parser.unescape(request_uri)
+      request_uri = URI::DEFAULT_PARSER.unescape(request_uri)
       request_uri.force_encoding(Encoding::BINARY)
 
       # strip away trailing slash
