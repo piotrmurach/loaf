@@ -86,7 +86,7 @@ jobs:
           bundler-cache: false
       - name: Install bundler
         run: |
-          gem uninstall -v '>= 2' -ax bundler
+          gem uninstall -v '>= 2' -ax bundler || true
           gem install bundler -v '< 2.0'
           bundle -v
       - name: Install dependencies
