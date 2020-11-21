@@ -8,17 +8,17 @@ RSpec.describe Loaf::Configuration do
   end
 
   it "accepts attributes at initialization" do
-    options = { locales_path: '/lib', match: :exact }
+    options = { locales_path: "/lib", match: :exact }
     config = Loaf::Configuration.new(options)
 
-    expect(config.locales_path).to eq('/lib')
+    expect(config.locales_path).to eq("/lib")
     expect(config.match).to eq(:exact)
   end
 
   it "exports configuration as hash" do
     config = Loaf::Configuration.new
     expect(config.to_hash).to eq({
-      locales_path: '/',
+      locales_path: "/",
       match: :inclusive
     })
   end
