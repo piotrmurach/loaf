@@ -31,6 +31,7 @@ jobs:
           - gemfiles/rails5.1.gemfile
           - gemfiles/rails5.2.gemfile
           - gemfiles/rails6.0.gemfile
+          - gemfiles/rails6.1.gemfile
         exclude:
           - ruby: 2.1
             gemfile: gemfiles/rails5.0.gemfile
@@ -40,12 +41,18 @@ jobs:
             gemfile: gemfiles/rails5.2.gemfile
           - ruby: 2.1
             gemfile: gemfiles/rails6.0.gemfile
+          - ruby: 2.1
+            gemfile: gemfiles/rails6.1.gemfile
           - ruby: 2.2
             gemfile: gemfiles/rails5.2.gemfile
           - ruby: 2.2
             gemfile: gemfiles/rails6.0.gemfile
+          - ruby: 2.2
+            gemfile: gemfiles/rails6.1.gemfile
           - ruby: 2.3
             gemfile: gemfiles/rails6.0.gemfile
+          - ruby: 2.3
+            gemfile: gemfiles/rails6.1.gemfile
           - ruby: 2.4
             gemfile: gemfiles/rails3.2.gemfile
           - ruby: 2.4
@@ -54,6 +61,8 @@ jobs:
             gemfile: gemfiles/rails4.1.gemfile
           - ruby: 2.4
             gemfile: gemfiles/rails6.0.gemfile
+          - ruby: 2.4
+            gemfile: gemfiles/rails6.1.gemfile
           - ruby: 2.5
             gemfile: gemfiles/rails3.2.gemfile
           - ruby: 2.5
@@ -88,7 +97,6 @@ jobs:
         run: |
           gem uninstall -v '>= 2' -ax bundler || true
           gem install bundler -v '< 2.0'
-          bundle -v
       - name: Install dependencies
         run: |
           export BUNDLE_GEMFILE=${{ matrix.gemfile }}
