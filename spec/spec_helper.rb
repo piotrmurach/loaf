@@ -1,8 +1,8 @@
 # encoding: utf-8
 
-if (ENV['COVERAGE'] || ENV['CI']) && RUBY_VERSION < '2.4.0'
-  require 'simplecov'
-  require 'coveralls'
+if (ENV["COVERAGE"] || ENV["CI"])
+  require "simplecov"
+  require "coveralls"
 
   SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new([
     SimpleCov::Formatter::HTMLFormatter,
@@ -10,17 +10,17 @@ if (ENV['COVERAGE'] || ENV['CI']) && RUBY_VERSION < '2.4.0'
   ])
 
   SimpleCov.start do
-    command_name 'spec'
-    add_filter 'spec'
+    command_name "spec"
+    add_filter "spec"
   end
 end
 
 # Configure Rails Environment
 ENV["RAILS_ENV"] = "test"
 
-require 'rails_app/config/environment.rb'
-require 'rspec/rails'
-require 'loaf'
+require "rails_app/config/environment.rb"
+require "rspec/rails"
+require "loaf"
 
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each {|f| require f}
 
@@ -41,7 +41,7 @@ RSpec.configure do |config|
   config.warnings = true
 
   if config.files_to_run.one?
-    config.default_formatter = 'doc'
+    config.default_formatter = "doc"
   end
 
   config.profile_examples = 2
