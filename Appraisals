@@ -7,6 +7,7 @@ rails_versions = [
   %w[5.1 5.1.7],
   %w[5.2 5.2.4],
   %w[6.0 6.0.3],
+  %w[6.1 6.1.0.rc1]
 ]
 
 rails_versions.each do |(version, rails)|
