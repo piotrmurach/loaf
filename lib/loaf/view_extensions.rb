@@ -45,7 +45,7 @@ module Loaf
     #
     # @api public
     def breadcrumb_trail(options = {})
-      return enum_for(:breadcrumb_trail) unless block_given?
+      return enum_for(:breadcrumb_trail, options) unless block_given?
 
       valid?(options)
 

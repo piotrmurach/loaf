@@ -1,6 +1,12 @@
 # encoding: utf-8
 
 RSpec.describe Loaf::ViewExtensions, "#breadcrumb_trail" do
+  it "doesn't configure any breadcrumbs by default" do
+    view = DummyView.new
+
+    expect(view.breadcrumb_trail.to_a).to be_empty
+  end
+
   it "resolves breadcrumb paths" do
     view = DummyView.new
     view.breadcrumb('home', :home_path)
@@ -256,5 +262,22 @@ RSpec.describe Loaf::ViewExtensions, "#breadcrumb_trail" do
       ['home-sweet-home', '/', false],
       ['posts-for-everybody', '/posts', false]
     ])
+  end
+
+  it "allows to enumerate all breadcrumb properties individually" do
+    view = DummyView.new
+    links = {
+     "Home" => :home_path,
+     "Posts" => :posts_path,
+     "Edit post" => "/posts/1"
+    }
+    links.each do |name, url|
+      view.breadcrumb(name, url)
+    end
+    view.set_path("/posts/1")
+
+    expect(view.breadcrumb_trail.map(&:name)).to eq(links.keys)
+    expect(view.breadcrumb_trail.map(&:url)).to eq(%w[/ /posts /posts/1])
+    expect(view.breadcrumb_trail(match: :exact).map(&:current?)).to eq([false, false, true])
   end
 end
