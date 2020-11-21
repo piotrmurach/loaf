@@ -85,7 +85,10 @@ jobs:
           ruby-version: ${{ matrix.ruby }}
           bundler-cache: false
       - name: Install bundler
-        run: gem install bundler -v '< 2.0'
+        run: |
+          gem uninstall -v '>= 2' -ax bundler
+          gem install bundler -v '< 2.0'
+          bundle -v
       - name: Install dependencies
         run: |
           export BUNDLE_GEMFILE=${{ matrix.gemfile }}
