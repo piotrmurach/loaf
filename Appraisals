@@ -14,7 +14,7 @@ rails_versions.each do |(version, rails)|
   gem_version = Gem::Version.new(version)
 
   appraise "rails#{version}" do
-    gem "rails", "~> #{rails}"
+    gem "railties", "~> #{rails}"
     gem "capybara", "~> 2.18.0"
 
     if gem_version <= Gem::Version.new("4.0")
