@@ -209,7 +209,9 @@ breadcrumb "Posts", posts_path(order: :desc), match: {order: :desc}
 
 ### 2.2 breadcrumb_trail
 
-In order to display breadcrumbs use the `breadcrumb_trail` view helper which as an argument accepts options and yields all breadcrumbs to a block:
+In order to display breadcrumbs use the `breadcrumb_trail` view helper. It accepts optional argument of configuration options and can be used in two ways.
+
+One way, given a block it will yield all the breadcrumbs in order of definition:
 
 ```ruby
 breadcrumb_trail do |crumb|
@@ -217,7 +219,7 @@ breadcrumb_trail do |crumb|
 end
 ```
 
-The yielded parameter is a `Loaf::Crumb` object that provides the following methods:
+The yielded parameter is an instance of `Loaf::Crumb` object with the following methods:
 
 ```ruby
 crumb.name     # => the name as string
@@ -240,6 +242,7 @@ For example, you can add the following semantic markup to show breadcrumbs using
   </ol>
 </nav>
 ```
+
 For Bootstrap 4:
 
 ```erb
@@ -255,7 +258,7 @@ For Bootstrap 4:
 </nav>
 ```
 
-and if you are using HAML do:
+And, if you are using `HAML` do:
 
 ```haml
   - # haml
@@ -266,6 +269,20 @@ and if you are using HAML do:
 ```
 
 Usually best practice is to put such snippet inside its own `_breadcrumbs.html.erb` partial.
+
+The second way is to use the `breadcrumb_trail` without passing a block. In this case, the helper will return an enumerator that you can use to, for example, access an array of names pushed into the breadcrumb trail in order of addition. This can be handy for generating page titles from breadcrumb data.
+
+For example, you can define a `breadcrumbs_to_title` method in `ApplicationHelper` like so:
+
+```ruby
+module ApplicationHelper
+  def breadcrumbs_to_title
+    breadcrumb_trail.map(&:name).join(">")
+  end
+end
+```
+
+Use whichever of the two ways is more convenient given your application structure and needs.
 
 ## 3. Configuration
 
