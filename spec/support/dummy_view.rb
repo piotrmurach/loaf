@@ -1,4 +1,4 @@
-require 'action_view'
+require "action_view"
 
 class DummyView < ActionView::Base
   module FakeRequest
@@ -20,9 +20,11 @@ class DummyView < ActionView::Base
   include ActionView::Helpers::UrlHelper
   include Loaf::ViewExtensions
 
-  def initialize(*args)
+  def initialize
     context = ActionView::LookupContext.new([])
-    super(context, *args)
+    assigns = {}
+    controller = nil
+    super(context, assigns, controller)
   end
 
   attr_reader :_breadcrumbs
@@ -46,7 +48,7 @@ class DummyView < ActionView::Base
   def set_path(path)
     request.path = path
     request.fullpath = path
-    request.protocol = 'http://'
-    request.host_with_port = 'www.example.com'
+    request.protocol = "http://"
+    request.host_with_port = "www.example.com"
   end
 end
