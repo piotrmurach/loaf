@@ -17,7 +17,9 @@ rails_versions.each do |(version, rails)|
     gem "railties", "~> #{rails}"
     gem "capybara", "~> 2.18.0"
 
-    if gem_version <= Gem::Version.new("4.0")
+    if gem_version == Gem::Version.new("3.2")
+      gem "tzinfo", "~> 0.3"
+    elsif gem_version <= Gem::Version.new("4.0")
       gem "test-unit", "~> 3.0"
       gem "sqlite3" , "~> 1.3.13", platforms: :ruby
     elsif gem_version >= Gem::Version.new("6.0")
