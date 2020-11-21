@@ -1,10 +1,11 @@
 # Change log
 
-## [v0.10.0] - unreleased
+## [v0.10.0] - 2020-11-21
 
 ### Changed
 * Reduce gem dependencies to `railties` by Christian Sutter (@csutter)
 * Use `URI::DEFAULT_PARSER` instead of deprecated `URI.parser` by (@dsazup)
+* Support Rails 6.1 in tests
 
 ### Fixed
 * Fix #breadcrumb_trail to allow overriding the match option
