@@ -1,7 +1,9 @@
 # encoding: utf-8
 
 RSpec.describe "breadcrumbs trail" do
-  include ActionView::TestCase::Behavior
+  before do
+    include ActionView::TestCase::Behavior
+  end
 
   it "shows root breadcrumb" do
     visit root_path
