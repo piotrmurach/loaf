@@ -1,17 +1,17 @@
 <div align="center">
-  <img width="237" src="https://cdn.rawgit.com/piotrmurach/loaf/master/assets/loaf_logo.png" alt="loaf logo" />
+  <img width="237" src="https://github.com/piotrmurach/loaf/blob/master/assets/loaf_logo.png" alt="Loaf gem logo" />
 </div>
 
 # Loaf
 
 [![Gem Version](https://badge.fury.io/rb/loaf.svg)][gem]
-[![Build Status](https://secure.travis-ci.org/piotrmurach/loaf.svg?branch=master)][travis]
+[![Actions CI](https://github.com/piotrmurach/loaf/workflows/CI/badge.svg?branch=master)][gh_actions_ci]
 [![Maintainability](https://api.codeclimate.com/v1/badges/966193dafa3895766977/maintainability)][codeclimate]
 [![Coverage Status](https://coveralls.io/repos/github/piotrmurach/loaf/badge.svg?branch=master)][coveralls]
 [![Inline docs](http://inch-ci.org/github/piotrmurach/loaf.svg?branch=master)][inchpages]
 
 [gem]: http://badge.fury.io/rb/loaf
-[travis]: http://travis-ci.org/piotrmurach/loaf
+[gh_actions_ci]: https://github.com/piotrmurach/loaf/actions?query=workflow%3ACI
 [codeclimate]: https://codeclimate.com/github/piotrmurach/loaf/maintainability
 [coveralls]: https://coveralls.io/github/piotrmurach/loaf
 [inchpages]: http://inch-ci.org/github/piotrmurach/loaf
@@ -31,7 +31,7 @@
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'loaf'
+gem "loaf"
 ```
 
 And then execute:
@@ -73,7 +73,7 @@ In order to add breadcrumbs in controller use `breadcrumb` method ([see 2.1](#21
 ```ruby
 class Blog::CategoriesController < ApplicationController
 
-  breadcrumb 'Article Categories', :blog_categories_path, only: [:show]
+  breadcrumb "Article Categories", :blog_categories_path, only: [:show]
 
   def show
     breadcrumb @category.title, blog_category_path(@category)
@@ -94,7 +94,7 @@ The `breadcrumb` method takes at minimum two arguments: the first is a name for 
 When using path variable `blog_categories_path`:
 
 ```ruby
-breadcrumb 'Categories', blog_categories_path
+breadcrumb "Categories", blog_categories_path
 ```
 
 When using an instance `@category`:
@@ -112,7 +112,7 @@ breadcrumb @category.title, [:blog, @category]
 You can specify segments of the url:
 
 ```ruby
-breadcrumb @category.title, {controller: 'categories', action: 'show', id: @category.id}
+breadcrumb @category.title, {controller: "categories", action: "show", id: @category.id}
 ```
 
 #### 2.1.1 controller
@@ -121,7 +121,7 @@ Breadcrumbs are inherited, so if you set a breadcrumb in `ApplicationController`
 
 ```ruby
 class ApplicationController < ActionController::Base
-  breadcrumb 'Home', :root_path
+  breadcrumb "Home", :root_path
 end
 ```
 
@@ -129,7 +129,7 @@ Outside of controller actions the `breadcrumb` helper behaviour is similar to fi
 
 ```ruby
 class ArticlesController < ApplicationController
-  breadcrumb 'All Articles', :articles_path, only: [:new, :create]
+  breadcrumb "All Articles", :articles_path, only: [:new, :create]
 end
 ```
 
@@ -137,12 +137,12 @@ Each time you call the `breadcrumb` helper, a new element is added to a breadcru
 
 ```ruby
 class ArticlesController < ApplicationController
-  breadcrumb 'Home', :root_path
-  breadcrumb 'All Articles', :articles_path
+  breadcrumb "Home", :root_path
+  breadcrumb "All Articles", :articles_path
 
   def show
-    breadcrumb 'Article One', article_path(:one)
-    breadcrumb 'Article Two', article_path(:two)
+    breadcrumb "Article One", article_path(:one)
+    breadcrumb "Article Two", article_path(:two)
   end
 end
 ```
@@ -155,11 +155,11 @@ class CommentsController < ApplicationController
 end
 ```
 
-Also, to dynamically evalute parameters inside the url argument do:
+Also, to dynamically evaluate parameters inside the url argument do:
 
 ```ruby
 class CommentsController < ApplicationController
-  breadcrumb 'All Comments', -> { post_comments_path(params[:post_id]) }
+  breadcrumb "All Comments", -> { post_comments_path(params[:post_id]) }
 end
 ```
 
@@ -191,20 +191,20 @@ The `:match` key accepts the following values:
 
 * `:inclusive` - the default value, which matches nested paths
 * `:exact` - matches only the exact same path
-* `:exclusive` - matches only direct path and its query params if present
+* `:exclusive` - matches only direct path and its query parameters if present
 * `/regex/` - matches based on regular expression
-* `{foo: bar}` - match based on query params
+* `{foo: bar}` - match based on query parameters
 
 For example, to force a breadcrumb to be the current regardless do:
 
 ```ruby
-breadcrumb 'New Post', new_post_path, match: :exact
+breadcrumb "New Post", new_post_path, match: :exact
 ```
 
-To make a breadcrumb current based on the query params do:
+To make a breadcrumb current based on the query parameters do:
 
 ```ruby
-breadcrumb 'Posts', posts_path(order: :desc), match: {order: :desc}
+breadcrumb "Posts", posts_path(order: :desc), match: {order: :desc}
 ```
 
 ### 2.2 breadcrumb_trail
@@ -217,7 +217,7 @@ breadcrumb_trail do |crumb|
 end
 ```
 
-The yielded pararmeter is a `Loaf::Crumb` object that provides the following methods:
+The yielded parameter is a `Loaf::Crumb` object that provides the following methods:
 
 ```ruby
 crumb.name     # => the name as string
@@ -230,10 +230,10 @@ For example, you can add the following semantic markup to show breadcrumbs using
 
 ```erb
 <nav aria-label="breadcrumb">
-  <ol class='breadcrumbs'>
+  <ol class="breadcrumbs">
     <% breadcrumb_trail do |crumb| %>
-      <li class="<%= crumb.current? ? 'current' : '' %>">
-        <%= link_to crumb.name, crumb.url, (crumb.current? ? {'aria-current' => 'page'} : {}) %>
+      <li class="<%= crumb.current? ? "current" : "" %>">
+        <%= link_to crumb.name, crumb.url, (crumb.current? ? {"aria-current" => "page"} : {}) %>
         <% unless crumb.current? %><span>::</span><% end %>
       </li>
     <% end %>
@@ -245,10 +245,10 @@ For Bootstrap 4:
 ```erb
 <% #erb %>
 <nav aria-label="breadcrumb">
-  <ol class='breadcrumb'>
+  <ol class="breadcrumb">
     <% breadcrumb_trail do |crumb| %>
-      <li class="breadcrumb-item <%= crumb.current? ? 'active' : '' %>">
-        <%= link_to_unless crumb.current?, crumb.name, crumb.url, (crumb.current? ? {'aria-current' => 'page'} : {}) %>
+      <li class="breadcrumb-item <%= crumb.current? ? "active" : "" %>">
+        <%= link_to_unless crumb.current?, crumb.name, crumb.url, (crumb.current? ? {"aria-current" => "page"} : {}) %>
       </li>
     <% end %>
   </ol>
@@ -261,8 +261,8 @@ and if you are using HAML do:
   - # haml
   %ol.breadcrumb
     - breadcrumb_trail do |crumb|
-      %li.breadcrumb-item{class: crumb.current? ? 'active' : '' }
-        = link_to_unless crumb.current?, crumb.name, crumb.url, (crumb.current? ? {'aria-current' => 'page'} : {})
+      %li.breadcrumb-item{class: crumb.current? ? "active" : "" }
+        = link_to_unless crumb.current?, crumb.name, crumb.url, (crumb.current? ? {"aria-current" => "page"} : {})
 ```
 
 Usually best practice is to put such snippet inside its own `_breadcrumbs.html.erb` partial.
