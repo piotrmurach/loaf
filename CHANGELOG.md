@@ -9,6 +9,7 @@
 
 ### Fixed
 * Fix #breadcrumb_trail to allow overriding the match option
+* Fix #breadcrumb_trail to return enumerator that includes passed in match option
 
 ## [v0.9.0] - 2020-01-19
 
