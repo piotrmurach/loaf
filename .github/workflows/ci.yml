@@ -94,12 +94,10 @@ jobs:
           ruby-version: ${{ matrix.ruby }}
           bundler-cache: false
       - name: Install bundler
-        run: |
-          gem uninstall -v '>= 2' -ax bundler || true
-          gem install bundler -v '< 2.0'
+        run: gem install bundler -v '< 2.0'
       - name: Install dependencies
         run: |
           export BUNDLE_GEMFILE=${{ matrix.gemfile }}
-          bundle install --jobs 4 --retry 3
+          bundle _1.17.3_ install --jobs 4 --retry 3
       - name: Run tests
         run: BUNDLE_GEMFILE=${{ matrix.gemfile }} bundle exec rake ci
