@@ -1,0 +1,94 @@
+---
+name: CI
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+jobs:
+  tests:
+    name: Ruby ${{ matrix.ruby }}, ${{ matrix.gemfile }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        ruby:
+          - 2.1
+          - 2.2
+          - 2.3
+          - 2.4
+          - 2.5
+          - 2.6
+          - 2.7
+        gemfile:
+          - gemfiles/rails3.2.gemfile
+          - gemfiles/rails4.0.gemfile
+          - gemfiles/rails4.1.gemfile
+          - gemfiles/rails4.2.gemfile
+          - gemfiles/rails5.0.gemfile
+          - gemfiles/rails5.1.gemfile
+          - gemfiles/rails5.2.gemfile
+          - gemfiles/rails6.0.gemfile
+        exclude:
+          - ruby: 2.1
+            gemfile: gemfiles/rails5.0.gemfile
+          - ruby: 2.1
+            gemfile: gemfiles/rails5.1.gemfile
+          - ruby: 2.1
+            gemfile: gemfiles/rails5.2.gemfile
+          - ruby: 2.1
+            gemfile: gemfiles/rails6.0.gemfile
+          - ruby: 2.2
+            gemfile: gemfiles/rails5.2.gemfile
+          - ruby: 2.2
+            gemfile: gemfiles/rails6.0.gemfile
+          - ruby: 2.3
+            gemfile: gemfiles/rails6.0.gemfile
+          - ruby: 2.4
+            gemfile: gemfiles/rails3.2.gemfile
+          - ruby: 2.4
+            gemfile: gemfiles/rails4.0.gemfile
+          - ruby: 2.4
+            gemfile: gemfiles/rails4.1.gemfile
+          - ruby: 2.4
+            gemfile: gemfiles/rails6.0.gemfile
+          - ruby: 2.5
+            gemfile: gemfiles/rails3.2.gemfile
+          - ruby: 2.5
+            gemfile: gemfiles/rails4.0.gemfile
+          - ruby: 2.5
+            gemfile: gemfiles/rails4.1.gemfile
+          - ruby: 2.6
+            gemfile: gemfiles/rails3.2.gemfile
+          - ruby: 2.6
+            gemfile: gemfiles/rails4.0.gemfile
+          - ruby: 2.6
+            gemfile: gemfiles/rails4.1.gemfile
+          - ruby: 2.7
+            gemfile: gemfiles/rails3.2.gemfile
+          - ruby: 2.7
+            gemfile: gemfiles/rails4.0.gemfile
+          - ruby: 2.7
+            gemfile: gemfiles/rails4.1.gemfile
+          - ruby: 2.7
+            gemfile: gemfiles/rails4.2.gemfile
+        os:
+          - ubuntu-latest
+    continue-on-error: ${{ endsWith(matrix.ruby, 'head') }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+          bundler-cache: false
+      - name: Install bundler
+        run: gem install bundler -v '< 2.0'
+      - name: Install dependencies
+        run: |
+          export BUNDLE_GEMFILE=${{ matrix.gemfile }}
+          bundle install --jobs 4 --retry 3
+      - name: Run tests
+        run: bundle exec rake ci
