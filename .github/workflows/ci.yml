@@ -4,9 +4,15 @@ on:
   push:
     branches:
       - master
+    paths-ignore:
+      - "bin/**"
+      - "*.md"
   pull_request:
     branches:
       - master
+    paths-ignore:
+      - "bin/**"
+      - "*.md"
 jobs:
   tests:
     name: Ruby ${{ matrix.ruby }}, ${{ matrix.gemfile }}
@@ -22,6 +28,7 @@ jobs:
           - 2.5
           - 2.6
           - 2.7
+          - 3.0
         gemfile:
           - gemfiles/rails3.2.gemfile
           - gemfiles/rails4.0.gemfile
@@ -83,9 +90,26 @@ jobs:
             gemfile: gemfiles/rails4.1.gemfile
           - ruby: 2.7
             gemfile: gemfiles/rails4.2.gemfile
+          - ruby: 3.0
+            gemfile: gemfiles/rails3.2.gemfile
+          - ruby: 3.0
+            gemfile: gemfiles/rails4.0.gemfile
+          - ruby: 3.0
+            gemfile: gemfiles/rails4.1.gemfile
+          - ruby: 3.0
+            gemfile: gemfiles/rails4.2.gemfile
+        include:
+          - ruby: 2.7
+            os: ubuntu-latest
+            coverage: true
+            gemfile: gemfiles/rails6.1.gemfile
         os:
           - ubuntu-latest
     continue-on-error: ${{ endsWith(matrix.ruby, 'head') }}
+    env:
+      BUNDLE_GEMFILE: ${{ matrix.gemfile }}
+      COVERAGE: ${{ matrix.coverage }}
+      COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
     steps:
       - uses: actions/checkout@v2
       - name: Set up Ruby
@@ -96,8 +120,6 @@ jobs:
       - name: Install bundler
         run: gem install bundler -v '< 2.0'
       - name: Install dependencies
-        run: |
-          export BUNDLE_GEMFILE=${{ matrix.gemfile }}
-          bundle _1.17.3_ install --jobs 4 --retry 3
+        run: bundle _1.17.3_ install --jobs 4 --retry 3
       - name: Run tests
-        run: BUNDLE_GEMFILE=${{ matrix.gemfile }} bundle exec rake ci
+        run: bundle exec rake ci

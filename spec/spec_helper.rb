@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-if (ENV["COVERAGE"] || ENV["CI"])
+if ENV["COVERAGE"] == "true"
   require "simplecov"
   require "coveralls"
 
