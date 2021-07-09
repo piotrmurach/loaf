@@ -18,6 +18,7 @@ RSpec.describe Loaf::Configuration do
   it "exports configuration as hash" do
     config = Loaf::Configuration.new
     expect(config.to_hash).to eq({
+      get_only: true,
       locales_path: "/",
       match: :inclusive
     })

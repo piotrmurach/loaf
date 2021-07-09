@@ -10,6 +10,8 @@ module Loaf
 
     attr_reader :match
 
+    attr_reader :get_only
+
     def initialize(name, url, options = {})
       @name  = name || raise_name_error
       @url   = url || raise_url_error

@@ -52,7 +52,11 @@ module Loaf
       _breadcrumbs.each do |crumb|
         name = title_for(crumb.name)
         path = url_for(_expand_url(crumb.url))
-        current = current_crumb?(path, options.fetch(:match) { crumb.match })
+        current = current_crumb?(
+          path,
+          options.fetch(:match) { crumb.match },
+          options.fetch(:get_only) { crumb.get_only }
+        )
 
         yield(Loaf::Breadcrumb[name, path, current])
       end
@@ -65,8 +69,8 @@ module Loaf
     #   the pattern to match on
     #
     # @api public
-    def current_crumb?(path, pattern = :inclusive)
-      return false unless request.get? || request.head?
+    def current_crumb?(path, pattern = :inclusive, get_only = true)
+      return false unless !get_only || request.get? || request.head?
 
       origin_path = URI::DEFAULT_PARSER.unescape(path).force_encoding(Encoding::BINARY)
 
