@@ -4,7 +4,8 @@ module Loaf
   class Configuration
     VALID_ATTRIBUTES = [
       :locales_path,
-      :match
+      :match,
+      :get_only
     ].freeze
 
     attr_accessor(*VALID_ATTRIBUTES)
@@ -12,6 +13,8 @@ module Loaf
     DEFAULT_LOCALES_PATH = '/'
 
     DEFAULT_MATCH = :inclusive
+
+    DEFAULT_GET_ONLY = true
 
     # Setup this configuration
     #
