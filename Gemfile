@@ -8,6 +8,7 @@ gem 'yard',        '~> 0.9.24'
 gem 'capybara',    '~> 3.30.0'
 gem 'rspec-rails', '~> 3.9.0'
 gem 'public_suffix', '~> 2.0.5'
+gem 'byebug'
 
 group :metrics do
   gem 'coveralls', '0.8.23'
