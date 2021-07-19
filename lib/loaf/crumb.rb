@@ -10,10 +10,13 @@ module Loaf
 
     attr_reader :match
 
+    attr_reader :http_verbs
+
     def initialize(name, url, options = {})
       @name  = name || raise_name_error
       @url   = url || raise_url_error
       @match = options.fetch(:match, Loaf.configuration.match)
+      @http_verbs = options.fetch(:http_verbs, Loaf.configuration.http_verbs)
       freeze
     end
 
