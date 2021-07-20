@@ -14,7 +14,7 @@ module Loaf
 
     DEFAULT_MATCH = :inclusive
 
-    DEFAULT_HTTP_VERBS = [:get]
+    DEFAULT_HTTP_VERBS = [:get, :head]
 
     # Setup this configuration
     #

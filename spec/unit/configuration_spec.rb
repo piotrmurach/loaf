@@ -20,7 +20,7 @@ RSpec.describe Loaf::Configuration do
     expect(config.to_hash).to eq({
       locales_path: "/",
       match: :inclusive,
-      http_verbs: [:get]
+      http_verbs: [:get, :head]
     })
   end
 

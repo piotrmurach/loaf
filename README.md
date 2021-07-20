@@ -221,13 +221,13 @@ The `:http_verbs` key accepts `:all` or an array with following values:
 * `:delete`
 * `:head`
 
-Its default value is `[:get]`
+Its default value is `[:get, :head]`
 
 For example:
 
 ```ruby
-http_verbs: %w[get head]
-http_verbs: %w[post get head]
+http_verbs: %i[get head]
+http_verbs: %i[post get head]
 http_verbs: :all
 ```
 
