@@ -70,7 +70,7 @@ module Loaf
     #
     # @api public
     def current_crumb?(path, pattern = :inclusive, http_verbs: Loaf.configuration.http_verbs)
-      return false unless http_verbs == :all || http_verbs.any? {|verb| request.send("#{verb}?")}
+      return false unless http_verbs == :all || http_verbs.any? {|verb| request.try("#{verb}?")}
 
       origin_path = URI::DEFAULT_PARSER.unescape(path).force_encoding(Encoding::BINARY)
 
