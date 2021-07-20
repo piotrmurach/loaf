@@ -5,27 +5,27 @@ class DummyView < ActionView::Base
     class Request
       attr_accessor :path, :fullpath, :protocol, :host_with_port, :_request_method
       def get?
-        _request_method == nil ? true : _request_method == 'GET'
+        _request_method == nil ? true : _request_method == "GET"
       end
 
       def post?
-        _request_method == nil ? false : _request_method == 'POST'
+        _request_method == nil ? false : _request_method == "POST"
       end
 
       def put?
-        _request_method == nil ? false : _request_method == 'PUT'
+        _request_method == nil ? false : _request_method == "PUT"
       end
 
       def patch?
-        _request_method == nil ? false : _request_method == 'PATCH'
+        _request_method == nil ? false : _request_method == "PATCH"
       end
 
       def delete?
-        _request_method == nil ? false : _request_method == 'DELETE'
+        _request_method == nil ? false : _request_method == "DELETE"
       end
 
       def head?
-        _request_method == nil ? false : _request_method == 'HEAD'
+        _request_method == nil ? false : _request_method == "HEAD"
       end
     end
     def request

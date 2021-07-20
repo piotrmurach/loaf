@@ -55,7 +55,7 @@ module Loaf
         current = current_crumb?(
           path,
           options.fetch(:match) { crumb.match },
-          options.fetch(:http_verbs) { crumb.http_verbs }
+          http_verbs: options.fetch(:http_verbs) { crumb.http_verbs }
         )
 
         yield(Loaf::Breadcrumb[name, path, current])
@@ -69,7 +69,7 @@ module Loaf
     #   the pattern to match on
     #
     # @api public
-    def current_crumb?(path, pattern = :inclusive, http_verbs = [:get])
+    def current_crumb?(path, pattern = :inclusive, http_verbs: Loaf.configuration.http_verbs)
       return false unless http_verbs == :all || http_verbs.any? {|verb| request.send("#{verb}?")}
 
       origin_path = URI::DEFAULT_PARSER.unescape(path).force_encoding(Encoding::BINARY)

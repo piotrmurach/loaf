@@ -71,50 +71,50 @@ RSpec.describe "breadcrumbs trail" do
     end
   end
 
-  it 'match to Non-GET methods' do
+  it "match to Non-GET methods" do
     visit onboard_path
 
-    expect(page).to have_selector('h1', text: 'Onboard')
-    page.within '#breadcrumbs' do
-      expect(page).to have_content('Onboard')
+    expect(page).to have_selector("h1", text: "Onboard")
+    page.within "#breadcrumbs" do
+      expect(page).to have_content("Onboard")
     end
 
-    click_link 'Step 1' # GET
-    expect(page).to have_selector('h1', text: 'Step 1')
+    click_link "Step 1" # GET
+    expect(page).to have_selector("h1", text: "Step 1")
     page.within '#breadcrumbs' do
       expect(page.html).to include('<a href="/onboard">Onboard</a>')
     end
-    page.within '#breadcrumbs .selected' do
+    page.within "#breadcrumbs .selected" do
       expect(page.html).to include('<a href="/onboard/step/1">Step 1</a>')
     end
 
-    click_on 'Save & Next' # POST
-    expect(page).to have_selector('h1', text: 'Step 2')
-    page.within '#breadcrumbs .selected' do
+    click_on "Save & Next" # POST
+    expect(page).to have_selector("h1", text: "Step 2")
+    page.within "#breadcrumbs .selected" do
       expect(page.html).to include('<a href="/onboard/step/2">Step 2</a>')
     end
 
-    click_on 'Save & Next' # PUT
-    expect(page).to have_selector('h1', text: 'Step 3')
-    page.within '#breadcrumbs .selected' do
+    click_on "Save & Next" # PUT
+    expect(page).to have_selector("h1", text: "Step 3")
+    page.within "#breadcrumbs .selected" do
       expect(page.html).to include('<a href="/onboard/step/3">Step 3</a>')
     end
 
-    click_on 'Save & Next' # PATCH
-    expect(page).to have_selector('h1', text: 'Step 4')
+    click_on "Save & Next" # PATCH
+    expect(page).to have_selector("h1", text: "Step 4")
     page.within '#breadcrumbs .selected' do
       expect(page.html).to include('<a href="/onboard/step/4">Step 4</a>')
     end
 
-    click_on 'Save & Next' # DELETE
-    expect(page).to have_selector('h1', text: 'Step 5')
-    page.within '#breadcrumbs .selected' do
+    click_on "Save & Next" # DELETE
+    expect(page).to have_selector("h1", text: "Step 5")
+    page.within "#breadcrumbs .selected" do
       expect(page.html).to include('<a href="/onboard/step/5">Step 5</a>')
     end
 
-    click_on 'Save & Next' # GET
-    expect(page).to have_selector('h1', text: 'Step 6')
-    page.within '#breadcrumbs .selected' do
+    click_on "Save & Next" # GET
+    expect(page).to have_selector("h1", text: "Step 6")
+    page.within "#breadcrumbs .selected" do
       expect(page.html).to include('<a href="/onboard/step/6">Step 6</a>')
     end
   end
