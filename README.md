@@ -220,6 +220,10 @@ The `:http_verbs` key accepts `:all` or an array with following values:
 * `:patch`
 * `:delete`
 * `:head`
+* `:options`
+* `:link`
+* `:unlink`
+* `:trace`
 
 Its default value is `[:get, :head]`
 
