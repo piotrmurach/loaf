@@ -14,7 +14,7 @@ module Loaf
 
     DEFAULT_MATCH = :inclusive
 
-    DEFAULT_HTTP_VERBS = [:get, :head].freeze
+    DEFAULT_HTTP_VERBS = %i[get head].freeze
 
     # Setup this configuration
     #

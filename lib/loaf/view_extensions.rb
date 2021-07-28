@@ -69,8 +69,8 @@ module Loaf
     #   the pattern to match on
     #
     # @api public
-    def current_crumb?(path, pattern = :inclusive, http_verbs: Loaf.configuration.http_verbs)
-      return false unless http_verbs == :all || http_verbs.any? {|verb| request.try("#{verb}?")}
+    def current_crumb?(path, pattern = :inclusive, http_verbs: nil)
+      return false unless match_http_verbs(http_verbs)
 
       origin_path = URI::DEFAULT_PARSER.unescape(path).force_encoding(Encoding::BINARY)
 
@@ -131,6 +131,18 @@ module Loaf
       else
         url
       end
+    end
+
+    # Check if the HTTP verbs are allowed
+    #
+    # @retun [Boolean]
+    #
+    # @api private
+    def match_http_verbs(http_verbs)
+      http_verbs ||= Loaf.configuration.http_verbs
+      return true if http_verbs == :all
+
+      http_verbs.any? { |verb| request.try("#{verb}?") }
     end
   end # ViewExtensions
 end # Loaf

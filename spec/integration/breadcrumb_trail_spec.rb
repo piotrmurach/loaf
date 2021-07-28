@@ -81,7 +81,7 @@ RSpec.describe "breadcrumbs trail" do
 
     click_link "Step 1" # GET
     expect(page).to have_selector("h1", text: "Step 1")
-    page.within '#breadcrumbs' do
+    page.within "#breadcrumbs" do
       expect(page.html).to include('<a href="/onboard">Onboard</a>')
     end
     page.within "#breadcrumbs .selected" do

@@ -225,7 +225,7 @@ The `:http_verbs` key accepts `:all` or an array with following values:
 * `:unlink`
 * `:trace`
 
-Its default value is `[:get, :head]`
+Its default value is `%i[get head]`
 
 For example:
 
