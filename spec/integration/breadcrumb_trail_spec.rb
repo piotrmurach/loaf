@@ -100,10 +100,12 @@ RSpec.describe "breadcrumbs trail" do
       expect(page.html).to include('<a href="/onboard/step/3">Step 3</a>')
     end
 
-    click_on "Save & Next" # PATCH
-    expect(page).to have_selector("h1", text: "Step 4")
-    page.within '#breadcrumbs .selected' do
-      expect(page.html).to include('<a href="/onboard/step/4">Step 4</a>')
+    if Rails.version >= "4.0.0"
+      click_on "Save & Next" # PATCH
+      expect(page).to have_selector("h1", text: "Step 4")
+      page.within '#breadcrumbs .selected' do
+        expect(page.html).to include('<a href="/onboard/step/4">Step 4</a>')
+      end
     end
 
     click_on "Save & Next" # DELETE
