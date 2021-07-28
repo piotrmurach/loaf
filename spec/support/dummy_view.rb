@@ -3,29 +3,45 @@ require "action_view"
 class DummyView < ActionView::Base
   module FakeRequest
     class Request
-      attr_accessor :path, :fullpath, :protocol, :host_with_port, :_request_method
+      attr_accessor :path,
+                    :fullpath,
+                    :protocol,
+                    :host_with_port,
+                    :_request_method
       def get?
-        _request_method == nil ? true : _request_method == "GET"
+        return true if _request_method.nil?
+
+        _request_method == "GET"
       end
 
       def post?
-        _request_method == nil ? false : _request_method == "POST"
+        return false if _request_method.nil?
+
+        _request_method == "POST"
       end
 
       def put?
-        _request_method == nil ? false : _request_method == "PUT"
+        return false if _request_method.nil?
+
+        _request_method == "PUT"
       end
 
       def patch?
-        _request_method == nil ? false : _request_method == "PATCH"
+        return false if _request_method.nil?
+
+        _request_method == "PATCH"
       end
 
       def delete?
-        _request_method == nil ? false : _request_method == "DELETE"
+        return false if _request_method.nil?
+
+        _request_method == "DELETE"
       end
 
       def head?
-        _request_method == nil ? false : _request_method == "HEAD"
+        return false if _request_method.nil?
+
+        _request_method == "HEAD"
       end
     end
     def request
