@@ -281,9 +281,9 @@ RSpec.describe Loaf::ViewExtensions, "#breadcrumb_trail" do
     expect(view.breadcrumb_trail(match: :exact).map(&:current?)).to eq([false, false, true])
   end
 
-  it "match current path with :http_verbs" do
+  it "match current path with :request_methods" do
     view = DummyView.new
-    view.breadcrumb("posts", "/posts", http_verbs: %i[get post])
+    view.breadcrumb("posts", "/posts", request_methods: %i[get post])
     view.set_path("/posts")
     view.set_request_method(:post)
 
@@ -291,7 +291,7 @@ RSpec.describe Loaf::ViewExtensions, "#breadcrumb_trail" do
     expect(trail).to eq([["posts", "/posts", true]])
   end
 
-  it "fail to match current path with :http_verbs" do
+  it "fail to match current path with :request_methods" do
     view = DummyView.new
     view.breadcrumb("posts", "/posts")
     view.set_path("/posts")
@@ -301,9 +301,9 @@ RSpec.describe Loaf::ViewExtensions, "#breadcrumb_trail" do
     expect(trail).to eq([["posts", "/posts", false]])
   end
 
-  it "match current path with :http_verbs => :all" do
+  it "match current path with :request_methods => :all" do
     view = DummyView.new
-    view.breadcrumb("posts", "/posts", http_verbs: :all)
+    view.breadcrumb("posts", "/posts", request_methods: :all)
     view.set_path("/posts")
     view.set_request_method(:delete)
 

@@ -3,9 +3,9 @@
 module Loaf
   class Configuration
     VALID_ATTRIBUTES = [
-      :http_verbs,
       :locales_path,
-      :match
+      :match,
+      :request_methods
     ].freeze
 
     attr_accessor(*VALID_ATTRIBUTES)
@@ -14,7 +14,7 @@ module Loaf
 
     DEFAULT_MATCH = :inclusive
 
-    DEFAULT_HTTP_VERBS = %i[get head].freeze
+    DEFAULT_REQUEST_METHODS = %i[get head].freeze
 
     # Setup this configuration
     #

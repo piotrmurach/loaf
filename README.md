@@ -60,7 +60,7 @@ rails generate loaf:install
     * [2.1.1 controller](#211-controller)
     * [2.1.2 view](#212-view)
     * [2.1.3 :match](#213-match)
-    * [2.1.4 :http_verbs](#214-http_verbs)
+    * [2.1.4 :request_methods](#214-request_methods)
   * [2.2 breadcrumb_trail](#22-breadcrumb_trail)
 * [3. Configuration](#3-configuration)
 * [4. Translation](#4-translation)
@@ -208,11 +208,11 @@ To make a breadcrumb current based on the query parameters do:
 breadcrumb "Posts", posts_path(order: :desc), match: {order: :desc}
 ```
 
-#### 2.1.4 :http_verbs
+#### 2.1.4 :request_methods
 
-**Loaf** allows you to match on multiple HTTP verbs in order to make a breadcrumb current with the `:http_verbs` option.
+**Loaf** allows you to match on multiple HTTP methods in order to make a breadcrumb current with the `:request_methods` option.
 
-The `:http_verbs` key accepts `:all` or an array with following values:
+The `:request_methods` key accepts `:all` or an array with following values:
 
 * `:get`
 * `:post`
@@ -230,9 +230,9 @@ Its default value is `%i[get head]`
 For example:
 
 ```ruby
-http_verbs: %i[get head]
-http_verbs: %i[post get head]
-http_verbs: :all
+request_methods: %i[get head]
+request_methods: %i[post get head]
+request_methods: :all
 ```
 
 ### 2.2 breadcrumb_trail

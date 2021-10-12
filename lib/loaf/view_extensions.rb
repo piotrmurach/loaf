@@ -55,7 +55,7 @@ module Loaf
         current = current_crumb?(
           path,
           options.fetch(:match) { crumb.match },
-          http_verbs: options.fetch(:http_verbs) { crumb.http_verbs }
+          request_methods: options.fetch(:request_methods) { crumb.request_methods }
         )
 
         yield(Loaf::Breadcrumb[name, path, current])
@@ -69,8 +69,8 @@ module Loaf
     #   the pattern to match on
     #
     # @api public
-    def current_crumb?(path, pattern = :inclusive, http_verbs: nil)
-      return false unless match_http_verbs(http_verbs)
+    def current_crumb?(path, pattern = :inclusive, request_methods: nil)
+      return false unless match_request_methods(request_methods)
 
       origin_path = URI::DEFAULT_PARSER.unescape(path).force_encoding(Encoding::BINARY)
 
@@ -133,16 +133,16 @@ module Loaf
       end
     end
 
-    # Check if the HTTP verbs are allowed
+    # Check if the HTTP request methods are allowed
     #
     # @retun [Boolean]
     #
     # @api private
-    def match_http_verbs(http_verbs)
-      http_verbs ||= Loaf.configuration.http_verbs
-      return true if http_verbs == :all
+    def match_request_methods(request_methods)
+      request_methods ||= Loaf.configuration.request_methods
+      return true if request_methods == :all
 
-      http_verbs.any? { |verb| request.try("#{verb}?") }
+      request_methods.any? { |method| request.try("#{method}?") }
     end
   end # ViewExtensions
 end # Loaf
