@@ -52,7 +52,11 @@ module Loaf
       _breadcrumbs.each do |crumb|
         name = title_for(crumb.name)
         path = url_for(_expand_url(crumb.url))
-        current = current_crumb?(path, options.fetch(:match) { crumb.match })
+        current = current_crumb?(
+          path,
+          options.fetch(:match) { crumb.match },
+          request_methods: options.fetch(:request_methods) { crumb.request_methods }
+        )
 
         yield(Loaf::Breadcrumb[name, path, current])
       end
@@ -65,8 +69,8 @@ module Loaf
     #   the pattern to match on
     #
     # @api public
-    def current_crumb?(path, pattern = :inclusive)
-      return false unless request.get? || request.head?
+    def current_crumb?(path, pattern = :inclusive, request_methods: Loaf.configuration.request_methods)
+      return false unless match_request_methods(request_methods)
 
       origin_path = URI::DEFAULT_PARSER.unescape(path).force_encoding(Encoding::BINARY)
 
@@ -127,6 +131,17 @@ module Loaf
       else
         url
       end
+    end
+
+    # Check if the HTTP request methods are allowed
+    #
+    # @retun [Boolean]
+    #
+    # @api private
+    def match_request_methods(request_methods)
+      return true if request_methods == :all
+
+      request_methods.any? { |method| request.try("#{method}?") }
     end
   end # ViewExtensions
 end # Loaf

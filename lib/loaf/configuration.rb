@@ -4,7 +4,8 @@ module Loaf
   class Configuration
     VALID_ATTRIBUTES = [
       :locales_path,
-      :match
+      :match,
+      :request_methods
     ].freeze
 
     attr_accessor(*VALID_ATTRIBUTES)
@@ -12,6 +13,8 @@ module Loaf
     DEFAULT_LOCALES_PATH = '/'
 
     DEFAULT_MATCH = :inclusive
+
+    DEFAULT_REQUEST_METHODS = %i[get head].freeze
 
     # Setup this configuration
     #

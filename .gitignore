@@ -22,3 +22,4 @@ tmp
 *.o
 *.a
 mkmf.log
+.byebug_history
