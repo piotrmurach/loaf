@@ -69,7 +69,7 @@ module Loaf
     #   the pattern to match on
     #
     # @api public
-    def current_crumb?(path, pattern = :inclusive, request_methods: nil)
+    def current_crumb?(path, pattern = :inclusive, request_methods: Loaf.configuration.request_methods)
       return false unless match_request_methods(request_methods)
 
       origin_path = URI::DEFAULT_PARSER.unescape(path).force_encoding(Encoding::BINARY)
@@ -139,7 +139,6 @@ module Loaf
     #
     # @api private
     def match_request_methods(request_methods)
-      request_methods ||= Loaf.configuration.request_methods
       return true if request_methods == :all
 
       request_methods.any? { |method| request.try("#{method}?") }

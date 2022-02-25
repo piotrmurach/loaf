@@ -225,9 +225,9 @@ The `:request_methods` key accepts `:all` or an array with following values:
 * `:unlink`
 * `:trace`
 
-Its default value is `%i[get head]`
+It's defaults to `%i[get head]`
 
-For example:
+Here are some examples:
 
 ```ruby
 request_methods: %i[get head]
