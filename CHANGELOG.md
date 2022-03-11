@@ -1,5 +1,8 @@
 # Change log
 
+### Changed
+* Support Rails 7.0 and Ruby 3.1 in tests
+
 ## [v0.10.0] - 2020-11-21
 
 ### Changed
