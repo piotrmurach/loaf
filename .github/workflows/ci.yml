@@ -28,7 +28,8 @@ jobs:
           - 2.5
           - 2.6
           - 2.7
-          - 3.0
+          - '3.0'
+          - 3.1
         gemfile:
           - gemfiles/rails3.2.gemfile
           - gemfiles/rails4.0.gemfile
@@ -39,6 +40,7 @@ jobs:
           - gemfiles/rails5.2.gemfile
           - gemfiles/rails6.0.gemfile
           - gemfiles/rails6.1.gemfile
+          - gemfiles/rails7.0.gemfile
         exclude:
           - ruby: 2.1
             gemfile: gemfiles/rails5.0.gemfile
@@ -50,16 +52,24 @@ jobs:
             gemfile: gemfiles/rails6.0.gemfile
           - ruby: 2.1
             gemfile: gemfiles/rails6.1.gemfile
+          - ruby: 2.1
+            gemfile: gemfiles/rails7.0.gemfile
           - ruby: 2.2
             gemfile: gemfiles/rails5.2.gemfile
           - ruby: 2.2
             gemfile: gemfiles/rails6.0.gemfile
           - ruby: 2.2
             gemfile: gemfiles/rails6.1.gemfile
+          - ruby: 2.2
+            gemfile: gemfiles/rails7.0.gemfile
           - ruby: 2.3
             gemfile: gemfiles/rails6.0.gemfile
           - ruby: 2.3
             gemfile: gemfiles/rails6.1.gemfile
+          - ruby: 2.3
+            gemfile: gemfiles/rails6.1.gemfile
+          - ruby: 2.3
+            gemfile: gemfiles/rails7.0.gemfile
           - ruby: 2.4
             gemfile: gemfiles/rails3.2.gemfile
           - ruby: 2.4
@@ -70,18 +80,24 @@ jobs:
             gemfile: gemfiles/rails6.0.gemfile
           - ruby: 2.4
             gemfile: gemfiles/rails6.1.gemfile
+          - ruby: 2.4
+            gemfile: gemfiles/rails7.0.gemfile
           - ruby: 2.5
             gemfile: gemfiles/rails3.2.gemfile
           - ruby: 2.5
             gemfile: gemfiles/rails4.0.gemfile
           - ruby: 2.5
             gemfile: gemfiles/rails4.1.gemfile
+          - ruby: 2.5
+            gemfile: gemfiles/rails7.0.gemfile
           - ruby: 2.6
             gemfile: gemfiles/rails3.2.gemfile
           - ruby: 2.6
             gemfile: gemfiles/rails4.0.gemfile
           - ruby: 2.6
             gemfile: gemfiles/rails4.1.gemfile
+          - ruby: 2.6
+            gemfile: gemfiles/rails7.0.gemfile
           - ruby: 2.7
             gemfile: gemfiles/rails3.2.gemfile
           - ruby: 2.7
@@ -90,20 +106,36 @@ jobs:
             gemfile: gemfiles/rails4.1.gemfile
           - ruby: 2.7
             gemfile: gemfiles/rails4.2.gemfile
-          - ruby: 3.0
+          - ruby: '3.0'
             gemfile: gemfiles/rails3.2.gemfile
-          - ruby: 3.0
+          - ruby: '3.0'
             gemfile: gemfiles/rails4.0.gemfile
-          - ruby: 3.0
+          - ruby: '3.0'
             gemfile: gemfiles/rails4.1.gemfile
-          - ruby: 3.0
+          - ruby: '3.0'
             gemfile: gemfiles/rails4.2.gemfile
-          - ruby: 3.0
+          - ruby: '3.0'
             gemfile: gemfiles/rails5.0.gemfile
-          - ruby: 3.0
+          - ruby: '3.0'
             gemfile: gemfiles/rails5.1.gemfile
-          - ruby: 3.0
+          - ruby: '3.0'
             gemfile: gemfiles/rails5.2.gemfile
+          - ruby: 3.1
+            gemfile: gemfiles/rails3.2.gemfile
+          - ruby: 3.1
+            gemfile: gemfiles/rails4.0.gemfile
+          - ruby: 3.1
+            gemfile: gemfiles/rails4.1.gemfile
+          - ruby: 3.1
+            gemfile: gemfiles/rails4.2.gemfile
+          - ruby: 3.1
+            gemfile: gemfiles/rails5.0.gemfile
+          - ruby: 3.1
+            gemfile: gemfiles/rails5.1.gemfile
+          - ruby: 3.1
+            gemfile: gemfiles/rails5.2.gemfile
+          - ruby: 3.1
+            gemfile: gemfiles/rails6.0.gemfile
         include:
           - ruby: 2.7
             os: ubuntu-latest
